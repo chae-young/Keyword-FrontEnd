@@ -1,10 +1,8 @@
 import React from 'react';
 import InnerCon from '@/components/common/InnerCon';
 
-interface HomePageProps {
-  children: React.ReactNode;
-}
+interface HomePageProps {}
 
-const HomePage = ({ children }: HomePageProps) => <InnerCon>dsfdf</InnerCon>;
+const HomePage = ({}: HomePageProps) => <>홈입니다</>;
 
 export default HomePage;
