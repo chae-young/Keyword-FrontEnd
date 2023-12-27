@@ -2,11 +2,12 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true, node: true },
   extends: [
-    'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended',
     'airbnb/hooks',
-    'eslint:recommended',
+    // 'eslint:recommended',
     'plugin:react-hooks/recommended',
     'airbnb',
+    'airbnb-typescript',
     'prettier'
   ],
   parserOptions: {
@@ -15,14 +16,22 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'prettier'],
+
   settings: {
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
       }
     }
   },
+
   rules: {
+    // arrow 함수 형식 사용
+    'react/function-component-definition': [
+      2,
+      { namedComponents: 'arrow-function' }
+    ],
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'comma-dangle': ['error', 'never'],
     'prettier/prettier': ['error', { singleQuote: true }],
@@ -43,10 +52,10 @@ module.exports = {
       'error',
       'ignorePackages',
       {
-        js: 'never',
-        jsx: 'never',
+        '': 'never',
         ts: 'never',
-        tsx: 'never'
+        tsx: 'never',
+        js: 'never'
       }
     ]
   }

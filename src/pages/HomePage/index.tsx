@@ -1,7 +1,6 @@
 import React from 'react';
+import InnerCon from '@/components/common/InnerCon';
 
-function HomePage() {
-  return <div className="text-primary text-2xl">홈 입니다.</div>;
-}
+const HomePage = () => <InnerCon>홈 입니다.</InnerCon>;
 
 export default HomePage;
