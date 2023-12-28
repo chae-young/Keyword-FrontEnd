@@ -1,5 +1,6 @@
 import React from 'react';
+import TopTitle from '@/components/common/TopTitle';
 
-const ChatPage = () => <div />;
+const ChatPage = () => <></>;
 
 export default ChatPage;

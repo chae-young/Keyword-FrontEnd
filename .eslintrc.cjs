@@ -27,6 +27,7 @@ module.exports = {
   },
 
   rules: {
+    'react/require-default-props': 'off',
     // arrow 함수 형식 사용
     'react/function-component-definition': [
       2,
