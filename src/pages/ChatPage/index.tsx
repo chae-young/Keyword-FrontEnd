@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import TopTitle from '@/components/common/TopTitle';
 
 const ChatPage = () => (
   <ul>
