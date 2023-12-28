@@ -4,3 +4,9 @@ export interface ChatDataType {
   message: string;
   sendAt: string;
 }
+
+export interface ChatListDataType {
+  chatRoomId: number;
+  scheduleTitle: string;
+  friendsName: string[];
+}

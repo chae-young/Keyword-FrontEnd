@@ -1,4 +1,4 @@
-import * as todoHandler from './test';
+import { getChatList } from './chat/getChatList';
 
-const handlers = [...Object.values(todoHandler)];
+const handlers = [getChatList];
 export default handlers;
