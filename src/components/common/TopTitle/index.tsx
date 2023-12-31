@@ -13,7 +13,7 @@ const TopTitle = ({ title, back }: TopTitleProps) => {
     navigate(-1);
   };
   return (
-    <div className="h-[60px] flex justify-center items-center relative">
+    <div className="max-w-default h-[60px] flex justify-center items-center fixed left-0 top-0 right-0 m-auto w-full bg-white">
       {back && (
         <button
           type="button"
