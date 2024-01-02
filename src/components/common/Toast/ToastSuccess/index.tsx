@@ -2,9 +2,10 @@ import React from 'react';
 
 interface ToastSuccessProps {
   status: boolean;
+  text: string;
 }
 
-const ToastSuccess = ({ status }: ToastSuccessProps) => (
+const ToastSuccess = ({ status, text }: ToastSuccessProps) => (
   <div
     role="alert"
     className={`alert alert-success fixed left-0 top-0 flex  ${
@@ -24,7 +25,7 @@ const ToastSuccess = ({ status }: ToastSuccessProps) => (
         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     </svg>
-    <span>회원가입이 완료되었습니다!</span>
+    <span>{text}</span>
   </div>
 );
 

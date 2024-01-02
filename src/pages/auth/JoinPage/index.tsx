@@ -128,19 +128,6 @@ const JoinPage = () => {
     joinIsMutate({ email, password, name: nickname, phone: phoneNumber });
   };
 
-  // useEffect(() => {
-  //   let countRefId: NodeJS.Timeout;
-  //   if (joinIsSuccess) {
-  //     countRefId = setTimeout(() => {
-  //       navigate('/auth/login');
-  //     }, 1500);
-  //   }
-
-  //   return () => {
-  //     clearTimeout(countRefId);
-  //   };
-  // }, [joinIsSuccess]);
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -225,7 +212,7 @@ const JoinPage = () => {
         </div>
       </form>
 
-      <Success status={joinIsSuccess} />
+      <Success status={joinIsSuccess} text="회원가입이 완료되었습니다!" />
     </>
   );
 };
