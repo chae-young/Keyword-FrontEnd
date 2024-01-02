@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import React from 'react';
-import { axiosAuth } from '@/apis';
+import { axiosDefault } from '@/apis';
 import { LoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
 
 const responsAPI = async (data: LoginDataType) => {
   const { email, password } = data;
 
-  const res = await axiosAuth.post('/members/signin', { email, password });
+  const res = await axiosDefault.post('/members/signin', { email, password });
   return res.data;
 };
 

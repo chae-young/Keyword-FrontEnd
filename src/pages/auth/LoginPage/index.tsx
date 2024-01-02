@@ -4,6 +4,7 @@ import Input from '@/components/common/Input';
 import TopTitle from '@/components/common/TopTitle';
 import usePostLoginQuery from '@/hooks/query/auth/usePostLoginQuery';
 import WideButton from '@/components/common/Button/WideButton';
+import Logo from '@/components/common/Logo';
 
 const LoginPage = () => {
   const [email, setEmail, handleChangeEmail] = useInput('');
@@ -17,16 +18,11 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <div className="mt-4">
       <TopTitle title="로그인" back />
       <form onSubmit={handleSubmit}>
-        <img
-          src="/public/images/logo.svg"
-          width={200}
-          className="m-auto"
-          alt="keyword"
-        />
-        <div>
+        <Logo width={200} />
+        <div className="mt-10">
           <Input
             type="email"
             value={email}
@@ -48,7 +44,7 @@ const LoginPage = () => {
         </p>
         <WideButton text="시작하기" />
       </form>
-    </>
+    </div>
   );
 };
 
