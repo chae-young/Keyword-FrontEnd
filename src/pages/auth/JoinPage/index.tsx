@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import TopTitle from '@/components/common/TopTitle';
 import Logo from '@/components/common/Logo';
 import Input from '@/components/common/Input';
