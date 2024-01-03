@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
-import SearchPage from './pages/SearchPage';
 import ChatPage from './pages/ChatPage';
 import MyPage from './pages/MyPage';
 import InnerCon from './components/common/InnerCon';
@@ -10,6 +9,8 @@ import HomePage from './pages/HomePage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
 import LoginPage from './pages/auth/LoginPage';
 import JoinPage from './pages/auth/JoinPage';
+import SearchPage from './pages/search';
+import SearchResultPage from './pages/search/SearchResultPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -23,6 +24,7 @@ const App = ({ children }: AppProps) => (
         <Route>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/search/result" element={<SearchResultPage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/auth/login" element={<LoginPage />} />
           <Route path="/auth/join" element={<JoinPage />} />
