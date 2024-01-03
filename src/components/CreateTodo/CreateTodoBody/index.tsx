@@ -1,7 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import Input from '@/components/common/Input';
 import Select from '@/components/common/Select';
+import ScheduleDate from '@/components/common/Calendar';
+
 
 interface ScheduleFormProps {
   onScheduleAdd: (schedule: Schedule) => void;
@@ -15,6 +17,8 @@ interface Schedule {
   address: string;
   friends: string[];
 }
+
+
 
 const ScheduleForm: React.FC<ScheduleFormProps> = ({ onScheduleAdd }) => {
   const [schedule, setSchedule] = useState<Schedule>({
@@ -44,6 +48,7 @@ const ScheduleForm: React.FC<ScheduleFormProps> = ({ onScheduleAdd }) => {
     }));
   };
 
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onScheduleAdd(schedule);
@@ -58,6 +63,13 @@ const ScheduleForm: React.FC<ScheduleFormProps> = ({ onScheduleAdd }) => {
     });
   };
 
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSchedule((prevSchedule) => ({
+      ...prevSchedule,
+      alarm: e.target.value,
+    }));
+  };
+  
   return (
     <form onSubmit={handleFormSubmit}>
       <div>
@@ -66,7 +78,7 @@ const ScheduleForm: React.FC<ScheduleFormProps> = ({ onScheduleAdd }) => {
       </div>
       <div>
         <label>날짜</label>
-        <Input type="date" value={schedule.date} handleChangeInput={handleInputChange} />
+        <ScheduleDate/>
       </div>
       <div>
         <label>시간</label>
@@ -74,7 +86,8 @@ const ScheduleForm: React.FC<ScheduleFormProps> = ({ onScheduleAdd }) => {
       </div>
       <div>
         <label>알람</label>
-        {/* <Select options={[]} value ={schedule.alarm} handleChangeSelect={handleInputChange}/> */}
+        <Select options={[]} value={schedule.alarm} handleChangeSelect={handleSelectChange}/>
+
       </div>
       <div>
         <label>주소</label>
@@ -82,7 +95,7 @@ const ScheduleForm: React.FC<ScheduleFormProps> = ({ onScheduleAdd }) => {
       </div>
       <div>
         <label>친구 선택하기</label>
-        <Select multiple name="friends" value={schedule} onChange={handleFriendsChange}>
+        <Select multiple name="friends" value={schedule.friends} onChange={handleFriendsChange}>
           <option value="친구1">친구1</option>
           <option value="친구2">친구2</option>
           <option value="친구3">친구3</option>
