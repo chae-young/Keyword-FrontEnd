@@ -8,6 +8,8 @@ import MyPage from './pages/MyPage';
 import InnerCon from './components/common/InnerCon';
 import HomePage from './pages/HomePage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
+import LoginPage from './pages/auth/LoginPage';
+import JoinPage from './pages/auth/JoinPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -22,6 +24,8 @@ const App = ({ children }: AppProps) => (
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/join" element={<JoinPage />} />
           <Route path="/chat/:id" element={<ChatDetail />} />
           <Route path="/mypage" element={<MyPage />} />
           {/* 404 처리 */}

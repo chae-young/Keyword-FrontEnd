@@ -1,0 +1,36 @@
+import { useMutation } from '@tanstack/react-query';
+import React from 'react';
+import { axiosDefault } from '@/apis';
+import { LoginDataType } from '@/types/auth/authDataType';
+import { setCookie } from '@/util/cookie';
+
+const responsAPI = async (data: LoginDataType) => {
+  const { email, password } = data;
+
+  const res = await axiosDefault.post('/members/signin', { email, password });
+  return res.data;
+};
+
+const usePostLoginQuery = () => {
+  const {
+    mutate: loginIsMutate,
+    isError: loginIsError,
+    isSuccess: loginIsSuccess
+  } = useMutation({
+    mutationKey: ['login'],
+    mutationFn: ({ email, password }: LoginDataType) =>
+      responsAPI({ email, password }),
+    onSuccess: data => {
+      setCookie('accessToken', data.accessToken);
+      setCookie('refreshToken', data.refreshToken);
+    }
+  });
+
+  return {
+    loginIsMutate,
+    loginIsError,
+    loginIsSuccess
+  };
+};
+
+export default usePostLoginQuery;

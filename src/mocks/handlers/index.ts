@@ -1,4 +1,5 @@
-import { getChatList } from './chat/getChatList';
+import { postSignIn, postSignUp } from './auth/handler';
+import { getChatList } from './chat/handler';
 
-const handlers = [getChatList];
+const handlers = [getChatList, postSignIn, postSignUp];
 export default handlers;
