@@ -11,7 +11,6 @@ function ScheduleDate() {
 
   return (
     <div>
-      <Calendar onChange={handleDateChange} value={value} />
     </div>
   );
 }
