@@ -1,8 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import React from 'react';
 import { axiosDefault } from '@/apis';
 import { JoinDataType } from '@/types/auth/authDataType';
-import { setCookie } from '@/util/cookie';
 
 const responsAPI = async (data: JoinDataType) => {
   const { email, password, name, phone } = data;
