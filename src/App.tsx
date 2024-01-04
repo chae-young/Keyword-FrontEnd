@@ -1,14 +1,19 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import HomePage from './pages/HomePage';
-import SearchPage from './pages/SearchPage';
+
 import ChatPage from './pages/ChatPage';
 import MyPage from './pages/MyPage';
 import InnerCon from './components/common/InnerCon';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/auth/LoginPage';
+import ChatDetail from './pages/ChatPage/ChatDetail';
+import JoinPage from './pages/auth/JoinPage';
+import SearchPage from './pages/search';
+import SearchResultPage from './pages/search/SearchResultPage';
 
 interface AppProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const App = ({ children }: AppProps) => (
@@ -19,7 +24,11 @@ const App = ({ children }: AppProps) => (
         <Route>
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/search/result" element={<SearchResultPage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/auth/login" element={<LoginPage />} />
+          <Route path="/auth/join" element={<JoinPage />} />
+          <Route path="/chat/:id" element={<ChatDetail />} />
           <Route path="/mypage" element={<MyPage />} />
           {/* 404 처리 */}
           {/* <Route path="*" element={<NotFound />}></Route> */}

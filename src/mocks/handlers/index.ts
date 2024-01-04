@@ -1,4 +1,12 @@
-import * as todoHandler from './test';
+import { postSignIn, postSignUp } from './auth/handler';
+import { getChatList } from './chat/handler';
+import { getFriendsSearchList, postFriendAdd } from './search/handler';
 
-const handlers = [...Object.values(todoHandler)];
+const handlers = [
+  getChatList,
+  postSignIn,
+  postSignUp,
+  getFriendsSearchList,
+  postFriendAdd
+];
 export default handlers;
