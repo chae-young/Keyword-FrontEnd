@@ -1,5 +1,9 @@
 import React from 'react';
 
-const HomePage = ({}: HomePageProps) => <>홈입니다</>;
+const HomePage = () => (
+  <div>
+    안녕하세요
+  </div>
+);
 
 export default HomePage;
