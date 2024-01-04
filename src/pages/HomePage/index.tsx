@@ -1,15 +1,5 @@
 import React from 'react';
-// import InnerCon from '@/components/common/InnerCon';
-import Input from '@/components/common/Input';
 
-// eslint-disable-next-line no-empty-pattern
-const HomePage = () => (
-
-  return(
-    <>
-    </>
-  )
-
-);
+const HomePage = ({}: HomePageProps) => <>홈입니다</>;
 
 export default HomePage;
