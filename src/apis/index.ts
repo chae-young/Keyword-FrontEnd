@@ -22,7 +22,7 @@ axiosAuth.interceptors.request.use(
   config => {
     const copyConfig = { ...config };
     if (!config.headers) return config;
-    const accessToken = getCookie('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken && config.headers) {
       // access token을 header에 담아 요청
@@ -40,7 +40,7 @@ axiosAuth.interceptors.response.use(
   response => response,
   async error => {
     console.log(error);
-    const errorMessage = error.response.data.message;
+    // const errorMessage = error.response.data.message;
     const errorStatus = error.response.status;
     const originalRequest = error.config;
     const refreshToken = getCookie('refreshToken');
@@ -53,8 +53,10 @@ axiosAuth.interceptors.response.use(
 
       const newAccessToken = res.data.accessToken;
       const newRefreshToken = res.data.refreshToken;
-      setCookie('accessToken', newAccessToken);
-      setCookie('refreshToken', newRefreshToken);
+      localStorage.setItem('accessToken', newAccessToken);
+      setCookie('refreshToken', newRefreshToken, {
+        path: '/'
+      });
 
       originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
       return axios(originalRequest);

@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import React from 'react';
 import { axiosDefault } from '@/apis';
 import { LoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
@@ -21,8 +20,10 @@ const usePostLoginQuery = () => {
     mutationFn: ({ email, password }: LoginDataType) =>
       responsAPI({ email, password }),
     onSuccess: data => {
-      setCookie('accessToken', data.accessToken);
-      setCookie('refreshToken', data.refreshToken);
+      localStorage.setItem('accessToken', data.accessToken);
+      setCookie('refreshToken', data.refreshToken, {
+        path: '/'
+      });
     }
   });
 
