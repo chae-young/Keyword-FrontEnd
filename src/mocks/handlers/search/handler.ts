@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-const friendsList = [
+let friendsList = [
   {
     memberId: 1,
     name: '김친구',
@@ -15,7 +15,7 @@ const friendsList = [
     email: 'DevHeaven@naver.com',
     profileImageUrl:
       'https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg',
-    status: 'REQUESTING'
+    status: 'REQUEST'
   },
   {
     memberId: 3,
@@ -23,7 +23,7 @@ const friendsList = [
     email: 'DevHeaven@naver.com',
     profileImageUrl:
       'https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg',
-    status: 'REQUESTING'
+    status: 'REQUEST'
   }
   //   {
   //     memberId: 4,
@@ -147,7 +147,7 @@ const friendsList = [
 ];
 
 // 검색한 친구 리스트
-const getFriendsSearchList = rest.get('/friends', (req, res, ctx) => {
+export const getFriendsSearchList = rest.get('/friends', (req, res, ctx) => {
   const keyword = req.url.searchParams.get('keyword');
   const size = Number(req.url.searchParams.get('size')) || 10;
   const page = Number(req.url.searchParams.get('page')) || 1;
@@ -160,4 +160,32 @@ const getFriendsSearchList = rest.get('/friends', (req, res, ctx) => {
   return res(ctx.status(200), ctx.json(result));
 });
 
-export default getFriendsSearchList;
+export const postFriendAdd = rest.post(
+  '/friends/:memberId',
+  async (req, res, ctx) => {
+    const { memberId } = req.params;
+    const newFriendsList = friendsList.map(friend => {
+      if (friend.memberId === Number(memberId)) {
+        return { ...friend, status: 'REQUSTING' };
+      }
+      return friend;
+    });
+
+    if (!memberId) {
+      return res(
+        ctx.json({
+          success: false,
+          message: 'error message',
+          data: null
+        })
+      );
+    }
+    friendsList = newFriendsList;
+    return res(
+      ctx.status(200),
+      ctx.json({
+        isFriendRequest: true
+      })
+    );
+  }
+);

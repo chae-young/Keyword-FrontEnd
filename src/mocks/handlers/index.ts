@@ -1,6 +1,12 @@
 import { postSignIn, postSignUp } from './auth/handler';
 import { getChatList } from './chat/handler';
-import getFriendsSearchList from './search/handler';
+import { getFriendsSearchList, postFriendAdd } from './search/handler';
 
-const handlers = [getChatList, postSignIn, postSignUp, getFriendsSearchList];
+const handlers = [
+  getChatList,
+  postSignIn,
+  postSignUp,
+  getFriendsSearchList,
+  postFriendAdd
+];
 export default handlers;
