@@ -23,6 +23,9 @@ export default {
       },
       maxWidth: {
         default: '31.25rem'
+      },
+      boxShadow: {
+        bottom: '-2px 10px 10px 0px rgba(237, 237, 237, 0.3)'
       }
     }
   },
