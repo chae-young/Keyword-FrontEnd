@@ -1,11 +1,10 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-interface InnerConProps {
-  children: React.ReactNode;
-}
-
-const InnerCon = ({ children }: InnerConProps) => (
-  <section className="max-w-default m-auto px-5 pt-[60px]">{children}</section>
+const InnerCon = () => (
+  <section className="max-w-default m-auto px-5 pt-[60px]">
+    <Outlet />
+  </section>
 );
 
 export default InnerCon;
