@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 
 interface InputProps {
-  type: 'text' | 'password' | 'email' | 'number';
+
+  type: 'text' | 'password' | 'email' | 'number' | 'date' | 'time';
   width?: string;
   value: string;
   placeholder?: string;
