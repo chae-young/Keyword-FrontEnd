@@ -10,5 +10,6 @@
   "prettier.configPath": ".prettierrc.cjs",
   "path-intellisense.mappings": {
     "@": "${workspaceRoot}/src"
-  }
+  },
+  "cSpell.words": ["Datepicker"]
 }
