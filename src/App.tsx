@@ -12,6 +12,7 @@ import SearchPage from './pages/search';
 import SearchResultPage from './pages/search/SearchResultPage';
 import MainLayout from './components/common/MainLayout';
 import LayoutWithHeader from './components/common/LayoutWithHeader';
+import CreateTodoPage from './pages/todo/CreateTodoPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -43,6 +44,11 @@ const App = ({ children }: AppProps) => (
             <Route path="join" element={<JoinPage />} />
           </Route>
           {/* 3.일정 */}
+          <Route path="/todo" element={<Outlet />}>
+            <Route path="create" element={<CreateTodoPage />} />
+            {/* <Route path="modify" element={<CreateTodoPage />} /> */}
+            {/* <Route path="join" element={<JoinPage />} />   */}
+          </Route>
         </Route>
         {/* 404 처리 */}
         {/* <Route path="*" element={<NotFound />}></Route> */}
