@@ -4,7 +4,7 @@ import ChatList from '@/components/Chatting/ChatList';
 
 const ChatPage = () => (
   <>
-    <TopTitle title="채팅" />
+    <TopTitle title="채팅" alarm />
     <ChatList />
   </>
 );

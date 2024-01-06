@@ -8,7 +8,7 @@ const ChatList = () => {
   const { lastElement } = useInfinite(chatListFetchNextPage);
 
   return (
-    <ul className="px-5 [&>*:last-child]:border-0">
+    <ul className="[&>*:last-child]:border-0">
       {chatList?.pages.map(page =>
         page.map(list => (
           <ChatItem
