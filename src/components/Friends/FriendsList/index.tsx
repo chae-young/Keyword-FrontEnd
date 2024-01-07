@@ -25,6 +25,7 @@ const FriendsList = ({ lists, FetchNextPage }: FriendsListProps) => {
               email={list.email}
               status={list.status}
               profileImageUrl={list.profileImageUrl}
+              del
             />
           ))
         ) : (

@@ -1,10 +1,14 @@
 import React, { useCallback } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import { IS_FRIEND } from '@/constants/friends';
 import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';
+import useDeleteMyFriendQuery from '@/hooks/query/friends/useDeleteMyFriendQuery';
 
 interface FriendsItemProps extends FriendsDataType {
   // buttonName: string[];
+  del?: boolean;
 }
 
 const FriendsItem = ({
@@ -12,14 +16,23 @@ const FriendsItem = ({
   name,
   email,
   profileImageUrl,
-  status
+  status,
+  del
 }: FriendsItemProps) => {
   const friendStatus = status === IS_FRIEND;
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
-
-  const handleFriendAdd = useCallback(() => {
+  const { IsFriendDelete, friendDeleteIsMutate } = useDeleteMyFriendQuery();
+  // 친구추가
+  const handleFriendAdd = () => {
     friendAddIsMutate();
-  }, []);
+  };
+  // 친구삭제
+  const handleFriendDel = (memberReqId: number) => {
+    const userConfirmed = window.confirm('해당 친구를 삭제하시겠습니까?');
+    if (userConfirmed) {
+      friendDeleteIsMutate(memberReqId);
+    }
+  };
 
   return (
     <li className="flex items-start mb-4">
@@ -44,6 +57,15 @@ const FriendsItem = ({
           }  rounded-xl  pt-2 py-1 px-3`}
         >
           친구추가
+        </button>
+      )}
+      {del && (
+        <button
+          type="button"
+          onClick={() => handleFriendDel(memberId)}
+          className="bg-primary text-white rounded-xl  pt-2 py-1 px-3"
+        >
+          삭제
         </button>
       )}
     </li>

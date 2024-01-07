@@ -3,7 +3,7 @@ import { axiosDefault } from '@/apis';
 import { LoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
 
-const responsAPI = async (data: LoginDataType) => {
+const fetchAPI = async (data: LoginDataType) => {
   const { email, password } = data;
 
   const res = await axiosDefault.post('/members/signin', { email, password });
@@ -18,7 +18,7 @@ const usePostLoginQuery = () => {
   } = useMutation({
     mutationKey: ['login'],
     mutationFn: ({ email, password }: LoginDataType) =>
-      responsAPI({ email, password }),
+      fetchAPI({ email, password }),
     onSuccess: data => {
       localStorage.setItem('accessToken', data.accessToken);
       setCookie('refreshToken', data.refreshToken, {
