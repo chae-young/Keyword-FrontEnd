@@ -27,6 +27,13 @@ module.exports = {
   },
 
   rules: {
+    // label id 연결
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelAttributes: ['htmlFor']
+      }
+    ],
     'react/require-default-props': 'off',
     // arrow 함수 형식 사용
     'react/function-component-definition': [

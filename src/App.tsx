@@ -3,7 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import ChatPage from './pages/ChatPage';
-import MyPage from './pages/MyPage';
+import MyPage from './pages/mypage';
 import InnerCon from './components/common/InnerCon';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/auth/LoginPage';
@@ -13,6 +13,7 @@ import SearchResultPage from './pages/search/SearchResultPage';
 import MainLayout from './components/common/MainLayout';
 import LayoutWithHeader from './components/common/LayoutWithHeader';
 import CreateTodoPage from './pages/todo/CreateTodoPage';
+import ProfileEditPage from './pages/mypage/ProfileEditPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -36,7 +37,10 @@ const App = ({ children }: AppProps) => (
             {/* 채팅 */}
             <Route path="/chat" element={<ChatPage />} />
             {/* 마이페이지 */}
-            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/mypage" element={<Outlet />}>
+              <Route path="" element={<MyPage />} />
+              <Route path="edit" element={<ProfileEditPage />} />
+            </Route>
           </Route>
           {/* 2.회원 */}
           <Route path="/auth" element={<Outlet />}>
