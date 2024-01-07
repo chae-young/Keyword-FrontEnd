@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import Input from '@/components/common/Input';
 import Select from '@/components/common/Select';
-import ScheduleDate from '@/components/common/Calendar';
+import ScheduleDate from '@/components/common/Date&TimePicker/Date';
 
 interface ScheduleFormProps {
   onScheduleAdd: (schedule: Schedule) => void;
