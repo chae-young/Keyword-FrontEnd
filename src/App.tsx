@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
+import { ToastContainer, toast } from 'react-toastify';
 
 import ChatPage from './pages/ChatPage';
 import MyPage from './pages/mypage';
@@ -14,6 +15,7 @@ import MainLayout from './components/common/MainLayout';
 import LayoutWithHeader from './components/common/LayoutWithHeader';
 import CreateTodoPage from './pages/todo/CreateTodoPage';
 import ProfileEditPage from './pages/mypage/ProfileEditPage';
+import MyFriendsPage from './pages/mypage/MyFriendsPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -40,6 +42,7 @@ const App = ({ children }: AppProps) => (
             <Route path="/mypage" element={<Outlet />}>
               <Route path="" element={<MyPage />} />
               <Route path="edit" element={<ProfileEditPage />} />
+              <Route path="myFriends" element={<MyFriendsPage />} />
             </Route>
           </Route>
           {/* 2.회원 */}
@@ -58,6 +61,18 @@ const App = ({ children }: AppProps) => (
         {/* <Route path="*" element={<NotFound />}></Route> */}
       </Route>
     </Routes>
+    <ToastContainer
+      position="top-center"
+      autoClose={2500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+    />
   </RecoilRoot>
 );
 
