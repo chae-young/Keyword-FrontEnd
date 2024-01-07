@@ -1,8 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { axiosDefault } from '@/apis';
 import { JoinDataType } from '@/types/auth/authDataType';
+import useToast from '@/hooks/useToast';
 
-const responsAPI = async (data: JoinDataType) => {
+const fetchAPI = async (data: JoinDataType) => {
   const { email, password, name, phone } = data;
 
   const res = await axiosDefault.post('/members/signup', {
@@ -15,6 +16,7 @@ const responsAPI = async (data: JoinDataType) => {
 };
 
 const usePostJoinQuery = () => {
+  const { toastSuccess } = useToast();
   const {
     mutate: joinIsMutate,
     isError: joinIsError,
@@ -22,8 +24,13 @@ const usePostJoinQuery = () => {
   } = useMutation({
     mutationKey: ['join'],
     mutationFn: ({ email, password, name, phone }: JoinDataType) =>
-      responsAPI({ email, password, name, phone }),
-    onSuccess: data => {}
+      fetchAPI({ email, password, name, phone }),
+    onSuccess: () => {
+      toastSuccess('회원가입이 완료되었습니다.');
+    },
+    onError: err => {
+      console.log(err);
+    }
   });
 
   return {

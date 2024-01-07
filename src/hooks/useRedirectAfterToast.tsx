@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const useRedirectAfterToast = (status: boolean, path: string) => {
@@ -9,7 +9,7 @@ const useRedirectAfterToast = (status: boolean, path: string) => {
     if (status) {
       countRefId = setTimeout(() => {
         navigate(path);
-      }, 1500);
+      }, 2000);
     }
 
     return () => {

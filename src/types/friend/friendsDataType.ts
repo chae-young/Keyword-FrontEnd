@@ -5,9 +5,13 @@ export interface FriendsDataType {
   name: string;
   email: string;
   profileImageUrl: string;
-  status: IsFriendType | IsFriendRequestType;
+  status?: IsFriendType | IsFriendRequestType;
 }
 
 export interface FriendAddType {
   isFriendRequest: boolean;
+}
+
+export interface FriendDeleteType {
+  isFriendDelete: boolean;
 }

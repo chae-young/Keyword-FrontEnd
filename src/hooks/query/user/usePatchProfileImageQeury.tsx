@@ -1,9 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { axiosAuth } from '@/apis';
 import { FriendAddType } from '@/types/friend/friendsDataType';
 
-const responsAPI = async (formData: FormData): Promise<FriendAddType> => {
+const fetchAPI = async (formData: FormData): Promise<FriendAddType> => {
   const res = await axiosAuth.patch('/members/profile-image', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -20,7 +19,7 @@ const usePatchProfileImageQuery = () => {
     isSuccess: profileImageUpdateIsSuccess
   } = useMutation({
     mutationKey: ['profileImageUpdate'],
-    mutationFn: (formData: FormData) => responsAPI(formData)
+    mutationFn: (formData: FormData) => fetchAPI(formData)
   });
 
   return {
