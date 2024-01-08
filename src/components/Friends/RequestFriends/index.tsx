@@ -2,21 +2,20 @@ import React from 'react';
 import FriendsList from '../FriendsList';
 import useGetMyFriendsQuery from '@/hooks/query/friends/useGetMyFriendsQuery';
 
-const MyFriends = () => {
+const RequestFriends = () => {
   const { friendsList, friendsListFetchNextPage } =
-    useGetMyFriendsQuery('accept');
+    useGetMyFriendsQuery('request');
 
   return (
-    <section>
+    <section className="pt-5">
       {friendsList && (
         <FriendsList
           lists={friendsList}
           FetchNextPage={friendsListFetchNextPage}
-          del
         />
       )}
     </section>
   );
 };
 
-export default MyFriends;
+export default RequestFriends;

@@ -2,7 +2,7 @@ import { rest } from 'msw';
 import { friendsList } from '@/mocks/data';
 
 export const getMyFriendsList = rest.get('/friends/state', (req, res, ctx) => {
-  const state = req.url.searchParams.get('friend-state');
+  // const state = req.url.searchParams.get('friend-state');
   const size = Number(req.url.searchParams.get('size')) || 10;
   const page = Number(req.url.searchParams.get('page')) || 1;
 
@@ -28,6 +28,27 @@ export const deleteMyFriend = rest.delete(
     return res(
       ctx.json({
         errorMessage: '해당 친구를 찾을 수 없습니다.'
+      })
+    );
+  }
+);
+export const patchMyFriendReq = rest.patch(
+  '/friends/handle/:memberReqId',
+  async (req, res, ctx) => {
+    const { memberReqId } = req.params;
+    const { friendState } = await req.json();
+    if (friendState === 'ACCEPTED') {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          friendState: 'ACCEPTED'
+        })
+      );
+    }
+    return res(
+      ctx.status(200),
+      ctx.json({
+        friendState: 'ACCEPTED'
       })
     );
   }

@@ -1,6 +1,10 @@
 import { postSignIn, postSignUp } from './auth/handler';
 import { getChatList } from './chat/handler';
-import { deleteMyFriend, getMyFriendsList } from './friends/handler';
+import {
+  deleteMyFriend,
+  getMyFriendsList,
+  patchMyFriendReq
+} from './friends/handler';
 import { getFriendsSearchList, postFriendAdd } from './search/handler';
 import { patchProfileImage } from './user/handler';
 
@@ -11,6 +15,7 @@ const handlers = [
   getFriendsSearchList,
   getMyFriendsList,
   postFriendAdd,
+  patchMyFriendReq,
   deleteMyFriend,
   patchProfileImage
 ];

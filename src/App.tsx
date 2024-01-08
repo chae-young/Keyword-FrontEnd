@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ChatPage from './pages/ChatPage';
 import MyPage from './pages/mypage';
@@ -16,6 +17,7 @@ import LayoutWithHeader from './components/common/LayoutWithHeader';
 import CreateTodoPage from './pages/todo/CreateTodoPage';
 import ProfileEditPage from './pages/mypage/ProfileEditPage';
 import MyFriendsPage from './pages/mypage/MyFriendsPage';
+import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -30,21 +32,18 @@ const App = ({ children }: AppProps) => (
           <Route element={<LayoutWithHeader />}>
             <Route path="/" element={<HomePage />} />
           </Route>
+
           {/* 1.네비로 라우팅 하는 페이지들 */}
           <Route element={<MainLayout />}>
             {/* 검색 */}
-            <Route path="/search" element={<SearchPage />}>
-              <Route path="result" element={<SearchResultPage />} />
-            </Route>
+            <Route path="/search" element={<SearchPage />} />
+            <Route path="/search/result" element={<SearchResultPage />} />
             {/* 채팅 */}
             <Route path="/chat" element={<ChatPage />} />
             {/* 마이페이지 */}
-            <Route path="/mypage" element={<Outlet />}>
-              <Route path="" element={<MyPage />} />
-              <Route path="edit" element={<ProfileEditPage />} />
-              <Route path="myFriends" element={<MyFriendsPage />} />
-            </Route>
+            <Route path="/mypage" element={<MyPage />} />
           </Route>
+
           {/* 2.회원 */}
           <Route path="/auth" element={<Outlet />}>
             <Route path="login" element={<LoginPage />} />
@@ -55,6 +54,12 @@ const App = ({ children }: AppProps) => (
             <Route path="create" element={<CreateTodoPage />} />
             {/* <Route path="modify" element={<CreateTodoPage />} /> */}
             {/* <Route path="join" element={<JoinPage />} />   */}
+          </Route>
+          {/* 4.마이페이지 */}
+          <Route path="/mypage" element={<Outlet />}>
+            <Route path="edit" element={<ProfileEditPage />} />
+            <Route path="myFriends" element={<MyFriendsPage />} />
+            <Route path="requested" element={<RequestedFriendsPage />} />
           </Route>
         </Route>
         {/* 404 처리 */}

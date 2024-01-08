@@ -26,7 +26,8 @@ const useGetChatListQuery = () => {
     getNextPageParam: (lastPage, allPage) => {
       const nextpage = allPage.length + 1;
       return lastPage.length === 0 ? null : nextpage;
-    }
+    },
+    staleTime: 20000
   });
 
   return {
