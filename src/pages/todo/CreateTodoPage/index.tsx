@@ -3,6 +3,7 @@ import TopTitle from '@/components/common/TopTitle';
 import WideButton from '@/components/common/Button/WideButton';
 import SelectDate from '@/components/common/Date&TimePicker/Date';
 import TimePicker from '@/components/common/Date&TimePicker/Time';
+import Addr from '@/components/common/Map';
 
 const CreateTodoPage = () => (
   <>
@@ -25,6 +26,7 @@ const CreateTodoPage = () => (
       </div>
       <div className="pb-4 pt-3">
         <p className="pb-3">장소</p>
+        <Addr />
       </div>
       <div className="pb-4 pt-3">
         <p className="pb-3">알림 설정</p>
