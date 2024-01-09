@@ -2,24 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 import TopTitle from '@/components/common/TopTitle';
+import Profile from '@/components/Profile';
 
 const MyPage = () => (
   <>
     <TopTitle title="마이페이지" alarm />
-    <div className="mt-4 flex justify-between">
-      <div className="avatar items-center">
-        <div className="w-20 rounded-full mr-4">
-          <img
-            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-            alt="김친구"
-          />
-        </div>
-        <p>김친구</p>
-      </div>
-      <Link to="edit" className="text-body2 text-gray4 flex items-center">
-        내 정보 수정 <IoIosArrowForward className="text-body2" />
-      </Link>
-    </div>
+    <Profile />
     <ul className="mt-8 -mx-5">
       <li className="border-b border-gray2 px-5">
         <Link to="myFriends" className="flex w-full justify-between py-6 ">
