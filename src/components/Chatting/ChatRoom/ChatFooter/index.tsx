@@ -1,25 +1,17 @@
 import React from 'react';
 import { IoMdArrowRoundUp } from 'react-icons/io';
 
-interface ChatFooterProps {
-  sendedMessage: string;
-  handlesendMessage: (msg: string) => (e: React.FormEvent) => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+interface ChatFooterProps {}
 
-const ChatFooter = ({
-  sendedMessage,
-  handlesendMessage,
-  handleInputChange
-}: ChatFooterProps) => (
+const ChatFooter = ({}: ChatFooterProps) => (
   <>
     {/* 채팅 보내기 */}
-    <form onSubmit={handlesendMessage(sendedMessage)}>
+    <form>
       <div className="fixed max-w-default bottom-0 left-0 right-0 w-full m-auto">
         <input
           type="text"
-          value={sendedMessage}
-          onChange={handleInputChange}
+          // value={sendedMessage}
+          // onChange={handleInputChange}
           className="w-full h-14 pl-5"
         />
         <button

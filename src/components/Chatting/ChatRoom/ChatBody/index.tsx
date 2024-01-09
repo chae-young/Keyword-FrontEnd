@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { ChatDataType } from '@/types/chatting/chatDataType';
 
-interface ChatBodyProps {
-  messages: ChatDataType[];
-}
+interface ChatBodyProps {}
 
-const ChatBody = ({ messages }: ChatBodyProps) => {
+const ChatBody = ({}: ChatBodyProps) => {
   const userId = 1;
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
@@ -14,11 +12,11 @@ const ChatBody = ({ messages }: ChatBodyProps) => {
       behavior: 'smooth',
       block: 'end'
     });
-  }, [messages]);
+  }, []);
 
   return (
     <section ref={lastMessageRef} className="bg-gray1 px-5 pb-5">
-      {messages.map(msg =>
+      {/* {messages.map(msg =>
         msg.senderId === userId ? (
           <div className="text-right">
             <p className="mt-3 inline-block bg-white p-4 rounded-xl">
@@ -43,7 +41,7 @@ const ChatBody = ({ messages }: ChatBodyProps) => {
             </p>
           </div>
         )
-      )}
+      )} */}
     </section>
   );
 };
