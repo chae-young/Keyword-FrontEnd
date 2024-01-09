@@ -11,9 +11,15 @@ const useModalState = () => {
   const [reqModalState, setReqModalState] = useRecoilState(
     modalAcceptOrRejectAtom
   );
+
   // 모달 오픈
   const openModal = () => {
     (document.getElementById('Modal') as HTMLDialogElement).showModal();
+  };
+
+  // 모달 닫기
+  const closeModal = () => {
+    (document.getElementById('Modal') as HTMLDialogElement).close();
   };
 
   // 모달(친구요청 수락/거절): 친구요청 수락/거절 친구 이름 변경
@@ -27,6 +33,7 @@ const useModalState = () => {
 
   return {
     openModal,
+    closeModal,
     modalState,
     reqModalState,
     changeFriendName
