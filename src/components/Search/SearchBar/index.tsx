@@ -31,7 +31,7 @@ const SearchBar = ({ backSearch, keyword }: SearchBarProps) => {
 
   return (
     <form
-      className="flex items-center -ml-5 -mt-10 relative"
+      className="flex items-center -ml-5 -mt-12 relative"
       onSubmit={handleSubmit}
     >
       <button

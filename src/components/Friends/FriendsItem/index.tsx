@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import { IS_FRIEND } from '@/constants/friends';
 import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';
 import useDeleteMyFriendQuery from '@/hooks/query/friends/useDeleteMyFriendQuery';
+import RightButton from '@/components/common/Button/RightButton';
+import useModalState from '@/hooks/recoil/useModalState';
 
 interface FriendsItemProps extends FriendsDataType {
   // buttonName: string[];
   del?: boolean;
+  reqCheck?: boolean;
 }
 
 const FriendsItem = ({
@@ -17,11 +19,13 @@ const FriendsItem = ({
   email,
   profileImageUrl,
   status,
-  del
+  del,
+  reqCheck
 }: FriendsItemProps) => {
   const friendStatus = status === IS_FRIEND;
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
-  const { IsFriendDelete, friendDeleteIsMutate } = useDeleteMyFriendQuery();
+  const { friendDeleteIsMutate } = useDeleteMyFriendQuery();
+  const { changeFriendName, openModal } = useModalState();
   // 친구추가
   const handleFriendAdd = () => {
     friendAddIsMutate();
@@ -32,6 +36,11 @@ const FriendsItem = ({
     if (userConfirmed) {
       friendDeleteIsMutate(memberReqId);
     }
+  };
+  // 확인하기
+  const handleRequestCheck = (friendName: string) => {
+    changeFriendName(friendName, memberId);
+    openModal();
   };
 
   return (
@@ -60,13 +69,16 @@ const FriendsItem = ({
         </button>
       )}
       {del && (
-        <button
-          type="button"
-          onClick={() => handleFriendDel(memberId)}
-          className="bg-primary text-white rounded-xl  pt-2 py-1 px-3"
-        >
-          삭제
-        </button>
+        <RightButton
+          handleClick={() => handleFriendDel(memberId)}
+          text="삭제"
+        />
+      )}
+      {reqCheck && (
+        <RightButton
+          handleClick={() => handleRequestCheck(name)}
+          text="확인하기"
+        />
       )}
     </li>
   );

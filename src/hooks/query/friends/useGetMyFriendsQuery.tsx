@@ -30,7 +30,8 @@ const useGetMyFriendsQuery = (state: string) => {
     getNextPageParam: (lastPage, allPage) => {
       const nextPage = allPage.length + 1;
       return lastPage.length === 0 ? null : nextPage;
-    }
+    },
+    staleTime: 20000
   });
 
   return {

@@ -15,3 +15,7 @@ export interface FriendAddType {
 export interface FriendDeleteType {
   isFriendDelete: boolean;
 }
+
+export interface FriendReqType {
+  friendState: string;
+}
