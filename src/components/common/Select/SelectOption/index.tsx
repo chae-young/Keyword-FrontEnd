@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
 import Select from '..';
 
-const SelectTime = () => {
-  const [selectedHour, setSelectedHour] = useState('');
+const SelectRemind = () => {
+  const [selectRemind, setSelectedRemind] = useState('');
 
-  const handleHourChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedHour(e.target.value);
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedRemind(e.target.value);
   };
-
-  const hours = Array.from({ length: 24 }, (_, index) => ({
-    value: String(index),
-    label: String(index)
-  }));
 
   return (
     <div>
       <Select
-        options={hours}
-        value={selectedHour}
-        handleChangeSelect={handleHourChange}
+        options={[
+          { value: '3hours', label: '3시간 전' },
+          { value: '12hours', label: '12시간 전' },
+          { value: '24hours', label: '24시간 전' }
+        ]}
+        value={selectRemind}
+        handleChangeSelect={handleSelectChange}
       />
     </div>
   );
 };
 
-export default SelectTime;
+export default SelectRemind;

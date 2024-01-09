@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
-interface ModalPorps {
+interface ModalProps {
   children: React.ReactNode;
   title?: string;
 }
-const Modal = ({ children, title }: ModalPorps) => {
+const Modal = ({ children, title }: ModalProps) => {
   const [open, close] = useState(true);
   return (
     <dialog id="Modal" className="modal">

@@ -4,6 +4,9 @@ import WideButton from '@/components/common/Button/WideButton';
 import SelectDate from '@/components/common/Date&TimePicker/Date';
 import TimePicker from '@/components/common/Date&TimePicker/Time';
 import Addr from '@/components/common/Map';
+import SelectRemind from '@/components/common/Select/SelectOption';
+import SelectFriendsButton from '@/components/common/Button/SelectFriendsButton';
+import Modal from '@/components/common/Modal';
 
 const CreateTodoPage = () => (
   <>
@@ -30,17 +33,14 @@ const CreateTodoPage = () => (
       </div>
       <div className="pb-4 pt-3">
         <p className="pb-3">알림 설정</p>
-        <input
-          className="bg-gray2 rounded-lg text-body2 placeholder-text-gray4 h-10 pl-3 w-full"
-          type="text"
-        />
+        <SelectRemind />
       </div>
       <div className="pb-4 pt-3">
         <p className="pb-3">친구선택</p>
-        <input
-          className="bg-gray2 rounded-lg text-body2 placeholder-text-gray4 h-10 pl-3 w-full"
-          type="text"
-        />
+        <div>
+          <SelectFriendsButton text="친구를 선택해보세요" status={false} />
+          <Modal />
+        </div>
       </div>
       <div>
         <WideButton type="submit" text="일정 등록" status={false} />

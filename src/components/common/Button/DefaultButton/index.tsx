@@ -3,7 +3,7 @@ import React from 'react';
 interface DefaultButtonProps {
   type?: string;
   text: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: () => void;
 }
 
 const DefaultButton = ({ type, text, onClick }: DefaultButtonProps) => (
