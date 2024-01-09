@@ -11,11 +11,12 @@ import useModalState from '@/hooks/recoil/useModalState';
 import FriendListModal from '@/components/common/Modal/FriendsListModal';
 
 const CreateTodoPage = () => {
-  const { openModal } = useModalState();
+  const { openModal, mySelectdFriends } = useModalState();
   const handleFriendSelect = () => {
     console.log('11');
     openModal();
   };
+  console.log('선택된 친구', mySelectdFriends);
   return (
     <>
       <TopTitle title="일정 생성" />

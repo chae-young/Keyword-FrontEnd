@@ -1,5 +1,11 @@
 import { useRecoilState } from 'recoil';
-import { modalAcceptOrRejectAtom, modalAtom } from '@/recoil/atoms/modal/atom';
+import {
+  modalAcceptOrRejectAtom,
+  modalAtom,
+  modalMySelectedFriendsAtom
+} from '@/recoil/atoms/modal/atom';
+import { UserDataType } from '@/types/user/userDataType';
+import { FriendsDataType } from '@/types/friend/friendsDataType';
 
 /*
  * modalAtom: 기본 모달 state
@@ -10,6 +16,9 @@ const useModalState = () => {
   const [modalState, setModalstate] = useRecoilState(modalAtom);
   const [reqModalState, setReqModalState] = useRecoilState(
     modalAcceptOrRejectAtom
+  );
+  const [mySelectdFriends, setMySelectedFriends] = useRecoilState(
+    modalMySelectedFriendsAtom
   );
 
   // 모달 오픈
@@ -31,12 +40,19 @@ const useModalState = () => {
     }));
   };
 
+  // 모달(내 친구 목록 불러오기) : 선택된 친구들 저장
+  const saveMySelectedFriends = (friends: FriendsDataType[]) => {
+    setMySelectedFriends(friends);
+  };
+
   return {
     openModal,
     closeModal,
     modalState,
     reqModalState,
-    changeFriendName
+    changeFriendName,
+    mySelectdFriends,
+    saveMySelectedFriends
   };
 };
 

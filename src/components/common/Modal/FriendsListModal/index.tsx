@@ -1,12 +1,13 @@
-
 import React, { useCallback, useState } from 'react';
 import { friendsList } from '@/mocks/data';
+import useModalState from '@/hooks/recoil/useModalState';
 
 interface CheckedState {
   [key: number]: boolean;
 }
 
 const FriendListModal: React.FC = () => {
+  const { saveMySelectedFriends } = useModalState();
   const [checkedState, setCheckedState] = useState<CheckedState>(
     friendsList.reduce((state, friend) => {
       state[friend.memberId] = false;
@@ -28,6 +29,7 @@ const FriendListModal: React.FC = () => {
         friend => checkedState[friend.memberId]
       );
       console.log('checkedList:', checkedList);
+      saveMySelectedFriends(checkedList);
     },
     [checkedState]
   );
