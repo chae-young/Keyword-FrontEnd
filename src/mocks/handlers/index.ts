@@ -6,7 +6,7 @@ import {
   patchMyFriendReq
 } from './friends/handler';
 import { getFriendsSearchList, postFriendAdd } from './search/handler';
-import { patchProfileImage } from './user/handler';
+import { getProfile, patchProfileImage } from './user/handler';
 
 const handlers = [
   getChatList,
@@ -17,6 +17,7 @@ const handlers = [
   postFriendAdd,
   patchMyFriendReq,
   deleteMyFriend,
-  patchProfileImage
+  patchProfileImage,
+  getProfile
 ];
 export default handlers;

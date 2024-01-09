@@ -22,4 +22,14 @@ export const patchProfileImage = rest.patch(
   }
 );
 
-export const postFriendAdd = '';
+export const getProfile = rest.get('/members', async (req, res, ctx) =>
+  res(
+    ctx.json({
+      name: '김친구',
+      email: 'DevHeaven@naver.com',
+      phone: '010-1234-1234',
+      imageUrl:
+        'https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
+    })
+  )
+);
