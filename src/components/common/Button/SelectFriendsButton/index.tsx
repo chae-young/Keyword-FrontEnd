@@ -5,17 +5,20 @@ interface SelectFriendsButtonProps {
   type?: string;
   text: string;
   status: boolean;
+  hadleClick: () => void;
 }
 
 const SelectFriendsButton = ({
   type,
   text,
-  status
+  status,
+  hadleClick
 }: SelectFriendsButtonProps) => (
   <button
     style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     type={type ? 'button' : 'submit'}
-    disabled={!status}
+    // disabled={!status}
+    onClick={hadleClick}
     className={`max-w-default m-auto w-full text-body1 h-14 rounded bottom-0 ${
       status ? 'text-white' : 'text-gray4'
     } ${status ? 'bg-primary' : 'bg-white border border-dashed border-gray4'}`}
