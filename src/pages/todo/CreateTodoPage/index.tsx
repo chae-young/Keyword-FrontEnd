@@ -12,7 +12,6 @@ import FriendListModal from '@/components/common/Modal/FriendsListModal';
 
 const CreateTodoPage = () => {
   const { openModal } = useModalState();
-
   const handleFriendSelect = () => {
     console.log('11');
     openModal();

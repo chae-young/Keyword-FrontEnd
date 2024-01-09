@@ -1,3 +1,4 @@
+
 import React, { useCallback, useState } from 'react';
 import { friendsList } from '@/mocks/data';
 
