@@ -204,3 +204,91 @@ export const friendsList = [
   //     'https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg'
   // }
 ];
+
+// 일정 리스트
+export const schedulesList = [
+  {
+    scheduleId: 1,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 2,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'COMPLETED'
+  },
+  {
+    scheduleId: 3,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 4,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 5,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 6,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 7,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 8,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 9,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 10,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 11,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  },
+  {
+    scheduleId: 12,
+    title: '크리스마스 모임 크리스마스 모임 크리스마스 모임 크리스마스 모임',
+    scheduleDateTime: '2023-12-25T13:00',
+    locationExplanation: '위치 설명',
+    status: 'ONGOING'
+  }
+];

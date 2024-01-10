@@ -4,7 +4,6 @@ import { RecoilRoot } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import ChatPage from './pages/ChatPage';
 import MyPage from './pages/mypage';
 import InnerCon from './components/common/InnerCon';
 import HomePage from './pages/HomePage';
