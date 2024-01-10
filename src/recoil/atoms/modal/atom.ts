@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { ModalAcceptOrRejectType } from './types';
+import { FriendsDataType } from '@/types/friend/friendsDataType';
 
 // basic 모달
 export const modalAtom = atom({
@@ -14,4 +15,10 @@ export const modalAcceptOrRejectAtom = atom<ModalAcceptOrRejectType>({
     labelName: '',
     friendName: ''
   }
+});
+
+// 모달: 내 친구 목록
+export const modalMySelectedFriendsAtom = atom<FriendsDataType[]>({
+  key: 'modalAcceptOrRejectAtom',
+  default: []
 });
