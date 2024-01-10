@@ -2,6 +2,7 @@ import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaRegBell } from 'react-icons/fa6';
+import Alarm from '../Alarm';
 
 interface TopTitleProps {
   title: string;
@@ -27,14 +28,7 @@ const TopTitle = ({ title, back, alarm }: TopTitleProps) => {
         </button>
       )}
       <h1 className="text-h2">{title}</h1>
-      {alarm && (
-        <Link
-          to="/alarm"
-          className="w-14 h-full flex justify-center items-center absolute right-0 top-0"
-        >
-          <FaRegBell className="text-xl text-bk" />
-        </Link>
-      )}
+      {alarm && <Alarm />}
     </div>
   );
 };
