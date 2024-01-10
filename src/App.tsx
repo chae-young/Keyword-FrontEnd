@@ -18,6 +18,8 @@ import CreateTodoPage from './pages/todo/CreateTodoPage';
 import ProfileEditPage from './pages/mypage/ProfileEditPage';
 import MyFriendsPage from './pages/mypage/MyFriendsPage';
 import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
+import ChatDetail from './pages/ChatPage/ChatDetail';
+import ChatList from './components/Chatting/ChatList';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -39,7 +41,7 @@ const App = ({ children }: AppProps) => (
             <Route path="/search" element={<SearchPage />} />
             <Route path="/search/result" element={<SearchResultPage />} />
             {/* 채팅 */}
-            <Route path="/chat" element={<ChatPage />} />
+            <Route path="/chat" element={<ChatList />} />
             {/* 마이페이지 */}
             <Route path="/mypage" element={<MyPage />} />
           </Route>
@@ -49,18 +51,24 @@ const App = ({ children }: AppProps) => (
             <Route path="login" element={<LoginPage />} />
             <Route path="join" element={<JoinPage />} />
           </Route>
+
           {/* 3.일정 */}
           <Route path="/todo" element={<Outlet />}>
             <Route path="create" element={<CreateTodoPage />} />
             {/* <Route path="modify" element={<CreateTodoPage />} /> */}
             {/* <Route path="join" element={<JoinPage />} />   */}
           </Route>
+
           {/* 4.마이페이지 */}
           <Route path="/mypage" element={<Outlet />}>
             <Route path="edit" element={<ProfileEditPage />} />
             <Route path="myFriends" element={<MyFriendsPage />} />
             <Route path="requested" element={<RequestedFriendsPage />} />
           </Route>
+        </Route>
+        {/* 5.채팅 */}
+        <Route path="chat" element={<Outlet />}>
+          <Route path=":roomId" element={<ChatDetail />} />
         </Route>
         {/* 404 처리 */}
         {/* <Route path="*" element={<NotFound />}></Route> */}
