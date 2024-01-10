@@ -6,7 +6,6 @@ interface ModalProps {
   title?: string;
 }
 
-const Modal = ({ children, title }: ModalPorps) => (
 const Modal = ({ children, title }: ModalProps) => (
   <dialog id="Modal" className="modal -z-10">
     <div className="modal-box w-11/12 max-w-default">
