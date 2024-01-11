@@ -28,7 +28,7 @@ export const getMyScheduleDetail = rest.get(
         latitude: 33.46312123233534,
         longitude: 126.56833027063311,
         status: 'ONGOING',
-        remindDateTime: '2023-12-25T11:00',
+        remindDateTime: '2023-12-25T 11:00',
         friendList: [
           {
             memberId: 1,
