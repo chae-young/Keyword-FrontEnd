@@ -41,3 +41,23 @@ export const getMyScheduleDetail = rest.get(
     );
   }
 );
+
+export const deleteMySchedule = rest.delete(
+  '/schedules/:scheduleId',
+  (req, res, ctx) => {
+    const { scheduleId } = req.params;
+    if (scheduleId) {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          isScheduleDelete: true
+        })
+      );
+    }
+    return res(
+      ctx.json({
+        errorMessage: '해당 일정이 없습니다.'
+      })
+    );
+  }
+);

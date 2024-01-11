@@ -25,6 +25,6 @@ export interface ScheduleDetailIdType {
   noticeId: string;
 }
 
-export interface ScheduleDeletetype {
+export interface ScheduleDeleteType {
   isScheduleDelete: boolean;
 }

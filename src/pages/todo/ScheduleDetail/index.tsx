@@ -4,13 +4,21 @@ import useGetScheduleDetailQuery from '@/hooks/query/schedules/useGetScheduleDet
 import KakaoMap from '@/components/KakaoMap';
 import TopTitle from '@/components/common/TopTitle';
 import WideButton from '@/components/common/Button/WideButton';
+import useDeleteScheduleQuery from '@/hooks/query/schedules/useDeleteScheduleQuery';
 
 const ScheduleDetail = () => {
   const { scheduleDetail } = useGetScheduleDetailQuery({
     scheduleId: '1',
     noticeId: '1'
   });
-  console.log(scheduleDetail);
+  const { scheduleDeleteIsMutate } = useDeleteScheduleQuery();
+  const handleScheduleDel = (scheduleId: number) => {
+    const scheduleConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
+    if (scheduleConfirmed) {
+      scheduleDeleteIsMutate(scheduleId);
+    }
+  };
+
   const coordi = {
     lat: scheduleDetail?.latitude,
     long: scheduleDetail?.longitude
@@ -35,7 +43,9 @@ const ScheduleDetail = () => {
       <div>
         <p>{scheduleDetail?.friendList.length}명의 친구가 선택되었습니다</p>
       </div>
-      <WideButton text="취소하기" status={false} />
+      <button type="submit" onClick={() => handleScheduleDel}>
+        취소하기
+      </button>
     </>
   );
 };

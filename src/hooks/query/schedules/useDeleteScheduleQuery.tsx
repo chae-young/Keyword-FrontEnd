@@ -8,7 +8,7 @@ const fetchAPI = async (scheduleId: number): Promise<ScheduleDeleteType> => {
   return res.data;
 };
 
-const useDeleteMyFriendQuery = () => {
+const useDeleteScheduleQuery = () => {
   const { toastSuccess } = useToast();
   const {
     data: IsScheduleDelete,
@@ -34,4 +34,4 @@ const useDeleteMyFriendQuery = () => {
   };
 };
 
-export default useDeleteMyFriendQuery;
+export default useDeleteScheduleQuery;

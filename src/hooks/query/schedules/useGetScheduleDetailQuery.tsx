@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
-import { UserDataType } from '@/types/user/userDataType';
 import {
   ScheduleDetailIdType,
   ScheduleDetailType
