@@ -13,12 +13,12 @@ import SearchPage from './pages/search';
 import SearchResultPage from './pages/search/SearchResultPage';
 import MainLayout from './components/common/MainLayout';
 import LayoutWithHeader from './components/common/LayoutWithHeader';
-import CreateTodoPage from './pages/todo/CreateTodoPage';
 import ProfileEditPage from './pages/mypage/ProfileEditPage';
 import MyFriendsPage from './pages/mypage/MyFriendsPage';
 import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
 import ChatList from './components/Chatting/ChatList';
+import ScheduleCreatePage from './pages/schedule/ScheduleCreatePage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -52,8 +52,8 @@ const App = ({ children }: AppProps) => (
           </Route>
 
           {/* 3.일정 */}
-          <Route path="/todo" element={<Outlet />}>
-            <Route path="create" element={<CreateTodoPage />} />
+          <Route path="/schedule" element={<Outlet />}>
+            <Route path="create" element={<ScheduleCreatePage />} />
             {/* <Route path="modify" element={<CreateTodoPage />} /> */}
             {/* <Route path="join" element={<JoinPage />} />   */}
           </Route>
