@@ -5,7 +5,7 @@ import {
   getMyFriendsList,
   patchMyFriendReq
 } from './friends/handler';
-import { getMyScheduleList } from './schedule/handler';
+import { getMyScheduleList, postMySchedule } from './schedule/handler';
 import { getFriendsSearchList, postFriendAdd } from './search/handler';
 import { getProfile, patchProfileImage } from './user/handler';
 
@@ -19,6 +19,7 @@ const handlers = [
   patchMyFriendReq,
   deleteMyFriend,
   getMyScheduleList,
+  postMySchedule,
   patchProfileImage,
   getProfile
 ];
