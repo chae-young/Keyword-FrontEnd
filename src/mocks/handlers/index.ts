@@ -10,6 +10,7 @@ import {
   getMyScheduleDetail,
   getMyScheduleList
 } from './schedule/handler';
+
 import { getFriendsSearchList, postFriendAdd } from './search/handler';
 import { getProfile, patchMyPassword, patchProfileImage } from './user/handler';
 
