@@ -15,7 +15,8 @@ const ScheduleDetail = () => {
   const handleScheduleDel = (scheduleId: number) => {
     const scheduleConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
     if (scheduleConfirmed) {
-      scheduleDeleteIsMutate(scheduleId);
+      console.log(scheduleId);
+      scheduleDeleteIsMutate(1);
     }
   };
 
@@ -38,12 +39,12 @@ const ScheduleDetail = () => {
       </div>
       <div>
         <p>{scheduleDetail?.locationExplanation}</p>
-        <KakaoMap coordi={coordi} />
+        {/* <KakaoMap coordi={coordi} /> */}
       </div>
       <div>
         <p>{scheduleDetail?.friendList.length}명의 친구가 선택되었습니다</p>
       </div>
-      <button type="submit" onClick={() => handleScheduleDel}>
+      <button type="button" onClick={handleScheduleDel}>
         취소하기
       </button>
     </>

@@ -4,7 +4,8 @@ import useToast from '@/hooks/useToast';
 import { ScheduleDeleteType } from '@/types/schedule/scheduleDataType';
 
 const fetchAPI = async (scheduleId: number): Promise<ScheduleDeleteType> => {
-  const res = await axiosAuth.delete(`/schedule/${scheduleId}`);
+  console.log('쿼리', scheduleId);
+  const res = await axiosAuth.delete(`/schedules/${scheduleId}`);
   return res.data;
 };
 

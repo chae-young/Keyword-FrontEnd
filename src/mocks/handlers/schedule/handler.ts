@@ -46,6 +46,7 @@ export const deleteMySchedule = rest.delete(
   '/schedules/:scheduleId',
   (req, res, ctx) => {
     const { scheduleId } = req.params;
+    console.log(scheduleId, req.params);
     if (scheduleId) {
       return res(
         ctx.status(200),
