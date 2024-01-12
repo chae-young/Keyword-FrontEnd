@@ -4,11 +4,7 @@ import TopTitle from '@/components/common/TopTitle';
 
 const MyPasswordUpdate = () => {
   const [newPassword, setNewPassword] = useState('');
-  const {
-    MyPasswordUpdateIsMutate,
-    MyPasswordUpdateIsError,
-    MyPasswordUpdateIsSuccess
-  } = usePatchMyPasswordQuery();
+  const { MyPasswordUpdateIsMutate } = usePatchMyPasswordQuery();
 
   const handlePasswordUpdate = () => {
     MyPasswordUpdateIsMutate(new FormData());
