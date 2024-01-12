@@ -7,8 +7,7 @@ const MyPasswordUpdate = () => {
   const { MyPasswordUpdateIsMutate } = usePatchMyPasswordQuery();
 
   const handlePasswordUpdate = () => {
-    MyPasswordUpdateIsMutate(new FormData());
-
+    MyPasswordUpdateIsMutate(newPassword);
     setNewPassword('');
   };
 

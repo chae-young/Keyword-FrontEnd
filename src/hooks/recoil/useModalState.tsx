@@ -42,6 +42,7 @@ const useModalState = () => {
 
   // 모달(내 친구 목록 불러오기) : 선택된 친구들 저장
   const saveMySelectedFriends = (friends: FriendsDataType[]) => {
+    console.log(friends);
     setMySelectedFriends(friends);
   };
 

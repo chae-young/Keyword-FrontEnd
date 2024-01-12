@@ -37,20 +37,7 @@ export const getProfile = rest.get('/members', async (req, res, ctx) =>
 export const patchMyPassword = rest.patch(
   '/members/password',
   async (req, res, ctx) => {
-    const defaultPassword = req.headers.get('password');
-    if (!defaultPassword?.includes('password'))
-      return res(
-        ctx.json({
-          success: false,
-          message: 'error message',
-          data: null
-        })
-      );
-    return res(
-      ctx.status(200),
-      ctx.json({
-        success: true
-      })
-    );
+    const { password } = await req.json();
+    if (password) res(ctx.status(200));
   }
 );

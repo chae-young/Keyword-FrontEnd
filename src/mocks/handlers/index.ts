@@ -6,9 +6,10 @@ import {
   patchMyFriendReq
 } from './friends/handler';
 import {
-  deleteMySchedule,
+  getMyScheduleList,
+  postMySchedule,
   getMyScheduleDetail,
-  getMyScheduleList
+  deleteMySchedule
 } from './schedule/handler';
 
 import { getFriendsSearchList, postFriendAdd } from './search/handler';
@@ -24,6 +25,7 @@ const handlers = [
   patchMyFriendReq,
   deleteMyFriend,
   getMyScheduleList,
+  postMySchedule,
   patchProfileImage,
   getProfile,
   getMyScheduleDetail,
