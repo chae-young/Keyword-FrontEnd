@@ -2,8 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import { UserPasswordType } from '@/types/user/userDataType';
 
-const fetchAPI = async (formData: FormData): Promise<UserPasswordType> => {
-  const res = await axiosAuth.patch('/members/password', formData);
+const fetchAPI = async (password: string): Promise<UserPasswordType> => {
+  const res = await axiosAuth.patch('/members/password', password);
   return res.data;
 };
 
@@ -15,7 +15,7 @@ const usePatchMyPasswordQuery = () => {
     isSuccess: MyPasswordUpdateIsSuccess
   } = useMutation({
     mutationKey: ['myPasswordUpdate'],
-    mutationFn: (formData: FormData) => fetchAPI(formData)
+    mutationFn: (password: string) => fetchAPI(password)
   });
 
   return {
