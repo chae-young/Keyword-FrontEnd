@@ -16,3 +16,51 @@ export const getMyScheduleList = rest.get('/schedules', (req, res, ctx) => {
 export const postMySchedule = rest.post('/schedules', async (req, res, ctx) =>
   res(ctx.status(200), ctx.json({ isScheduleRequest: true }))
 );
+
+export const getMyScheduleDetail = rest.get(
+  '/schedules/:scheduleId',
+  async (req, res, ctx) =>
+    // const { scheduleId } = req.params;
+    // const noticeId = req.url.searchParams.get('noticeId');
+    res(
+      ctx.status(200),
+      ctx.json({
+        title: '제목',
+        contents: '내용',
+        scheduleDateTime: '2023-12-25T 13:00',
+        locationExplanation: '위치 설명',
+        latitude: 33.46312123233534,
+        longitude: 126.56833027063311,
+        status: 'ONGOING',
+        remindDateTime: '2023-12-25T 11:00',
+        friendList: [
+          {
+            memberId: 1,
+            name: 'name',
+            profileImageUrl: '',
+            email: '3333@naver.com'
+          }
+        ]
+      })
+    )
+);
+
+export const deleteMySchedule = rest.delete(
+  '/schedules/:scheduleId',
+  (req, res, ctx) => {
+    const { scheduleId } = req.params;
+    if (scheduleId) {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          isScheduleDelete: true
+        })
+      );
+    }
+    return res(
+      ctx.json({
+        errorMessage: '해당 일정이 없습니다.'
+      })
+    );
+  }
+);
