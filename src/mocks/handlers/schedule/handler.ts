@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 import { schedulesList } from '@/mocks/data';
 
-// 채팅방 리스트
+// 스케쥴 리스트
 export const getMyScheduleList = rest.get('/schedules', (req, res, ctx) => {
   const size = Number(req.url.searchParams.get('size')) || 10;
   const page = Number(req.url.searchParams.get('page')) || 1;
@@ -13,12 +13,16 @@ export const getMyScheduleList = rest.get('/schedules', (req, res, ctx) => {
   return res(ctx.status(200), ctx.json(newSchedulesList));
 });
 
+export const postMySchedule = rest.post('/schedules', async (req, res, ctx) =>
+  res(ctx.status(200), ctx.json({ isScheduleRequest: true }))
+);
+
 export const getMyScheduleDetail = rest.get(
   '/schedules/:scheduleId',
-  async (req, res, ctx) => {
-    const { scheduleId } = req.params;
-    const noticeId = req.url.searchParams.get('noticeId');
-    return res(
+  async (req, res, ctx) =>
+    // const { scheduleId } = req.params;
+    // const noticeId = req.url.searchParams.get('noticeId');
+    res(
       ctx.status(200),
       ctx.json({
         title: '제목',
@@ -38,8 +42,7 @@ export const getMyScheduleDetail = rest.get(
           }
         ]
       })
-    );
-  }
+    )
 );
 
 export const deleteMySchedule = rest.delete(

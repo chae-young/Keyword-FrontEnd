@@ -8,3 +8,10 @@
   color-scheme: light dark;
   color: #222;
 }
+.react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+select:not(:focus):invalid {
+  color: #a2a2a2;
+}
