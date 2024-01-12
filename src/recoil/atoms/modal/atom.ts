@@ -19,6 +19,6 @@ export const modalAcceptOrRejectAtom = atom<ModalAcceptOrRejectType>({
 
 // 모달: 내 친구 목록
 export const modalMySelectedFriendsAtom = atom<FriendsDataType[]>({
-  key: 'modalAcceptOrRejectAtom',
+  key: 'modalMySelectedFriendsAtom',
   default: []
 });
