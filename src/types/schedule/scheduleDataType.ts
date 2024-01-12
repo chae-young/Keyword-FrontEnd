@@ -8,12 +8,13 @@ export interface ScheduleDataType {
   status: string;
 }
 export interface ScheduleDetailType {
+  organizerId?: number;
   title: string;
   contents: string;
   scheduleDateTime: string;
   locationExplanation: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   status?: string;
   remindDateTime: string;
   friendList: FriendsDataType[];

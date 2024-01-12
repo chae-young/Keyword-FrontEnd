@@ -25,14 +25,15 @@ export const getMyScheduleDetail = rest.get(
     res(
       ctx.status(200),
       ctx.json({
+        organizerId: 1,
         title: '제목',
         contents: '내용',
-        scheduleDateTime: '2023-12-25T 13:00',
+        scheduleDateTime: '2023-12-25T13:00',
         locationExplanation: '위치 설명',
         latitude: 33.46312123233534,
         longitude: 126.56833027063311,
         status: 'ONGOING',
-        remindDateTime: '2023-12-25T 11:00',
+        remindDateTime: '2023-12-25T11:00',
         friendList: [
           {
             memberId: 1,

@@ -16,8 +16,9 @@ const KakaoMap = ({ coordi }: KakaoMapProps) => {
   const mapScript = document.createElement('script');
 
   mapScript.async = true;
-  mapScript.src =
-    '//dapi.kakao.com/v2/maps/sdk.js?appkey=&libraries=services&autoload=false';
+  mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${
+    import.meta.env.VITE_KAKAO_JAVASCRIPT_KEY
+  }&libraries=services&autoload=false`;
 
   document.head.appendChild(mapScript);
   useEffect(() => {
@@ -48,7 +49,7 @@ const KakaoMap = ({ coordi }: KakaoMapProps) => {
 
   return (
     <div>
-      <div id="map" className="w-full h-80" />
+      <div id="map" className="w-full h-56" />
     </div>
   );
 };

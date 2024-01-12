@@ -3,6 +3,12 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      padding: {
+        default: '1.25rem'
+      },
+      margin: {
+        default: '1.25rem'
+      },
       colors: {
         primary: '#48A1F7',
         primary2: '#FAEDAA',

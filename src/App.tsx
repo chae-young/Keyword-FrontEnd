@@ -18,9 +18,8 @@ import MyFriendsPage from './pages/mypage/MyFriendsPage';
 import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
 import ChatList from './components/Chatting/ChatList';
-
 import ScheduleCreatePage from './pages/schedule/ScheduleCreatePage';
-import MapPage from './pages/todo/ScheduleDetail';
+import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -56,7 +55,7 @@ const App = ({ children }: AppProps) => (
           {/* 3.일정 */}
           <Route path="/schedule" element={<Outlet />}>
             <Route path="create" element={<ScheduleCreatePage />} />
-            <Route path=":id" element={<MapPage />} />
+            <Route path=":id" element={<ScheduleDetailPage />} />
             {/* <Route path="modify" element={<CreateTodoPage />} /> */}
             {/* <Route path="join" element={<JoinPage />} />   */}
           </Route>
