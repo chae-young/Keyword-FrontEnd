@@ -20,6 +20,7 @@ import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
 import ChatList from './components/Chatting/ChatList';
 import MapPage from './pages/todo/ScheduleDetail';
+import MyPasswordUpdate from './pages/MyPage/PasswordEditPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -63,6 +64,7 @@ const App = ({ children }: AppProps) => (
           {/* 4.마이페이지 */}
           <Route path="/mypage" element={<Outlet />}>
             <Route path="edit" element={<ProfileEditPage />} />
+            <Route path="myPassword" element={<MyPasswordUpdate />} />
             <Route path="myFriends" element={<MyFriendsPage />} />
             <Route path="requested" element={<RequestedFriendsPage />} />
           </Route>

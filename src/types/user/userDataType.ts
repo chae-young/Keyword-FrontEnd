@@ -4,3 +4,6 @@ export interface UserDataType {
   phone: string;
   imageUrl: string;
 }
+export interface UserPasswordType {
+  password: string;
+}
