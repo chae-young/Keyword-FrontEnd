@@ -5,7 +5,11 @@ import useInfinite from '@/hooks/useInfinite';
 import useModalState from '@/hooks/recoil/useModalState';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 
-const ModalInSelectedFriends = () => {
+interface ModalInSelectedFriendsProps {
+  view?: boolean;
+}
+
+const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
   const { closeModal, saveMySelectedFriends } = useModalState();
   const { friendsList, friendsListFetchNextPage } =
     useGetMyFriendsQuery('accept');
@@ -45,36 +49,16 @@ const ModalInSelectedFriends = () => {
     setIsChecked(!isChecked);
     handelCheckedItem(e.target.checked, friend);
   };
-  // const [checkedState, setCheckedState] = useState<CheckedState>(() =>
-  //   friendsList.reduce((state, friend) => {
-  //     state[friend.memberId] = false;
-  //     return state;
-  //   }, {})
-  // );
-  // const toggleCheckbox = (memberId: number) => {
-  //   setCheckedState(prevState => ({
-  //     ...prevState,
-  //     [memberId]: !prevState[memberId]
-  //   }));
-  // };
-  // 팝업 모달
-  // const onSubmit = useCallback(
-  //   (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     const checkedList = friendsList.filter(
-  //       friend => checkedState[friend.memberId]
-  //     );
-  //     console.log('checkedList:', checkedList);
-  //     saveMySelectedFriends(checkedList);
-  //   },
-  //   [checkedState, saveMySelectedFriends]
-  // );
+
   const { lastElement } = useInfinite(friendsListFetchNextPage);
   return (
     <Modal title="내 친구 목록">
-      <p className="text-body3 text-gray4 mb-3">
-        * 일정에 추가할 친구를 선택하세요
-      </p>
+      {!view && (
+        <p className="text-body3 text-gray4 mb-3">
+          * 일정에 추가할 친구를 선택하세요
+        </p>
+      )}
+
       <form onSubmit={handleSubmit}>
         <ul className="pb-16 max-h-56 overflow-y-auto -mx-6">
           {friendsList?.pages.map(page =>
@@ -111,40 +95,16 @@ const ModalInSelectedFriends = () => {
           )}
           {lastElement()}
         </ul>
-        <button
-          type="submit"
-          className="fixed bottom-0 right-0 h-14 bg-primary w-full text-white text-body1"
-          onClick={closeModal}
-        >
-          {`${friendCheckedList.length}명 선택하기`}
-          {/* {`${Object.values(checkedState).filter(Boolean).length}명 선택`} */}
-        </button>
+        {!view && (
+          <button
+            type="submit"
+            className="fixed bottom-0 right-0 h-14 bg-primary w-full text-white text-body1"
+            onClick={closeModal}
+          >
+            {`${friendCheckedList.length}명 선택하기`}
+          </button>
+        )}
       </form>
-      {/* <ul>
-          {friendsList.map(friend => (
-            <li key={friend.memberId}>
-              <div className="form-control">
-                <label className="cursor-pointer label">
-                  <div className="avatar">
-                    <div className="w-24 rounded-full">
-                      <img src={friend.profileImageUrl} alt={friend.name} />
-                    </div>
-                  </div>
-                  <span className="label-text">{friend.name}</span>
-                  <input
-                    type="checkbox"
-                    checked={checkedState[friend.memberId]}
-                    className="checkbox checkbox-warning"
-                    onChange={() => toggleCheckbox(friend.memberId)}
-                  />
-                </label>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div>
-
-        </div> */}
     </Modal>
   );
 };

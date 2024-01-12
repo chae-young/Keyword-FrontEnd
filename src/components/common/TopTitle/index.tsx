@@ -1,16 +1,17 @@
 import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaRegBell } from 'react-icons/fa6';
+import { MdOutlineMode } from 'react-icons/md';
 import Alarm from '../Alarm';
 
 interface TopTitleProps {
   title: string;
   back?: boolean;
   alarm?: boolean;
+  edit?: number;
 }
 
-const TopTitle = ({ title, back, alarm }: TopTitleProps) => {
+const TopTitle = ({ title, back, alarm, edit }: TopTitleProps) => {
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
@@ -29,6 +30,15 @@ const TopTitle = ({ title, back, alarm }: TopTitleProps) => {
       )}
       <h1 className="text-h2">{title}</h1>
       {alarm && <Alarm />}
+
+      {edit && (
+        <Link
+          to="edit"
+          className="w-14 h-full flex justify-center items-center absolute right-0 top-0"
+        >
+          <MdOutlineMode className="text-xl" />
+        </Link>
+      )}
     </div>
   );
 };
