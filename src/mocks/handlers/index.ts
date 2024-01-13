@@ -11,8 +11,9 @@ import {
   getMyScheduleDetail,
   deleteMySchedule
 } from './schedule/handler';
+
 import { getFriendsSearchList, postFriendAdd } from './search/handler';
-import { getProfile, patchProfileImage } from './user/handler';
+import { getProfile, patchMyPassword, patchProfileImage } from './user/handler';
 
 const handlers = [
   getChatList,
@@ -28,6 +29,7 @@ const handlers = [
   patchProfileImage,
   getProfile,
   getMyScheduleDetail,
-  deleteMySchedule
+  deleteMySchedule,
+  patchMyPassword
 ];
 export default handlers;

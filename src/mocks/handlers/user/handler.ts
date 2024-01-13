@@ -33,3 +33,11 @@ export const getProfile = rest.get('/members', async (req, res, ctx) =>
     })
   )
 );
+
+export const patchMyPassword = rest.patch(
+  '/members/password',
+  async (req, res, ctx) => {
+    const { password } = await req.json();
+    if (password) res(ctx.status(200));
+  }
+);
