@@ -22,7 +22,7 @@ const Select = ({ options, value, handleChangeSelect }: SelectProps) => (
       <option
         key={option.value}
         value={option.value}
-        selected={option.value === ''}
+        // selected={option.value === ''}
         disabled={option.value === ''}
         hidden={option.value === ''}
       >

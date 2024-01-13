@@ -38,6 +38,6 @@ export const patchMyPassword = rest.patch(
   '/members/password',
   async (req, res, ctx) => {
     const { password } = await req.json();
-    if (password) res(ctx.status(200));
+    if (password) return res(ctx.status(200));
   }
 );

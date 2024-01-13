@@ -64,7 +64,7 @@ const App = ({ children }: AppProps) => (
           {/* 4.마이페이지 */}
           <Route path="/mypage" element={<Outlet />}>
             <Route path="edit" element={<ProfileEditPage />} />
-            <Route path="myPassword" element={<MyPasswordUpdate />} />
+            <Route path="passwordEdit" element={<MyPasswordUpdate />} />
             <Route path="myFriends" element={<MyFriendsPage />} />
             <Route path="requested" element={<RequestedFriendsPage />} />
           </Route>

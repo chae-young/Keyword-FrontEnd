@@ -29,20 +29,23 @@ const SearchPlace = () => {
   useEffect(() => {
     // 위도 및 경도 좌푯값 구하기
     const geocoder = new window.kakao.maps.services.Geocoder();
-    geocoder.addressSearch(address, (result: any, status: any) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        // console.log(`위도 : ${result[0].y}`);
-        // console.log(`경도 : ${result[0].x}`);
-        const lat = `${result[0].x}`;
-        const long = `${result[0].y}`;
+    geocoder.addressSearch(
+      address || '서울 강남구 가로수길 5',
+      (result: any, status: any) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          // console.log(`위도 : ${result[0].y}`);
+          // console.log(`경도 : ${result[0].x}`);
+          const lat = `${result[0].x}`;
+          const long = `${result[0].y}`;
 
-        setScheduleCreateState(prevSchedule => ({
-          ...prevSchedule,
-          latitude: lat,
-          longitude: long
-        }));
+          setScheduleCreateState(prevSchedule => ({
+            ...prevSchedule,
+            latitude: lat,
+            longitude: long
+          }));
+        }
       }
-    });
+    );
   }, [address]);
 
   return (

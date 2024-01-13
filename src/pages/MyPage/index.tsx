@@ -19,6 +19,11 @@ const MyPage = () => (
           내 친구 요청 목록 <IoIosArrowForward className="text-bk" />
         </Link>
       </li>
+      <li className="border-b border-gray2 px-5">
+        <Link to="passwordEdit" className="flex w-full justify-between py-6 ">
+          비밀번호 변경 <IoIosArrowForward className="text-bk" />
+        </Link>
+      </li>
     </ul>
     <button type="button" className="text-body3 mt-8">
       로그아웃
