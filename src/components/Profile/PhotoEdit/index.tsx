@@ -5,37 +5,35 @@ import usePatchProfileImageQuery from '@/hooks/query/user/usePatchProfileImageQe
 import Avatar from '@/components/common/Avatar';
 
 const PhotoEdit = () => {
+  const [inputFile, setInputFile] = useState<string | null>(null);
   const [profileImageURL, setProfileImageURL] = useState<
     string | ArrayBuffer | null
   >('');
   const { profileImageUpdateIsMutate } = usePatchProfileImageQuery();
 
+  const imgCompress = async (file: File) => {
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 240
+    };
+    try {
+      const compressedFile = await imageCompression(file, options);
+      return compressedFile;
+    } catch (error) {
+      console.log(error);
+      throw Error();
+    }
+  };
+
   const handleProfileImageUpdate = async (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
-
+    // 압축
+    const compressed = await imgCompress(file as File);
     const formData = new FormData();
     if (!file) return;
-    formData.append('file', file);
-
-    const options = {
-      maxSizeMB: 2,
-      maxWidthOrHeight: 100
-    };
-
-    try {
-      const compressedFile = await imageCompression(file, options);
-      setProfileImageURL(compressedFile ? null : String);
-
-      // resize된 이미지의 url을 받아 fileUrl에 저장
-      const promise = imageCompression.getDataUrlFromFile(compressedFile);
-      promise.then(result => {
-        setProfileImageURL(result);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    formData.append('file', compressed);
 
     // 미리보기
     const fileRead = new FileReader();
@@ -68,6 +66,7 @@ const PhotoEdit = () => {
         </label>
         <input
           type="file"
+          accept="image/jpg,image/png,image/jpeg,image/gif"
           name="photoEdit"
           id="photoEdit"
           onChange={handleProfileImageUpdate}
