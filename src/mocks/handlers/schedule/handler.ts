@@ -17,6 +17,11 @@ export const postMySchedule = rest.post('/schedules', async (req, res, ctx) =>
   res(ctx.status(200), ctx.json({ isScheduleRequest: true }))
 );
 
+export const patchMySchedule = rest.patch(
+  '/schedules/:scheduleId',
+  async (req, res, ctx) => res(ctx.status(200), ctx.json({ scheduleId: true }))
+);
+
 export const getMyScheduleDetail = rest.get(
   '/schedules/:scheduleId',
   async (req, res, ctx) =>

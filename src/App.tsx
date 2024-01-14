@@ -21,6 +21,7 @@ import ChatList from './components/Chatting/ChatList';
 import ScheduleCreatePage from './pages/schedule/ScheduleCreatePage';
 import MyPasswordUpdate from './pages/MyPage/PasswordEditPage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
+import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
 
 interface AppProps {
   children?: React.ReactNode;
@@ -57,6 +58,7 @@ const App = ({ children }: AppProps) => (
           <Route path="/schedule" element={<Outlet />}>
             <Route path="create" element={<ScheduleCreatePage />} />
             <Route path=":id" element={<ScheduleDetailPage />} />
+            <Route path=":id/edit" element={<ScheduleEditPage />} />
             {/* <Route path="modify" element={<CreateTodoPage />} /> */}
             {/* <Route path="join" element={<JoinPage />} />   */}
           </Route>
