@@ -5,17 +5,11 @@ import useModalState from '@/hooks/recoil/useModalState';
 import useScheduleState from '@/hooks/recoil/useScheduleState';
 
 const ScheduleFriends = () => {
-  const { setScheduleCreateState } = useScheduleState();
   const { mySelectdFriends, openModal } = useModalState();
+
   const handleFriendSelect = () => {
     openModal();
   };
-  useEffect(() => {
-    setScheduleCreateState(prevState => ({
-      ...prevState,
-      friendList: mySelectdFriends
-    }));
-  }, [mySelectdFriends]);
 
   return (
     <ScheduleInputBox

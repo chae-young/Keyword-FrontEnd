@@ -1,56 +1,205 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useScheduleState from '@/hooks/recoil/useScheduleState';
-import ScheduleInputTitle from './ScheduleTitle';
-import ScheduleDate from './ScheduleDate';
-import ScheduleTime from './ScheduleTime';
-import ScheduleRemind from './ScheduleRemind';
-import ScheduleAddr from './ScheduleAddr';
+import moment from 'moment';
+import { Address } from 'react-daum-postcode';
 import WideButton from '@/components/common/Button/WideButton';
 import ScheduleFriends from './ScheduleFriends';
-import ScheduleText from './ScheduleText';
 import usePostSchedulesQuery from '@/hooks/query/schedules/usePostSchedulesQuery';
+import useInput from '@/hooks/useInput';
+import ScheduleInputBox from './ScheduleInputBox';
+import Input from '@/components/common/Input';
+import SelectDate from '@/components/common/DateTimePicker/Date';
+import { ScheduleTime } from '@/types/schedule/scheduleDataType';
+import TimePicker from '@/components/common/DateTimePicker/Time';
+import SelectRemind from '@/components/common/Select/SelectOption';
+import ScheduleAddr from './ScheduleAddr';
+import { formatTime } from '@/util/\bdate';
+import useModalState from '@/hooks/recoil/useModalState';
 
 const ScheduleCreate = () => {
   const navigate = useNavigate();
   const { scheduleIsMutate } = usePostSchedulesQuery();
-  const { scheduleCreateState, scheduleTimeState, setScheduleCreateState } =
-    useScheduleState();
+  const { mySelectdFriends, openModal } = useModalState();
   const [allInputValid, setAllInputValid] = useState(false);
+  const [isOpenAddrPopup, setIsOpenAddrPopup] = useState(false);
 
+  // form 관련 state
+  const [scheduleDateAndTime, setScheduleDateAndTime] = useState<ScheduleTime>({
+    date: '',
+    time: ''
+  });
+  const [scheduleTitle, setScheduleTitle, handleChangeScheduleTitle] =
+    useInput('');
+  const [contents, setContents, handleChangeContents] = useInput('');
+  const [scheduleDate, setScheduleDate] = useState<Date | null>(null);
+  const [scheduleSelectedTime, setScheduleSelectedTime] = useState<Date | null>(
+    null
+  );
+  const [scheduleSelectedRemind, setScheduleSelectedRemind] = useState('');
+  const [scheduleAddress, setScheduleAddress] = useState({
+    address: '',
+    latitude: 0,
+    longitude: 0
+  });
+  // 유효성 검사 체크 TODO: 리팩토링 필요..
   useEffect(() => {
-    const allInputChecked = Object.values(scheduleCreateState).every(value =>
-      Array.isArray(value) ? value.length > 0 : value !== ''
-    );
-    if (allInputChecked) {
+    if (
+      scheduleTitle &&
+      contents &&
+      scheduleDateAndTime.date &&
+      scheduleDateAndTime.time &&
+      scheduleDate &&
+      scheduleSelectedTime &&
+      scheduleSelectedRemind &&
+      scheduleAddress.address &&
+      scheduleAddress.latitude &&
+      scheduleAddress.longitude &&
+      mySelectdFriends.length
+    ) {
       setAllInputValid(true);
     } else {
       setAllInputValid(false);
     }
-  }, [scheduleCreateState]);
+  }, [
+    scheduleTitle,
+    contents,
+    scheduleDateAndTime.date,
+    scheduleDateAndTime.time,
+    scheduleDate,
+    scheduleSelectedTime,
+    scheduleSelectedRemind,
+    scheduleAddress.address,
+    scheduleAddress.latitude,
+    scheduleAddress.longitude,
+    mySelectdFriends
+  ]);
 
-  useEffect(() => {
-    if (scheduleTimeState.time && scheduleTimeState.date)
-      setScheduleCreateState(prevState => ({
-        ...prevState,
-        scheduleDateTime: `${scheduleTimeState.date}T${scheduleTimeState.time}`
-      }));
-  }, [scheduleTimeState.time, scheduleTimeState.date]);
+  // useEffect(() => {
+  //   const allInputChecked = Object.values(scheduleCreateState).every(value =>
+  //     Array.isArray(value) ? value.length > 0 : value !== ''
+  //   );
+  //   if (allInputChecked) {
+  //     setAllInputValid(true);
+  //   } else {
+  //     setAllInputValid(false);
+  //   }
+  // }, [scheduleCreateState]);
 
+  // 전송
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    scheduleIsMutate(scheduleCreateState);
+    const scheduleData = {
+      title: scheduleTitle,
+      contents,
+      scheduleDateTime: '',
+      locationExplanation: scheduleAddress.address,
+      latitude: scheduleAddress.latitude,
+      longitude: scheduleAddress.longitude,
+      remindDateTime: scheduleSelectedRemind,
+      friendList: mySelectdFriends // TODO: 주최자 추가해야함(나자신)
+    };
+    scheduleIsMutate(scheduleData);
     navigate('/', { replace: true });
+  };
+
+  // 날짜
+  const handleDate = (date: Date) => {
+    setScheduleDate(date);
+    const newDate = moment(date).format('YYYY-MM-DD');
+    setScheduleDateAndTime((prevState: ScheduleTime) => ({
+      ...prevState,
+      date: newDate
+    }));
+  };
+  // 시간
+  const handleSelectedTime = (date: Date) => {
+    setScheduleSelectedTime(date);
+
+    setScheduleDateAndTime((prevState: ScheduleTime) => ({
+      ...prevState,
+      time: formatTime(date)
+    }));
+  };
+
+  // 알림
+  const handleRemind = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setScheduleSelectedRemind(e.target.value);
+  };
+
+  // 주소 팝업
+  const handleAddrPopup = () => {
+    setIsOpenAddrPopup(prev => !prev);
+  };
+
+  // 주소 입력 완료
+  const handleAddrComplete = (data: Address) => {
+    handleAddrPopup();
+    setScheduleAddress(prevState => ({
+      ...prevState,
+      address: data.address
+    }));
   };
 
   return (
     <form className="pt-0" onSubmit={handleSubmit}>
-      <ScheduleInputTitle />
-      <ScheduleText />
-      <ScheduleDate />
-      <ScheduleTime />
-      <ScheduleRemind />
-      <ScheduleAddr />
+      <ScheduleInputBox
+        title="제목"
+        element={
+          <Input
+            type="text"
+            placeholder="일정 제목을 입력해주세요."
+            value={scheduleTitle}
+            handleChangeInput={handleChangeScheduleTitle}
+          />
+        }
+      />
+      <ScheduleInputBox
+        title="내용"
+        element={
+          <textarea
+            className="bg-gray2 rounded-lg text-body2 placeholder-text-gray4 p-3 w-full resize-none h-20"
+            placeholder="내용을 입력해주세요."
+            value={contents}
+            onChange={handleChangeContents}
+          />
+        }
+      />
+      <ScheduleInputBox
+        title="날짜"
+        element={
+          <SelectDate scheduleDate={scheduleDate} handleDate={handleDate} />
+        }
+      />
+      <ScheduleInputBox
+        title="시간"
+        element={
+          <TimePicker
+            scheduleSelectedTime={scheduleSelectedTime}
+            handleSelectedTime={handleSelectedTime}
+          />
+        }
+      />
+      <ScheduleInputBox
+        title="알림"
+        element={
+          <SelectRemind
+            scheduleSelectedRemind={scheduleSelectedRemind}
+            handleRemind={handleRemind}
+          />
+        }
+      />
+      <ScheduleInputBox
+        title="주소"
+        element={
+          <ScheduleAddr
+            isOpenAddrPopup={isOpenAddrPopup}
+            scheduleAddress={scheduleAddress}
+            setScheduleAddress={setScheduleAddress}
+            handleAddrComplete={handleAddrComplete}
+            handleAddrPopup={handleAddrPopup}
+          />
+        }
+      />
       <ScheduleFriends />
       <WideButton text="등록하기" status={allInputValid} />
     </form>
