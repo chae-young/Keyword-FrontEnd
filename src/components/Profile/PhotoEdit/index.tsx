@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FiCamera } from 'react-icons/fi';
+import imageCompression from 'browser-image-compression';
 import usePatchProfileImageQuery from '@/hooks/query/user/usePatchProfileImageQeury';
 import Avatar from '@/components/common/Avatar';
 
@@ -9,12 +10,32 @@ const PhotoEdit = () => {
   >('');
   const { profileImageUpdateIsMutate } = usePatchProfileImageQuery();
 
-  const handleProfileImageUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProfileImageUpdate = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files?.[0];
 
     const formData = new FormData();
     if (!file) return;
     formData.append('file', file);
+
+    const options = {
+      maxSizeMB: 2,
+      maxWidthOrHeight: 100
+    };
+
+    try {
+      const compressedFile = await imageCompression(file, options);
+      setProfileImageURL(compressedFile ? null : String);
+
+      // resize된 이미지의 url을 받아 fileUrl에 저장
+      const promise = imageCompression.getDataUrlFromFile(compressedFile);
+      promise.then(result => {
+        setProfileImageURL(result);
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
     // 미리보기
     const fileRead = new FileReader();
