@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { DefaultValue } from 'recoil';
 
 interface InputProps {
   type: 'text' | 'password' | 'email' | 'number' | 'date' | 'time';
@@ -9,6 +10,7 @@ interface InputProps {
   minLength?: number;
   focus?: boolean;
   addStyle?: string;
+  defaultValue?: string;
   handleChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -21,7 +23,8 @@ const Input = ({
   maxLength,
   minLength,
   focus,
-  addStyle
+  addStyle,
+  defaultValue
 }: InputProps) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -40,6 +43,7 @@ const Input = ({
       value={value}
       minLength={minLength}
       maxLength={maxLength}
+      defaultValue={defaultValue}
       onChange={handleChangeInput}
     />
   );
