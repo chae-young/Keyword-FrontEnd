@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getCookie, setCookie } from '@/util/cookie';
 
-export const BASE_URL = 'http://localhost:5173';
-// export const BASE_URL = 'http://3.34.183.67:8080';
+// export const BASE_URL = 'http://localhost:5173';
+export const BASE_URL = 'http://3.34.183.67:8080';
 
 export const axiosDefault = axios.create({
   baseURL: BASE_URL,
