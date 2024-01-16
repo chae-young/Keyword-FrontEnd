@@ -6,7 +6,7 @@ import { ScheduleDataType } from '@/types/schedule/scheduleDataType';
 const fetchAPI = async (page: number): Promise<ScheduleDataType[]> => {
   try {
     const list = await axiosAuth.get(`/schedules?size=10&page=${page}`);
-    return list.data;
+    return list.data.content;
   } catch (error) {
     console.log(error);
     throw error;
