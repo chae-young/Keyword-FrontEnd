@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NotLoginPage = () => (
+const NotLoginPage: React.FC = () => (
   <section className="max-w-default m-auto h-screen px-5 pt-10">
     <h1>
       <img src="/images/logo.svg" alt="keyword" className="w-80 m-auto" />
@@ -16,7 +16,7 @@ const NotLoginPage = () => (
         to="/auth/login"
         className="border border-gray2 text-body1 w-full h-[50px] rounded-xl flex justify-center items-center"
       >
-        이메일 로그인
+        이메일로 로그인
       </Link>
     </div>
     <p className="text-center text-body3 absolute bottom-10 left-0 right-0 m-auto">

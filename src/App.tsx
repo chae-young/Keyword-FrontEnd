@@ -33,7 +33,12 @@ const App = ({ children }: AppProps) => (
     <Routes>
       <Route>
         <Route path="/auth" element={<NotLoginPage />} />
-
+        <Route element={<InnerCon />}>
+          <Route path="/auth" element={<Outlet />}>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="join" element={<JoinPage />} />
+          </Route>
+        </Route>
         <Route element={<AuthLayout />}>
           <Route element={<InnerCon />}>
             {/* 홈 */}
@@ -50,12 +55,6 @@ const App = ({ children }: AppProps) => (
               <Route path="/chat" element={<ChatList />} />
               {/* 마이페이지 */}
               <Route path="/mypage" element={<MyPage />} />
-            </Route>
-
-            {/* 2.회원 */}
-            <Route path="/auth" element={<Outlet />}>
-              <Route path="login" element={<LoginPage />} />
-              <Route path="join" element={<JoinPage />} />
             </Route>
 
             {/* 3.일정 */}

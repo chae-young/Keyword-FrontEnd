@@ -6,12 +6,12 @@ import usePostLoginQuery from '@/hooks/query/auth/usePostLoginQuery';
 import WideButton from '@/components/common/Button/WideButton';
 import Logo from '@/components/common/Logo';
 
-const LoginPage = () => {
-  const [email, setEmail, handleChangeEmail] = useInput('');
-  const [password, setPassword, handleChangePassword] = useInput('');
+const LoginPage: React.FC = () => {
+  const [email, , handleChangeEmail] = useInput('');
+  const [password, , handleChangePassword] = useInput('');
   const [allInputCheck, setAllInputCheck] = useState(false);
 
-  const { loginIsMutate, loginIsError, loginIsSuccess } = usePostLoginQuery();
+  const { loginIsMutate, loginIsError } = usePostLoginQuery();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
