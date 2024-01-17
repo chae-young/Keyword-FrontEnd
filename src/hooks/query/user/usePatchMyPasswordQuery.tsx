@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import useToast from '@/hooks/useToast';
 import { axiosAuth } from '@/apis';
 import { UserPasswordType } from '@/types/user/userDataType';
@@ -11,6 +12,7 @@ const fetchAPI = async (password: string): Promise<UserPasswordType> => {
 };
 
 const usePatchMyPasswordQuery = () => {
+  const navigate = useNavigate();
   const { toastSuccess, toastError } = useToast();
   const {
     data: IsMyPasswordUpdate,
@@ -22,6 +24,7 @@ const usePatchMyPasswordQuery = () => {
     mutationFn: (password: string) => fetchAPI(password),
     onSuccess: () => {
       toastSuccess('비밀번호 변경이 완료되었습니다.');
+      navigate(-1);
     },
     onError: () => {
       toastError('에러가 발생했습니다.');
