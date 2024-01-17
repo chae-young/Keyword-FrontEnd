@@ -29,7 +29,10 @@ const usePostLoginQuery = () => {
       setCookie('refreshToken', data.tokenResponse.refreshToken, {
         path: '/'
       });
-      saveUserInfo(data.myInfoResponse);
+      saveUserInfo({
+        ...data.myInfoResponse,
+        isLogin: true
+      });
       navigate('/', { replace: true });
     }
   });
