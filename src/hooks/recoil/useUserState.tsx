@@ -6,10 +6,9 @@ const useUserState = () => {
   const [userState, setUserState] = useRecoilState(userAtom);
 
   const saveUserInfo = (userInfo: UserInfo) => {
-    setUserState(prevState => ({
-      ...prevState,
-      myInfoResponse: { ...userInfo }
-    }));
+    setUserState({
+      ...userInfo
+    });
   };
 
   return {
