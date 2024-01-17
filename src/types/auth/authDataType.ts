@@ -27,6 +27,7 @@ export type UserInfo = {
   email: string;
   phone: string;
   imageUrl: string | null;
+  isLogin?: boolean;
 };
 export interface UserIsLoginDataType {
   tokenResponse: UserToken;

@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import { UserDataType } from '@/types/user/userDataType';
 import { UserInfo } from '@/types/auth/authDataType';
 
 const { persistAtom } = recoilPersist({
@@ -14,7 +13,8 @@ export const userAtom = atom<UserInfo>({
     name: '',
     email: '',
     phone: '',
-    imageUrl: ''
+    imageUrl: null,
+    isLogin: false
   },
   effects_UNSTABLE: [persistAtom]
 });

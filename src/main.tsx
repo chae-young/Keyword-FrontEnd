@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 import worker from './mocks/worker';
+import { RecoilRoot } from 'recoil';
 
 const queryClient = new QueryClient();
 
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen />
-        <App />
+        <RecoilRoot>
+          <App />
+        </RecoilRoot>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>
