@@ -1,6 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const useInfinite = (callback: () => void) => {
+type UseInfiniteHook = {
+  lastElement: () => JSX.Element;
+};
+
+const useInfinite = (callback: () => void): UseInfiniteHook => {
   const observer = useRef<IntersectionObserver | null>(null);
   const lastElementRef = useRef<HTMLDivElement>(null);
 

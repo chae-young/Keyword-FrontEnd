@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopTitle from '@/components/common/TopTitle';
 import Logo from '@/components/common/Logo';
 import Input from '@/components/common/Input';
@@ -7,15 +7,13 @@ import WideButton from '@/components/common/Button/WideButton';
 import { VaildType } from '@/types/auth/authDataType';
 import { isValidEmail, isValidPassword } from '@/util/valid';
 import usePostJoinQuery from '@/hooks/query/auth/usePostJoinQuery';
-import Success from '@/components/common/Toast/ToastSuccess';
 import useRedirectAfterToast from '@/hooks/useRedirectAfterToast';
 
 const JoinPage = () => {
-  const [email, setEmail, handleChangeEmail] = useInput('');
-  const [password, setPassword, handleChangePassword] = useInput('');
-  const [confirmPassword, setConfirmPassword, handleChangeConfirmPassword] =
-    useInput('');
-  const [nickname, setNickname, handleChangeNickname] = useInput('');
+  const [email, , handleChangeEmail] = useInput('');
+  const [password, , handleChangePassword] = useInput('');
+  const [confirmPassword, , handleChangeConfirmPassword] = useInput('');
+  const [nickname, , handleChangeNickname] = useInput('');
   const [phoneNumber, setPhoneNumber, handleChangePhoneNumber] = useInput('');
   const [allInputCheck, setAllInputCheck] = useState(false);
 
@@ -30,7 +28,8 @@ const JoinPage = () => {
     useState<VaildType>(validObj);
 
   const { joinIsMutate, joinIsSuccess } = usePostJoinQuery();
-  const redirect = useRedirectAfterToast(joinIsSuccess, '/auth/login');
+  // redirect 변수 없이 사용
+  useRedirectAfterToast(joinIsSuccess, '/auth/login');
 
   // 이메일 유효성 검사
   useEffect(() => {
@@ -122,97 +121,92 @@ const JoinPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('가입하기');
 
     joinIsMutate({ email, password, name: nickname, phone: phoneNumber });
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <Logo width={150} />
-        <TopTitle title="회원가입" back />
-        <div className="mt-6">
-          <div>
-            <Input
-              type="email"
-              value={email}
-              handleChangeInput={handleChangeEmail}
-              placeholder="이메일을 입력해주세요"
-            />
-            <p
-              className={`text-body2 ${
-                emailCheck.status ? 'text-green-500' : 'text-red-500'
-              }`}
-            >
-              {emailCheck.text}
-            </p>
-          </div>
-          <div className="mt-3">
-            <Input
-              type="text"
-              value={nickname}
-              handleChangeInput={handleChangeNickname}
-              placeholder="닉네임을 입력해주세요"
-            />
-          </div>
-          <div className="mt-3">
-            <Input
-              type="text"
-              value={phoneNumber}
-              handleChangeInput={handleChangePhoneNumber}
-              placeholder="핸드폰번호를 입력해주세요"
-            />
-            {/* <p className="text-stone-300 text-body3 mt-1">
+    <form onSubmit={handleSubmit}>
+      <Logo width={150} />
+      <TopTitle title="회원가입" back />
+      <div className="mt-6">
+        <div>
+          <Input
+            type="email"
+            value={email}
+            handleChangeInput={handleChangeEmail}
+            placeholder="이메일을 입력해주세요"
+          />
+          <p
+            className={`text-body2 ${
+              emailCheck.status ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {emailCheck.text}
+          </p>
+        </div>
+        <div className="mt-3">
+          <Input
+            type="text"
+            value={nickname}
+            handleChangeInput={handleChangeNickname}
+            placeholder="닉네임을 입력해주세요"
+          />
+        </div>
+        <div className="mt-3">
+          <Input
+            type="text"
+            value={phoneNumber}
+            handleChangeInput={handleChangePhoneNumber}
+            placeholder="핸드폰번호를 입력해주세요"
+          />
+          {/* <p className="text-stone-300 text-body3 mt-1">
               * ‘-’ 문자를 넣어 숫자를 입력해주세요(예: 010-3333-3333)
             </p> */}
-            <p
-              className={`text-body2 ${
-                phoneNumberCheck.status ? 'text-green-500' : 'text-red-500'
-              }`}
-            >
-              {phoneNumberCheck.text}
-            </p>
-          </div>
-          <div className="mt-3">
-            <Input
-              type="password"
-              value={password}
-              handleChangeInput={handleChangePassword}
-              placeholder="비밀번호를 입력해주세요"
-            />
-            <p className="text-stone-300 text-body3 mt-1">
-              * 영문자+특수문자+숫자를 포함하여 8자 이상 입력해주세요
-            </p>
-            <p
-              className={`text-body2 ${
-                passwordCheck.status ? 'text-green-500' : 'text-red-500'
-              }`}
-            >
-              {passwordCheck.text}
-            </p>
-          </div>
-          <div className="mt-3">
-            <Input
-              type="password"
-              value={confirmPassword}
-              handleChangeInput={handleChangeConfirmPassword}
-              placeholder="비밀번호를 한번 더 입력해주세요"
-            />
-            <p
-              className={`text-body2 ${
-                confirmPasswordCheck.status ? 'text-green-500' : 'text-red-500'
-              }`}
-            >
-              {confirmPasswordCheck.text}
-            </p>
-          </div>
-          <WideButton status={allInputCheck} text="가입하기" />
+          <p
+            className={`text-body2 ${
+              phoneNumberCheck.status ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {phoneNumberCheck.text}
+          </p>
         </div>
-      </form>
-
-      <Success status={joinIsSuccess} text="회원가입이 완료되었습니다!" />
-    </>
+        <div className="mt-3">
+          <Input
+            type="password"
+            value={password}
+            handleChangeInput={handleChangePassword}
+            placeholder="비밀번호를 입력해주세요"
+          />
+          <p className="text-stone-300 text-body3 mt-1">
+            * 영문자+특수문자+숫자를 포함하여 8자 이상 입력해주세요
+          </p>
+          <p
+            className={`text-body2 ${
+              passwordCheck.status ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {passwordCheck.text}
+          </p>
+        </div>
+        <div className="mt-3">
+          <Input
+            type="password"
+            value={confirmPassword}
+            handleChangeInput={handleChangeConfirmPassword}
+            placeholder="비밀번호를 한번 더 입력해주세요"
+          />
+          <p
+            className={`text-body2 ${
+              confirmPasswordCheck.status ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            {confirmPasswordCheck.text}
+          </p>
+        </div>
+        <WideButton status={allInputCheck} text="가입하기" />
+      </div>
+    </form>
   );
 };
 export default JoinPage;

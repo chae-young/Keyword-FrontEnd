@@ -30,7 +30,7 @@
 
 export const isValidPassword = (password: string) => {
   const passwordRegex =
-    /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()-_=+\\|\[\]{};:'",.<>/?])(?=.*\d).{8,}$/;
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
   return passwordRegex.test(password);
 };
 

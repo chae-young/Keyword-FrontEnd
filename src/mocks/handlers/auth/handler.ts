@@ -21,6 +21,6 @@ export const postSignIn = rest.post(
 );
 
 // 회원가입
-export const postSignUp = rest.post('/members/signup', async (req, res, ctx) =>
+export const postSignUp = rest.post('/members/signup', async (_, res, ctx) =>
   res(ctx.status(200))
 );

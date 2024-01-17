@@ -3,6 +3,12 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      padding: {
+        default: '1.25rem'
+      },
+      margin: {
+        default: '1.25rem'
+      },
       colors: {
         primary: '#48A1F7',
         primary2: '#FAEDAA',
@@ -23,6 +29,9 @@ export default {
       },
       maxWidth: {
         default: '31.25rem'
+      },
+      boxShadow: {
+        bottom: '-2px 10px 10px 0px rgba(237, 237, 237, 0.3)'
       }
     }
   },

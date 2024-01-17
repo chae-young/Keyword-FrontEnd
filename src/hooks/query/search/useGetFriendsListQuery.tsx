@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { BASE_URL, axiosAuth } from '@/apis';
+import { axiosAuth } from '@/apis';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 
 const fetchAPI = async (
@@ -7,8 +7,8 @@ const fetchAPI = async (
   keyword: string
 ): Promise<FriendsDataType[]> => {
   try {
-    const list = await axiosAuth(
-      `${BASE_URL}/friends?keyword=${keyword}&size=10&page=${page}`
+    const list = await axiosAuth.get(
+      `/friends?keyword=${keyword}&size=10&page=${page}`
     );
     return list.data;
   } catch (error) {
@@ -30,7 +30,8 @@ const useGetFriendsListQuery = (keyword: string) => {
     getNextPageParam: (lastPage, allPage) => {
       const nextPage = allPage.length + 1;
       return lastPage.length === 0 ? null : nextPage;
-    }
+    },
+    staleTime: 10000
   });
 
   return {

@@ -1,10 +1,14 @@
-import React, { useCallback } from 'react';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import { IS_FRIEND } from '@/constants/friends';
 import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';
+import useDeleteMyFriendQuery from '@/hooks/query/friends/useDeleteMyFriendQuery';
+import RightButton from '@/components/common/Button/RightButton';
+import useModalState from '@/hooks/recoil/useModalState';
 
 interface FriendsItemProps extends FriendsDataType {
   // buttonName: string[];
+  del?: boolean;
+  reqCheck?: boolean;
 }
 
 const FriendsItem = ({
@@ -12,14 +16,30 @@ const FriendsItem = ({
   name,
   email,
   profileImageUrl,
-  status
+  status,
+  del,
+  reqCheck
 }: FriendsItemProps) => {
   const friendStatus = status === IS_FRIEND;
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
-
-  const handleFriendAdd = useCallback(() => {
+  const { friendDeleteIsMutate } = useDeleteMyFriendQuery();
+  const { changeFriendName, openModal } = useModalState();
+  // 친구추가
+  const handleFriendAdd = () => {
     friendAddIsMutate();
-  }, []);
+  };
+  // 친구삭제
+  const handleFriendDel = (memberReqId: number) => {
+    const userConfirmed = window.confirm('해당 친구를 삭제하시겠습니까?');
+    if (userConfirmed) {
+      friendDeleteIsMutate(memberReqId);
+    }
+  };
+  // 확인하기
+  const handleRequestCheck = (friendName: string) => {
+    changeFriendName(friendName, memberId);
+    openModal();
+  };
 
   return (
     <li className="flex items-start mb-4">
@@ -45,6 +65,18 @@ const FriendsItem = ({
         >
           친구추가
         </button>
+      )}
+      {del && (
+        <RightButton
+          handleClick={() => handleFriendDel(memberId)}
+          text="삭제"
+        />
+      )}
+      {reqCheck && (
+        <RightButton
+          handleClick={() => handleRequestCheck(name)}
+          text="확인하기"
+        />
       )}
     </li>
   );

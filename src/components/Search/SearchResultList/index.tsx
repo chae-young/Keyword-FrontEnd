@@ -1,4 +1,3 @@
-import React from 'react';
 import useGetFriendsListQuery from '@/hooks/query/search/useGetFriendsListQuery';
 import FriendsList from '@/components/Friends/FriendsList';
 

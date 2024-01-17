@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { getCookie, setCookie } from '@/util/cookie';
 
-export const BASE_URL = 'http://localhost:5173';
+// export const BASE_URL = 'http://localhost:5173';
+export const BASE_URL = import.meta.env.VITE_SERVER;
 
 export const axiosDefault = axios.create({
   baseURL: BASE_URL,

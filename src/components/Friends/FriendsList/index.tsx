@@ -1,4 +1,3 @@
-import React from 'react';
 import { InfiniteData } from '@tanstack/react-query';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import FiendsItem from '../FriendsItem';
@@ -8,9 +7,16 @@ import NoResultText from '@/components/common/NoDataText';
 interface FriendsListProps {
   lists: InfiniteData<FriendsDataType[], unknown>;
   FetchNextPage: any;
+  del?: boolean;
+  reqCheck?: boolean;
 }
 
-const FriendsList = ({ lists, FetchNextPage }: FriendsListProps) => {
+const FriendsList = ({
+  lists,
+  FetchNextPage,
+  del,
+  reqCheck
+}: FriendsListProps) => {
   const { lastElement } = useInfinite(FetchNextPage);
 
   return (
@@ -25,10 +31,12 @@ const FriendsList = ({ lists, FetchNextPage }: FriendsListProps) => {
               email={list.email}
               status={list.status}
               profileImageUrl={list.profileImageUrl}
+              del={del}
+              reqCheck={reqCheck}
             />
           ))
         ) : (
-          <NoResultText text="감섹걀과가 없습니다." key="noText" />
+          <NoResultText text="검색결과가 없습니다." key="noText" />
         )
       )}
 
