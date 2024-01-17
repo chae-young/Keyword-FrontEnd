@@ -1,19 +1,19 @@
 import { atom } from 'recoil';
 import {
-  ScheduleCreateDataType,
+  ScheduleDetailType,
   ScheduleTime
 } from '@/types/schedule/scheduleDataType';
 
 // 일정 추가에 필요한 데이터
-export const scheduleCreateAtom = atom<ScheduleCreateDataType>({
+export const scheduleCreateAtom = atom<ScheduleDetailType>({
   key: 'scheduleCreateAtom',
   default: {
     title: '',
     contents: '',
     scheduleDateTime: '',
     locationExplanation: '',
-    latitude: '',
-    longitude: '',
+    latitude: 0,
+    longitude: 0,
     remindDateTime: '',
     friendList: []
   }

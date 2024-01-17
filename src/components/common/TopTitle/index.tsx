@@ -1,4 +1,3 @@
-import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineMode } from 'react-icons/md';

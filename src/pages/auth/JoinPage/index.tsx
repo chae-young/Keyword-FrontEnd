@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TopTitle from '@/components/common/TopTitle';
 import Logo from '@/components/common/Logo';
 import Input from '@/components/common/Input';
@@ -7,15 +7,13 @@ import WideButton from '@/components/common/Button/WideButton';
 import { VaildType } from '@/types/auth/authDataType';
 import { isValidEmail, isValidPassword } from '@/util/valid';
 import usePostJoinQuery from '@/hooks/query/auth/usePostJoinQuery';
-import Success from '@/components/common/Toast/ToastSuccess';
 import useRedirectAfterToast from '@/hooks/useRedirectAfterToast';
 
 const JoinPage = () => {
-  const [email, setEmail, handleChangeEmail] = useInput('');
-  const [password, setPassword, handleChangePassword] = useInput('');
-  const [confirmPassword, setConfirmPassword, handleChangeConfirmPassword] =
-    useInput('');
-  const [nickname, setNickname, handleChangeNickname] = useInput('');
+  const [email, , handleChangeEmail] = useInput('');
+  const [password, , handleChangePassword] = useInput('');
+  const [confirmPassword, , handleChangeConfirmPassword] = useInput('');
+  const [nickname, , handleChangeNickname] = useInput('');
   const [phoneNumber, setPhoneNumber, handleChangePhoneNumber] = useInput('');
   const [allInputCheck, setAllInputCheck] = useState(false);
 
@@ -30,7 +28,8 @@ const JoinPage = () => {
     useState<VaildType>(validObj);
 
   const { joinIsMutate, joinIsSuccess } = usePostJoinQuery();
-  const redirect = useRedirectAfterToast(joinIsSuccess, '/auth/login');
+  // redirect 변수 없이 사용
+  useRedirectAfterToast(joinIsSuccess, '/auth/login');
 
   // 이메일 유효성 검사
   useEffect(() => {

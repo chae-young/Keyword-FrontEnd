@@ -35,7 +35,7 @@ export const deleteMyFriend = rest.delete(
 export const patchMyFriendReq = rest.patch(
   '/friends/handle/:memberReqId',
   async (req, res, ctx) => {
-    const { memberReqId } = req.params;
+    // const { memberReqId } = req.params;
     const { friendState } = await req.json();
     if (friendState === 'ACCEPTED') {
       return res(

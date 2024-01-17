@@ -22,7 +22,7 @@ export const patchProfileImage = rest.patch(
   }
 );
 
-export const getProfile = rest.get('/members', async (req, res, ctx) =>
+export const getProfile = rest.get('/members', async (_, res, ctx) =>
   res(
     ctx.json({
       name: '김친구',

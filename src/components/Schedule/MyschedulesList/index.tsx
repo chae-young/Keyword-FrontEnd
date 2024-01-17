@@ -1,5 +1,3 @@
-import React from 'react';
-import useGetChatListQuery from '@/hooks/query/chat/useGetChatListQuery';
 import useInfinite from '@/hooks/useInfinite';
 import MySchedulesItem from './MySchdulesItem';
 import useGetSchedulesQuery from '@/hooks/query/schedules/useGetSchedulesQuery';
@@ -18,7 +16,7 @@ const MySchedulesList = () => {
               scheduleId={list.scheduleId}
               title={list.title}
               scheduleDateTime={list.scheduleDateTime}
-              locationExplanation={list.locationExplanation}
+              // locationExplanation={list.locationExplanation}
               status={list.status}
             />
           ))

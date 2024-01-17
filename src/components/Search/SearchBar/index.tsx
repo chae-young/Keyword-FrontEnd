@@ -12,9 +12,7 @@ interface SearchBarProps {
 
 const SearchBar = ({ backSearch, keyword }: SearchBarProps) => {
   const navigate = useNavigate();
-  const [searchKeyword, setSearchKeyword, handleChangeSearchKeyword] = useInput(
-    keyword || ''
-  );
+  const [searchKeyword, , handleChangeSearchKeyword] = useInput(keyword || '');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

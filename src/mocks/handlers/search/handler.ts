@@ -19,12 +19,12 @@ export const postFriendAdd = rest.post(
   '/friends/:memberId',
   async (req, res, ctx) => {
     const { memberId } = req.params;
-    const newFriendsList = searchFriendsList.map(friend => {
-      if (friend.memberId === Number(memberId)) {
-        return { ...friend, status: 'REQUSTING' };
-      }
-      return friend;
-    });
+    // const newFriendsList = searchFriendsList.map(friend => {
+    //   if (friend.memberId === Number(memberId)) {
+    //     return { ...friend, status: 'REQUSTING' };
+    //   }
+    //   return friend;
+    // });
 
     if (!memberId) {
       return res(

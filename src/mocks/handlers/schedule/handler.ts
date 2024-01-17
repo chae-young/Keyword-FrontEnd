@@ -13,18 +13,18 @@ export const getMyScheduleList = rest.get('/schedules', (req, res, ctx) => {
   return res(ctx.status(200), ctx.json(newSchedulesList));
 });
 
-export const postMySchedule = rest.post('/schedules', async (req, res, ctx) =>
+export const postMySchedule = rest.post('/schedules', async (_, res, ctx) =>
   res(ctx.status(200), ctx.json({ isScheduleRequest: true }))
 );
 
 export const patchMySchedule = rest.patch(
   '/schedules/:scheduleId',
-  async (req, res, ctx) => res(ctx.status(200), ctx.json({ scheduleId: true }))
+  async (_, res, ctx) => res(ctx.status(200), ctx.json({ scheduleId: true }))
 );
 
 export const getMyScheduleDetail = rest.get(
   '/schedules/:scheduleId',
-  async (req, res, ctx) =>
+  async (_, res, ctx) =>
     // const { scheduleId } = req.params;
     // const noticeId = req.url.searchParams.get('noticeId');
     res(

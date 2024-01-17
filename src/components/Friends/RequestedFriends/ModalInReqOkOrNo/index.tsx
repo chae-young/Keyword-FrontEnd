@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import usePatchMyFriendReqQuery from '@/hooks/query/friends/usePatchMyFriendReqQuery';
 import useModalState from '@/hooks/recoil/useModalState';
 import { ACCEPTED, REJECTED } from '@/constants/friends';
@@ -8,8 +7,7 @@ interface ModalInReqOkOrNoProps {
 }
 
 const ModalInReqOkOrNo = ({ name }: ModalInReqOkOrNoProps) => {
-  const { FriendReqAcceptIsMutate, FriendReqAcceptIsSuccess } =
-    usePatchMyFriendReqQuery();
+  const { FriendReqAcceptIsMutate } = usePatchMyFriendReqQuery();
   const { reqModalState, closeModal } = useModalState();
   const handelReqReject = () => {
     FriendReqAcceptIsMutate({

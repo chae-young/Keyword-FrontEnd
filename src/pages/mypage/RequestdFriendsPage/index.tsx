@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TopTitle from '@/components/common/TopTitle';
 import RequestedFriends from '@/components/Friends/RequestedFriends';
 import RequestFriends from '@/components/Friends/\bRequestFriends';

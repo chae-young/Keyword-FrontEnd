@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NotLoginPage: React.FC = () => (
+const NotLoginPage = () => (
   <section className="max-w-default m-auto h-screen px-5 pt-10">
     <h1>
       <img src="/images/logo.svg" alt="keyword" className="w-80 m-auto" />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ONGOING } from '@/constants/schedule';
 
@@ -6,7 +5,7 @@ interface MySchedulesItemProps {
   scheduleId: number;
   title: string;
   scheduleDateTime: string;
-  locationExplanation: string;
+  // locationExplanation?: string;
   status: string;
 }
 
@@ -14,7 +13,7 @@ const MySchedulesItem = ({
   scheduleId,
   title,
   scheduleDateTime,
-  locationExplanation,
+  // locationExplanation,
   status
 }: MySchedulesItemProps) => {
   const [date, time] = scheduleDateTime.split('T');

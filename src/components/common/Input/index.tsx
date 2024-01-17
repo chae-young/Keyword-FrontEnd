@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { DefaultValue } from 'recoil';
 
 interface InputProps {
   type: 'text' | 'password' | 'email' | 'number' | 'date' | 'time';

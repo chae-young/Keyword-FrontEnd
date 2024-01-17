@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,17 +17,17 @@ import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
 import ChatList from './components/Chatting/ChatList';
 import ScheduleCreatePage from './pages/schedule/ScheduleCreatePage';
-import MyPasswordUpdate from './pages/MyPage/PasswordEditPage';
+import PasswordEditPage from './pages/mypage/PasswordEditPage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
 import NotLoginPage from './pages/auth/NotLoginPage';
 import AuthLayout from './components/AuthLayout';
 
-interface AppProps {
-  children?: React.ReactNode;
-}
+// interface AppProps {
+//   children?: React.ReactNode;
+// }
 
-const App = ({ children }: AppProps) => (
+const App = () => (
   <>
     <Routes>
       <Route>
@@ -69,7 +68,7 @@ const App = ({ children }: AppProps) => (
             {/* 4.마이페이지 */}
             <Route path="/mypage" element={<Outlet />}>
               <Route path="edit" element={<ProfileEditPage />} />
-              <Route path="passwordEdit" element={<MyPasswordUpdate />} />
+              <Route path="passwordEdit" element={<PasswordEditPage />} />
               <Route path="myFriends" element={<MyFriendsPage />} />
               <Route path="requested" element={<RequestedFriendsPage />} />
             </Route>

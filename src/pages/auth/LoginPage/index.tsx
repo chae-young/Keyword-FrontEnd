@@ -6,7 +6,7 @@ import usePostLoginQuery from '@/hooks/query/auth/usePostLoginQuery';
 import WideButton from '@/components/common/Button/WideButton';
 import Logo from '@/components/common/Logo';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const [email, , handleChangeEmail] = useInput('');
   const [password, , handleChangePassword] = useInput('');
   const [allInputCheck, setAllInputCheck] = useState(false);

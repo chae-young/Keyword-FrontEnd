@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as StompJs from '@stomp/stompjs';
-import SockJS from 'sockjs-client/dist/sockjs';
+// import SockJS from 'sockjs-client/dist/sockjs';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { IoMdArrowRoundUp } from 'react-icons/io';

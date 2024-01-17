@@ -5,7 +5,6 @@ import usePatchProfileImageQuery from '@/hooks/query/user/usePatchProfileImageQe
 import Avatar from '@/components/common/Avatar';
 
 const PhotoEdit = () => {
-  const [inputFile, setInputFile] = useState<string | null>(null);
   const [profileImageURL, setProfileImageURL] = useState<
     string | ArrayBuffer | null
   >('');

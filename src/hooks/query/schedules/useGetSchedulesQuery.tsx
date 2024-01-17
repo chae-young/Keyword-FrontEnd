@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import { ScheduleDataType } from '@/types/schedule/scheduleDataType';

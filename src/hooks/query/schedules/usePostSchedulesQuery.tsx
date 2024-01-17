@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import useToast from '@/hooks/useToast';
-import { ScheduleCreateDataType } from '@/types/schedule/scheduleDataType';
+import { ScheduleDetailType } from '@/types/schedule/scheduleDataType';
 
-const fetchAPI = async (data: ScheduleCreateDataType) => {
+const fetchAPI = async (data: ScheduleDetailType) => {
   const res = await axiosAuth.post('/schedules', data);
   return res.data;
 };
@@ -16,7 +16,7 @@ const usePostSchedulesQuery = () => {
     isSuccess: scheduleIsSuccess
   } = useMutation({
     mutationKey: ['schedule'],
-    mutationFn: (data: ScheduleCreateDataType) => fetchAPI(data),
+    mutationFn: (data: ScheduleDetailType) => fetchAPI(data),
     onSuccess: () => {
       toastSuccess('일정이 등록되었습니다.');
     },

@@ -1,4 +1,3 @@
-import React from 'react';
 import { InfiniteData } from '@tanstack/react-query';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import FiendsItem from '../FriendsItem';

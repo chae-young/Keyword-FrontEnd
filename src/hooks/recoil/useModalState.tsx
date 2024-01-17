@@ -45,6 +45,7 @@ const useModalState = () => {
   };
 
   return {
+    setModalstate,
     openModal,
     closeModal,
     modalState,

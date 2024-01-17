@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import FriendsList from '../FriendsList';
 import useGetMyFriendsQuery from '@/hooks/query/friends/useGetMyFriendsQuery';
 import Modal from '@/components/common/Modal';

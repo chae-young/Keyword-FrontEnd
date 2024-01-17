@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface WideButtonProps {
   type?: string;
   text: string;

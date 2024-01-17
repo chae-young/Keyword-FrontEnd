@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
 import { IoPersonAddSharp } from 'react-icons/io5';
 import ScheduleInputBox from '../ScheduleInputBox';
 import useModalState from '@/hooks/recoil/useModalState';
-import useScheduleState from '@/hooks/recoil/useScheduleState';
 
 const ScheduleFriends = () => {
   const { mySelectdFriends, openModal } = useModalState();

@@ -12,7 +12,11 @@ const useInput = (
   ) => void
 ] => {
   const [value, setValue] = useState(init);
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     e.preventDefault();
     setValue(e.target.value);
   };

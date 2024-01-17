@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
 import App from './App';
 import './index.css';
-import worker from './mocks/worker';
-import { RecoilRoot } from 'recoil';
+// import worker from './mocks/worker';
 
 const queryClient = new QueryClient();
 

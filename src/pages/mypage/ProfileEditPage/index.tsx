@@ -1,5 +1,3 @@
-import React from 'react';
-
 import TopTitle from '@/components/common/TopTitle';
 import PhotoEdit from '@/components/Profile/PhotoEdit';
 

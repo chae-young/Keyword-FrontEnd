@@ -1,5 +1,3 @@
-import React, { useCallback } from 'react';
-
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import { IS_FRIEND } from '@/constants/friends';
 import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 // 프로필 사진 x
 const Avatar = () => (

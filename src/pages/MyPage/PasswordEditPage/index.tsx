@@ -24,7 +24,6 @@ const MyPasswordUpdate = () => {
 
   // 비밀번호 유효성 검사
   useEffect(() => {
-    console.log(newPassword);
     if (!newPassword) return;
     if (isValidPassword(newPassword)) {
       setPasswordCheck({

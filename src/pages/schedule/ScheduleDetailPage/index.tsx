@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdAccessTime } from 'react-icons/md';
 import { BiBell } from 'react-icons/bi';
 import { LuText } from 'react-icons/lu';
@@ -7,10 +6,8 @@ import { LiaUserFriendsSolid } from 'react-icons/lia';
 import useGetScheduleDetailQuery from '@/hooks/query/schedules/useGetScheduleDetailQuery';
 import KakaoMap from '@/components/KakaoMap';
 import TopTitle from '@/components/common/TopTitle';
-import useDeleteScheduleQuery from '@/hooks/query/schedules/useDeleteScheduleQuery';
 import ScheduleTextBox from '@/components/Schedule/ScheduleDetail/ScheduleTextBox';
 import WideButton from '@/components/common/Button/WideButton';
-import Modal from '@/components/common/Modal';
 import ModalInSelectedFriends from '@/components/Schedule/ModalInSelectedFriedns';
 import useModalState from '@/hooks/recoil/useModalState';
 
@@ -20,16 +17,16 @@ const ScheduleDetailPage = () => {
     noticeId: '1'
   });
   const [date, time] = (scheduleDetail?.scheduleDateTime ?? '').split('T');
-  const { scheduleDeleteIsMutate } = useDeleteScheduleQuery();
+  // const { scheduleDeleteIsMutate } = useDeleteScheduleQuery();
   const { openModal } = useModalState();
 
   // 취소하기
-  const handleScheduleDel = (scheduleId: number) => {
-    const scheduleConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
-    if (scheduleConfirmed) {
-      scheduleDeleteIsMutate(scheduleId);
-    }
-  };
+  // const handleScheduleDel = (scheduleId: number) => {
+  //   const scheduleConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
+  //   if (scheduleConfirmed) {
+  //     scheduleDeleteIsMutate(scheduleId);
+  //   }
+  // };
 
   const coordi = {
     lat: scheduleDetail?.latitude,

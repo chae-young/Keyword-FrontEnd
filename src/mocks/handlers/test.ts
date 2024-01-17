@@ -12,7 +12,7 @@ const todos: Todo[] = [
 ];
 
 // 할일 목록
-const getTodo = rest.get('/todos', (req, res, ctx) =>
+const getTodo = rest.get('/todos', (_, res, ctx) =>
   res(ctx.status(200), ctx.json(todos))
 );
 export default getTodo;

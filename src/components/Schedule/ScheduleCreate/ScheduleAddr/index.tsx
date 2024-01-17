@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import DaumPostcode, { Address } from 'react-daum-postcode';
 
 declare global {

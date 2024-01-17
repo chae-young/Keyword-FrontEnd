@@ -1,4 +1,3 @@
-import React from 'react';
 import TopTitle from '@/components/common/TopTitle';
 import ChatList from '@/components/Chatting/ChatList';
 

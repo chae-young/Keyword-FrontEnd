@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { RiSearchLine } from 'react-icons/ri';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { LuPlus } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import MySchedulesList from '@/components/Schedule/MyschedulesList';

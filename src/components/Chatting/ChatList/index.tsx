@@ -1,4 +1,3 @@
-import React from 'react';
 import ChatItem from './Chatitem/indext';
 import useGetChatListQuery from '@/hooks/query/chat/useGetChatListQuery';
 import useInfinite from '@/hooks/useInfinite';

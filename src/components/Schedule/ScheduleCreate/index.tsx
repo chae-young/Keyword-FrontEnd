@@ -15,10 +15,11 @@ import {
 } from '@/types/schedule/scheduleDataType';
 import TimePicker from '@/components/common/DateTimePicker/Time';
 import SelectRemind from '@/components/common/Select/SelectOption';
-import ScheduleAddr from './ScheduleAddr';
+
 import { formatTime } from '@/util/\bdate';
 import useModalState from '@/hooks/recoil/useModalState';
 import usePatchScheduleQuery from '@/hooks/query/schedules/usePatchScheduleQuery';
+import ScheduleAddr from './ScheduleAddr';
 
 interface ScheduleCreateProps {
   scheduleToEdit?: ScheduleDetailType;
@@ -31,7 +32,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   const { scheduleIsMutate } = usePostSchedulesQuery();
   const { patchedScheduleIsMutate } = usePatchScheduleQuery();
   const { saveMySelectedFriends } = useModalState();
-  const { mySelectdFriends, openModal } = useModalState();
+  const { mySelectdFriends } = useModalState();
   const [allInputValid, setAllInputValid] = useState(false);
   const [isOpenAddrPopup, setIsOpenAddrPopup] = useState(false);
 

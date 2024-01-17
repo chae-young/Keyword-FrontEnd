@@ -31,7 +31,7 @@ const usePostFriendAddQuery = (memberId: number) => {
       // 롤백
       return { prevMemberId };
     },
-    onError: (err, reqMemberId, context) => {
+    onError: (_, reqMemberId, context) => {
       queryClient.setQueryData(
         ['friendAdd', reqMemberId],
         context?.prevMemberId
