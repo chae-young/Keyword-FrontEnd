@@ -1,5 +1,11 @@
 import { FriendsDataType } from '@/types/friend/friendsDataType';
-import { IS_FRIEND } from '@/constants/friends';
+import {
+  FRIEND,
+  FRIEND_REQUEST,
+  FRIEND_REQUESTED,
+  ME,
+  NOT_FRIEND
+} from '@/constants/friends';
 import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';
 import useDeleteMyFriendQuery from '@/hooks/query/friends/useDeleteMyFriendQuery';
 import RightButton from '@/components/common/Button/RightButton';
@@ -21,7 +27,7 @@ const FriendsItem = ({
   del,
   reqCheck
 }: FriendsItemProps) => {
-  const friendStatus = status === IS_FRIEND;
+  const friendStatus = status === FRIEND;
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
   const { friendDeleteIsMutate } = useDeleteMyFriendQuery();
   const { changeFriendName, openModal } = useModalState();
@@ -57,7 +63,7 @@ const FriendsItem = ({
         <b className="text-body1 font-bold">{name}</b>
         <p className="text-body2 text-gray4">{email}</p>
       </div>
-      {status && (
+      {status !== ME && (
         <button
           type="button"
           disabled={friendStatus || IsFriendAdd?.isFriendRequest}
@@ -68,7 +74,10 @@ const FriendsItem = ({
               : 'bg-primary text-white'
           }  rounded-xl  pt-2 py-1 px-3`}
         >
-          친구추가
+          {status === NOT_FRIEND && '친구추가'}
+          {status === FRIEND && '우린친구😆'}
+          {status === FRIEND_REQUEST && '요청중'}
+          {status === FRIEND_REQUESTED && '요청됨'}
         </button>
       )}
       {del && (
