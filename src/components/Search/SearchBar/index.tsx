@@ -6,11 +6,10 @@ import Input from '@/components/common/Input';
 import useInput from '@/hooks/useInput';
 
 interface SearchBarProps {
-  backSearch?: boolean;
   keyword: string;
 }
 
-const SearchBar = ({ backSearch, keyword }: SearchBarProps) => {
+const SearchBar = ({ keyword }: SearchBarProps) => {
   const navigate = useNavigate();
   const [searchKeyword, , handleChangeSearchKeyword] = useInput(keyword || '');
 
@@ -19,12 +18,12 @@ const SearchBar = ({ backSearch, keyword }: SearchBarProps) => {
     navigate(`/search/result?keyword=${searchKeyword}`);
   };
 
-  const handleBack = () => {
-    if (backSearch) {
-      navigate('/search');
-    } else {
+  const handleBack = (back: boolean | null) => {
+    if (back) {
       navigate(-1);
     }
+    if (!searchKeyword) return;
+    if (searchKeyword) navigate('/search');
   };
 
   return (
@@ -35,12 +34,12 @@ const SearchBar = ({ backSearch, keyword }: SearchBarProps) => {
       <button
         type="button"
         className="relative h-10 w-12 flex justify-center items-center pl-2"
-        onClick={handleBack}
+        onClick={() => handleBack(true)}
       >
         <span className="sr-only">뒤로가기</span>
         <IoIosArrowBack className="text-2xl " />
       </button>
-      <button type="button" onClick={handleBack} className="w-full">
+      <button type="button" onClick={() => handleBack} className="w-full">
         <span className="sr-only">검색창으로 이동</span>
         <Input
           type="text"
