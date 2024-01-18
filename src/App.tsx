@@ -22,6 +22,7 @@ import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
 import NotLoginPage from './pages/auth/NotLoginPage';
 import AuthLayout from './components/AuthLayout';
+import ChatPage from './pages/ChatPage';
 
 // interface AppProps {
 //   children?: React.ReactNode;
@@ -51,7 +52,7 @@ const App = () => (
               <Route path="/search" element={<SearchPage />} />
               <Route path="/search/result" element={<SearchResultPage />} />
               {/* 채팅 */}
-              <Route path="/chat" element={<ChatList />} />
+              <Route path="/chat" element={<ChatPage />} />
               {/* 마이페이지 */}
               <Route path="/mypage" element={<MyPage />} />
             </Route>

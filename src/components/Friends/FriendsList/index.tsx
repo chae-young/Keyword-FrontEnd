@@ -36,7 +36,7 @@ const FriendsList = ({
             />
           ))
         ) : (
-          <NoResultText text="검색결과가 없습니다." key="noText" />
+          <NoResultText text="친구가 없습니다." key="noText" />
         )
       )}
 
