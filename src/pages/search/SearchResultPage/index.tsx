@@ -9,7 +9,7 @@ const SearchResultPage = () => {
 
   return (
     <>
-      <SearchBar backSearch keyword={keyword || ''} />
+      <SearchBar keyword={keyword || ''} />
       {keyword ? (
         <SearchResultList keyword={keyword} />
       ) : (

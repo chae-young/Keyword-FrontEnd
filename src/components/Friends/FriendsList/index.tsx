@@ -31,7 +31,7 @@ const FriendsList = ({
               name={list.name}
               email={list.email}
               status={list.status}
-              profileImageUrl={list.profileImageUrl}
+              imageUrl={list.imageUrl}
               del={del}
               reqCheck={reqCheck}
             />
