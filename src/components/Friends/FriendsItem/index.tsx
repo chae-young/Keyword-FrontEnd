@@ -16,7 +16,7 @@ const FriendsItem = ({
   memberId,
   name,
   email,
-  profileImageUrl,
+  imageUrl,
   status,
   del,
   reqCheck
@@ -46,8 +46,8 @@ const FriendsItem = ({
     <li className="flex items-start mb-4">
       <div className="avatar mr-2">
         <div className="w-12 rounded-full">
-          {profileImageUrl ? (
-            <img src={profileImageUrl} alt={name} />
+          {imageUrl ? (
+            <img src={imageUrl} alt={name} />
           ) : (
             <Avatar h="h-12" iconWidth="text-3xl" />
           )}
