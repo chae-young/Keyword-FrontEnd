@@ -31,8 +31,9 @@ const PhotoEdit = () => {
     // 압축
     const compressed = await imgCompress(file as File);
     const formData = new FormData();
+
     if (!file) return;
-    formData.append('file', compressed);
+    formData.append('profileImage', file);
 
     // 미리보기
     const fileRead = new FileReader();
