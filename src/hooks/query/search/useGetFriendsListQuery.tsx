@@ -25,8 +25,8 @@ const useGetFriendsListQuery = (keyword: string) => {
     hasNextPage: friendsListHasNextPage
   } = useInfiniteQuery({
     queryKey: ['friendList', keyword],
-    initialPageParam: 1,
-    queryFn: ({ pageParam = 1 }) => fetchAPI(pageParam, keyword),
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam, keyword),
     getNextPageParam: (lastPage, allPage) => {
       const nextPage = allPage.length + 1;
       return lastPage.length === 0 ? null : nextPage;

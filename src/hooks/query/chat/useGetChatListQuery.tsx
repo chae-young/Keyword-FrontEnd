@@ -21,8 +21,8 @@ const useGetChatListQuery = () => {
     hasNextPage: chatListhasNextPage
   } = useInfiniteQuery({
     queryKey: ['chatList'],
-    initialPageParam: 1,
-    queryFn: ({ pageParam = 1 }) => fetchAPI(pageParam),
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam),
     getNextPageParam: (lastPage, allPage) => {
       const nextpage = allPage.length + 1;
       return lastPage.length === 0 ? null : nextpage;
