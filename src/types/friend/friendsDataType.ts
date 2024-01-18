@@ -4,7 +4,7 @@ export interface FriendsDataType {
   memberId: number;
   name: string;
   email: string;
-  profileImageUrl: string;
+  imageUrl: string;
   status?: IsFriendType | IsFriendRequestType;
 }
 
