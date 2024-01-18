@@ -3,7 +3,7 @@ import useGetMyFriendsQuery from '@/hooks/query/friends/useGetMyFriendsQuery';
 
 const RequestFriends = () => {
   const { friendsList, friendsListFetchNextPage } =
-    useGetMyFriendsQuery('request');
+    useGetMyFriendsQuery('REQUEST');
 
   return (
     <section className="pt-5">
