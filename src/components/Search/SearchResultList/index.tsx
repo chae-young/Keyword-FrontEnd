@@ -6,9 +6,8 @@ interface SearchResultListProps {
 }
 
 const SearchResultList = ({ keyword }: SearchResultListProps) => {
-  const { friendsList, friendsListFetchNextPage } = useGetFriendsListQuery(
-    keyword || ''
-  );
+  const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
+    useGetFriendsListQuery(keyword || '');
 
   return (
     <section>
@@ -16,6 +15,7 @@ const SearchResultList = ({ keyword }: SearchResultListProps) => {
         <FriendsList
           lists={friendsList}
           FetchNextPage={friendsListFetchNextPage}
+          hasNextPage={friendsListHasNextPage}
         />
       )}
     </section>

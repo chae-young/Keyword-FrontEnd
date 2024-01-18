@@ -15,7 +15,6 @@ import ProfileEditPage from './pages/mypage/ProfileEditPage';
 import MyFriendsPage from './pages/mypage/MyFriendsPage';
 import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
 import ChatDetail from './pages/ChatPage/ChatDetail';
-import ChatList from './components/Chatting/ChatList';
 import ScheduleCreatePage from './pages/schedule/ScheduleCreatePage';
 import PasswordEditPage from './pages/mypage/PasswordEditPage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';

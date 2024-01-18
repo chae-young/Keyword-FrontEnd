@@ -6,7 +6,7 @@ import ModalInReqOkOrNo from './ModalInReqOkOrNo';
 import { REQUESTED } from '@/constants/friends';
 
 const RequestedFriends = () => {
-  const { friendsList, friendsListFetchNextPage } =
+  const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
     useGetMyFriendsQuery(REQUESTED);
   const { reqModalState } = useModalState();
 
@@ -16,6 +16,7 @@ const RequestedFriends = () => {
         <FriendsList
           lists={friendsList}
           FetchNextPage={friendsListFetchNextPage}
+          hasNextPage={friendsListHasNextPage}
           reqCheck
         />
       )}

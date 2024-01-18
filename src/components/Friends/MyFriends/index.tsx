@@ -3,7 +3,7 @@ import FriendsList from '../FriendsList';
 import useGetMyFriendsQuery from '@/hooks/query/friends/useGetMyFriendsQuery';
 
 const MyFriends = () => {
-  const { friendsList, friendsListFetchNextPage } =
+  const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
     useGetMyFriendsQuery(ACCEPT);
 
   return (
@@ -12,6 +12,7 @@ const MyFriends = () => {
         <FriendsList
           lists={friendsList}
           FetchNextPage={friendsListFetchNextPage}
+          hasNextPage={friendsListHasNextPage}
           del
         />
       )}

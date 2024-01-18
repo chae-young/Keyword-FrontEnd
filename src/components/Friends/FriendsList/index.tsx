@@ -9,16 +9,17 @@ interface FriendsListProps {
   FetchNextPage: any;
   del?: boolean;
   reqCheck?: boolean;
+  hasNextPage: boolean;
 }
 
 const FriendsList = ({
   lists,
   FetchNextPage,
   del,
-  reqCheck
+  reqCheck,
+  hasNextPage
 }: FriendsListProps) => {
   const { lastElement } = useInfinite(FetchNextPage);
-
   return (
     <ul className="pt-5">
       {lists.pages.map(page =>
@@ -40,7 +41,7 @@ const FriendsList = ({
         )
       )}
 
-      {lastElement()}
+      {lists?.pages[0].length >= 10 && hasNextPage ? lastElement() : ''}
     </ul>
   );
 };

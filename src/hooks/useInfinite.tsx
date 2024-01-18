@@ -32,7 +32,12 @@ const useInfinite = (callback: () => void): UseInfiniteHook => {
   }, [lastElementRef.current]);
 
   const lastElement = () => (
-    <div ref={lastElementRef} className="w-10 h-10 bg-red-300" />
+    <div className="text-center">
+      <span
+        ref={lastElementRef}
+        className="loading loading-spinner loading-md"
+      />
+    </div>
   );
 
   return {
