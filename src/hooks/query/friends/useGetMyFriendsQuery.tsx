@@ -8,7 +8,7 @@ const fetchAPI = async (
 ): Promise<FriendsDataType[]> => {
   try {
     const list = await axiosAuth.get(
-      `/friends/state?friend-state=${state}&size=10&page=${page}`
+      `/friends?friend-state=${state}&size=10&page=${page}`
     );
     return list.data;
   } catch (error) {
