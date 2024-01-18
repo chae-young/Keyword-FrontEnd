@@ -4,6 +4,7 @@ import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';
 import useDeleteMyFriendQuery from '@/hooks/query/friends/useDeleteMyFriendQuery';
 import RightButton from '@/components/common/Button/RightButton';
 import useModalState from '@/hooks/recoil/useModalState';
+import Avatar from '@/components/common/Avatar';
 
 interface FriendsItemProps extends FriendsDataType {
   // buttonName: string[];
@@ -45,7 +46,11 @@ const FriendsItem = ({
     <li className="flex items-start mb-4">
       <div className="avatar mr-2">
         <div className="w-12 rounded-full">
-          <img src={profileImageUrl} alt={name} />
+          {profileImageUrl ? (
+            <img src={profileImageUrl} alt={name} />
+          ) : (
+            <Avatar h="h-12" iconWidth="text-3xl" />
+          )}
         </div>
       </div>
       <div className="flex-grow">

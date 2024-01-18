@@ -55,7 +55,7 @@ const PhotoEdit = () => {
           </div>
         ) : (
           <div className="w-32 rounded-full bg-gray3">
-            <Avatar />
+            <Avatar h="h-32" />
           </div>
         )}
         <label
@@ -73,13 +73,13 @@ const PhotoEdit = () => {
           className="hidden"
         />
       </div>
-      <button
+      {/* <button
         type="button"
         className=" text-body3 text-gray4"
         onClick={handleProfileImageDel}
       >
         프로필 삭제하기
-      </button>
+      </button> */}
     </div>
   );
 };
