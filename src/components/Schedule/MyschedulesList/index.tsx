@@ -4,7 +4,11 @@ import useGetSchedulesQuery from '@/hooks/query/schedules/useGetSchedulesQuery';
 import NoDataText from '@/components/common/NoDataText';
 
 const MySchedulesList = () => {
-  const { schedulesList, schedulesListFetchNextPage } = useGetSchedulesQuery();
+  const {
+    schedulesList,
+    schedulesListFetchNextPage,
+    schedulesListhasNextPage
+  } = useGetSchedulesQuery();
   const { lastElement } = useInfinite(schedulesListFetchNextPage);
   return (
     <ul className="[&>*:last-child]:border-0">
@@ -24,7 +28,11 @@ const MySchedulesList = () => {
           <NoDataText text="등록한 일정이 없습니다" key={0} />
         )
       )}
-      {schedulesList && schedulesList?.pages[0].length >= 10 && lastElement()}
+      {schedulesList &&
+      schedulesList?.pages[0].length >= 10 &&
+      schedulesListhasNextPage
+        ? lastElement()
+        : ''}
     </ul>
   );
 };

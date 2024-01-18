@@ -4,7 +4,8 @@ import useGetChatListQuery from '@/hooks/query/chat/useGetChatListQuery';
 import useInfinite from '@/hooks/useInfinite';
 
 const ChatList = () => {
-  const { chatList, chatListFetchNextPage } = useGetChatListQuery();
+  const { chatList, chatListFetchNextPage, chatListhasNextPage } =
+    useGetChatListQuery();
   const { lastElement } = useInfinite(chatListFetchNextPage);
 
   return (
@@ -23,7 +24,9 @@ const ChatList = () => {
           <NoDataText text="모임 채팅이 없습니다" key={0} />
         )
       )}
-      {chatList && chatList?.pages[0].length >= 10 && lastElement()}
+      {chatList && chatList?.pages[0].length >= 10 && chatListhasNextPage
+        ? lastElement()
+        : ''}
     </ul>
   );
 };
