@@ -27,7 +27,8 @@ const FriendsItem = ({
   del,
   reqCheck
 }: FriendsItemProps) => {
-  const friendStatus = status === FRIEND;
+  const friendStatus = status !== NOT_FRIEND;
+
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
   const { friendDeleteIsMutate } = useDeleteMyFriendQuery();
   const { changeFriendName, openModal } = useModalState();
@@ -48,6 +49,8 @@ const FriendsItem = ({
     openModal();
   };
 
+  console.log(memberId);
+
   return (
     <li className="flex items-start mb-4">
       <div className="avatar mr-2">
@@ -63,7 +66,8 @@ const FriendsItem = ({
         <b className="text-body1 font-bold">{name}</b>
         <p className="text-body2 text-gray4">{email}</p>
       </div>
-      {status !== ME && (
+
+      {status && status !== ME && (
         <button
           type="button"
           disabled={friendStatus || IsFriendAdd}

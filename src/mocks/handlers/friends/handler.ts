@@ -36,19 +36,19 @@ export const patchMyFriendReq = rest.patch(
   '/friends/handle/:memberReqId',
   async (req, res, ctx) => {
     // const { memberReqId } = req.params;
-    const { friendState } = await req.json();
-    if (friendState === 'ACCEPTED') {
+    const { friendStatus } = await req.json();
+    if (friendStatus === 'ACCEPTED') {
       return res(
         ctx.status(200),
         ctx.json({
-          friendState: 'ACCEPTED'
+          friendStatus: 'ACCEPTED'
         })
       );
     }
     return res(
       ctx.status(200),
       ctx.json({
-        friendState: 'ACCEPTED'
+        friendStatus: 'ACCEPTED'
       })
     );
   }

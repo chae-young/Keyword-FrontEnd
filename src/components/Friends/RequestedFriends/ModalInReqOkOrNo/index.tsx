@@ -1,6 +1,6 @@
 import usePatchMyFriendReqQuery from '@/hooks/query/friends/usePatchMyFriendReqQuery';
 import useModalState from '@/hooks/recoil/useModalState';
-import { ACCEPTED, REJECTED } from '@/constants/friends';
+import { FRIEND_ACCEPTED, FRIEND_REFUSED } from '@/constants/friends';
 
 interface ModalInReqOkOrNoProps {
   name: string;
@@ -12,14 +12,14 @@ const ModalInReqOkOrNo = ({ name }: ModalInReqOkOrNoProps) => {
   const handelReqReject = () => {
     FriendReqAcceptIsMutate({
       ...reqModalState,
-      friendState: ACCEPTED
+      friendStatus: FRIEND_REFUSED
     });
     closeModal();
   };
   const handleReqAccept = () => {
     FriendReqAcceptIsMutate({
       ...reqModalState,
-      friendState: REJECTED
+      friendStatus: FRIEND_ACCEPTED
     });
     closeModal();
   };
