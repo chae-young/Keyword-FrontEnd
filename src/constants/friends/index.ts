@@ -3,8 +3,8 @@
 // export const IS_FRIEND_REQUEST: IsFriendRequestType = 'REQUEST';
 
 // 친구 요청 수락 거절
-export const ACCEPTED = 'ACCEPTED';
-export const REJECTED = 'REJECTED';
+export const FRIEND_ACCEPTED = 'FRIEND_ACCEPTED';
+export const FRIEND_REFUSED = 'FRIEND_REFUSED';
 
 // 친구 목록
 export const REQUESTED = 'REQUESTED';
