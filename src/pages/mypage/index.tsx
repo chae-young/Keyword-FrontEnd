@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from 'react-icons/io';
 import TopTitle from '@/components/common/TopTitle';
 import Profile from '@/components/Profile';
+import AccountClose from '@/components/Mypage/AccountClose';
 
 const MyPage = () => (
   <>
@@ -24,9 +25,7 @@ const MyPage = () => (
         </Link>
       </li>
     </ul>
-    <button type="button" className="text-body3 mt-8">
-      로그아웃
-    </button>
+    <AccountClose />
   </>
 );
 
