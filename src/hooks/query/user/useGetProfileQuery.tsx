@@ -21,7 +21,6 @@ const useGetProfileQuery = () => {
   } = useQuery({
     queryKey: ['myProfile'],
     queryFn: () => fetchAPI(),
-
     staleTime: Infinity
   });
 
