@@ -1,9 +1,10 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 import { UserInfo } from '@/types/auth/authDataType';
+import { USER_INFO } from '@/constants/auth';
 
 const { persistAtom } = recoilPersist({
-  key: 'localStorage', // 고유한 key 값
+  key: USER_INFO, // 고유한 key 값
   storage: localStorage
 });
 
