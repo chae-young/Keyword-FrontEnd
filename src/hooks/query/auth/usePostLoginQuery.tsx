@@ -5,6 +5,7 @@ import { LoginDataType, UserIsLoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
 import useUserState from '@/hooks/recoil/useUserState';
 import useToast from '@/hooks/useToast';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants/auth';
 
 const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
   const { email, password } = data;
@@ -27,8 +28,8 @@ const usePostLoginQuery = () => {
     mutationFn: ({ email, password }: LoginDataType) =>
       fetchAPI({ email, password }),
     onSuccess: data => {
-      localStorage.setItem('accessToken', data.tokenResponse.accessToken);
-      setCookie('refreshToken', data.tokenResponse.refreshToken, {
+      localStorage.setItem(ACCESS_TOKEN, data.tokenResponse.accessToken);
+      setCookie(REFRESH_TOKEN, data.tokenResponse.refreshToken, {
         path: '/'
       });
       saveUserInfo({
