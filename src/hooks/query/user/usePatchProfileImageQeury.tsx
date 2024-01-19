@@ -1,8 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { axiosAuth } from '@/apis';
-import { FriendAddType } from '@/types/friend/friendsDataType';
+import useToast from '@/hooks/useToast';
 
-const fetchAPI = async (formData: FormData): Promise<FriendAddType> => {
+const fetchAPI = async (formData: FormData): Promise<boolean> => {
   const res = await axiosAuth.patch('/members/profile-image', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -12,6 +13,8 @@ const fetchAPI = async (formData: FormData): Promise<FriendAddType> => {
 };
 
 const usePatchProfileImageQuery = () => {
+  const navigate = useNavigate();
+  const { toastSuccess } = useToast();
   const {
     data: isProfileImageUpdate,
     mutate: profileImageUpdateIsMutate,
@@ -19,7 +22,11 @@ const usePatchProfileImageQuery = () => {
     isSuccess: profileImageUpdateIsSuccess
   } = useMutation({
     mutationKey: ['profileImageUpdate'],
-    mutationFn: (formData: FormData) => fetchAPI(formData)
+    mutationFn: (formData: FormData) => fetchAPI(formData),
+    onSuccess: () => {
+      toastSuccess('프로필 변경이 완료되었습니다.');
+      navigate('/mypage', { replace: true });
+    }
   });
 
   return {
