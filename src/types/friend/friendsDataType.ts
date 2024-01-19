@@ -20,10 +20,6 @@ export interface FriendsDataType {
     | MeType;
 }
 
-export interface FriendAddType {
-  isFriendRequest: boolean;
-}
-
 export interface FriendDeleteType {
   isFriendDelete: boolean;
 }

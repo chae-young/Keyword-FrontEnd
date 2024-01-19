@@ -27,7 +27,8 @@ const FriendsItem = ({
   del,
   reqCheck
 }: FriendsItemProps) => {
-  const friendStatus = status === FRIEND;
+  const friendStatus = status !== NOT_FRIEND;
+
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
   const { friendDeleteIsMutate } = useDeleteMyFriendQuery();
   const { changeFriendName, openModal } = useModalState();
@@ -66,10 +67,10 @@ const FriendsItem = ({
       {status !== ME && (
         <button
           type="button"
-          disabled={friendStatus || IsFriendAdd?.isFriendRequest}
+          disabled={friendStatus || IsFriendAdd}
           onClick={handleFriendAdd}
           className={`${
-            friendStatus || IsFriendAdd?.isFriendRequest
+            friendStatus || IsFriendAdd
               ? 'bg-gray3 text-gray1'
               : 'bg-primary text-white'
           }  rounded-xl  pt-2 py-1 px-3`}
