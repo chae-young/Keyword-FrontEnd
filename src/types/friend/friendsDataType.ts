@@ -25,5 +25,5 @@ export interface FriendDeleteType {
 }
 
 export interface FriendReqType {
-  friendState: string;
+  friendStatus: string;
 }
