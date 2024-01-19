@@ -4,6 +4,7 @@ import { axiosDefault } from '@/apis';
 import { LoginDataType, UserIsLoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
 import useUserState from '@/hooks/recoil/useUserState';
+import useToast from '@/hooks/useToast';
 
 const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
   const { email, password } = data;
@@ -14,6 +15,7 @@ const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
 
 const usePostLoginQuery = () => {
   const navigate = useNavigate();
+  const { toastSuccess } = useToast();
   const { saveUserInfo } = useUserState();
   const {
     data: isLoginData,
@@ -33,6 +35,7 @@ const usePostLoginQuery = () => {
         ...data.myInfoResponse,
         isLogin: true
       });
+      toastSuccess('로그인이 되었습니다.');
       navigate('/', { replace: true });
     }
   });
