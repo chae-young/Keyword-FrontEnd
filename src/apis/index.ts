@@ -48,19 +48,25 @@ axiosAuth.interceptors.response.use(
 
     // refresh token을 body에 넣어 -> access token 재발급
     if (errorStatus === 401) {
-      const res = await axios.post('/members/reissue', {
-        refreshToken: `Bearer ${refreshToken}`
-      });
+      try {
+        const res = await axiosDefault.post('/members/reissue', {
+          refreshToken: `Bearer ${refreshToken}`
+        });
+        const newAccessToken = res.data.accessToken;
+        const newRefreshToken = res.data.refreshToken;
+        localStorage.setItem('accessToken', newAccessToken);
+        setCookie('refreshToken', newRefreshToken, {
+          path: '/'
+        });
 
-      const newAccessToken = res.data.accessToken;
-      const newRefreshToken = res.data.refreshToken;
-      localStorage.setItem('accessToken', newAccessToken);
-      setCookie('refreshToken', newRefreshToken, {
-        path: '/'
-      });
-
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-      return axios(originalRequest);
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        return await axios(originalRequest);
+      } catch (err) {
+        alert('토큰 재발급이 되지 않았습니다. 다시 로그인 해주세요');
+        window.location.replace('/auth');
+      }
     }
+    // 에러 반환.
+    return Promise.reject(error);
   }
 );
