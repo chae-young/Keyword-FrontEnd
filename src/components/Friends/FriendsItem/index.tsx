@@ -49,6 +49,8 @@ const FriendsItem = ({
     openModal();
   };
 
+  console.log(memberId);
+
   return (
     <li className="flex items-start mb-4">
       <div className="avatar mr-2">
@@ -64,7 +66,8 @@ const FriendsItem = ({
         <b className="text-body1 font-bold">{name}</b>
         <p className="text-body2 text-gray4">{email}</p>
       </div>
-      {status !== ME && (
+
+      {status && status !== ME && (
         <button
           type="button"
           disabled={friendStatus || IsFriendAdd}
