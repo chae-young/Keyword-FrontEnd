@@ -11,13 +11,13 @@ export interface ScheduleDetailType {
   organizerId?: number;
   title: string;
   contents: string;
-  scheduleDateTime: string;
+  scheduleAt: string;
   locationExplanation: string;
   latitude: number;
   longitude: number;
   status?: string;
-  remindDateTime: string;
-  friendList: FriendsDataType[];
+  remindAt: number;
+  scheduleFriendList: FriendsDataType[];
 }
 
 export type ScheduleTime = {
@@ -32,4 +32,8 @@ export interface ScheduleDetailIdType {
 
 export interface ScheduleDeleteType {
   isScheduleDelete: boolean;
+}
+
+export interface ScheduleDataIdType {
+  scheduleId: number;
 }
