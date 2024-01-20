@@ -4,7 +4,6 @@ import { axiosDefault } from '@/apis';
 import { LoginDataType, UserIsLoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
 import useUserState from '@/hooks/recoil/useUserState';
-import useToast from '@/hooks/useToast';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants/auth';
 
 const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
@@ -16,13 +15,13 @@ const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
 
 const usePostLoginQuery = () => {
   const navigate = useNavigate();
-  const { toastSuccess } = useToast();
   const { saveUserInfo } = useUserState();
   const {
     data: isLoginData,
     mutate: loginIsMutate,
     isError: loginIsError,
-    isSuccess: loginIsSuccess
+    isSuccess: loginIsSuccess,
+    isPending: loginIsPending
   } = useMutation({
     mutationKey: ['login'],
     mutationFn: ({ email, password }: LoginDataType) =>
@@ -36,7 +35,6 @@ const usePostLoginQuery = () => {
         ...data.myInfoResponse,
         isLogin: true
       });
-      toastSuccess('로그인이 되었습니다.');
       navigate('/', { replace: true });
     }
   });
@@ -45,6 +43,7 @@ const usePostLoginQuery = () => {
     isLoginData,
     loginIsMutate,
     loginIsError,
+    loginIsPending,
     loginIsSuccess
   };
 };
