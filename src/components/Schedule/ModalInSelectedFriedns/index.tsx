@@ -6,6 +6,8 @@ import useModalState from '@/hooks/recoil/useModalState';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
 import { ACCEPT } from '@/constants/friends';
 import NoResultText from '@/components/common/NoDataText';
+import Avatar from '@/components/common/Avatar';
+import { UserInfo } from '@/types/auth/authDataType';
 
 interface ModalInSelectedFriendsProps {
   view?: boolean;
@@ -15,9 +17,9 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
   const { closeModal, saveMySelectedFriends } = useModalState();
   const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
     useGetMyFriendsQuery(ACCEPT);
-  const [friendCheckedList, setFriendCheckedList] = useState<FriendsDataType[]>(
-    []
-  );
+  const [friendCheckedList, setFriendCheckedList] = useState<
+    (UserInfo | FriendsDataType)[]
+  >([]);
   const [isChecked, setIsChecked] = useState(false);
 
   // 체크리스트에 포함되어 있으면 제거 없으면 추가
@@ -41,6 +43,8 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    // '나'를 포함한 친구들
+    // const meAddFriendCheckedList = [...friendCheckedList, userState];
     saveMySelectedFriends(friendCheckedList);
   };
 
@@ -51,7 +55,6 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
     setIsChecked(!isChecked);
     handelCheckedItem(e.target.checked, friend);
   };
-
   const { lastElement } = useInfinite(friendsListFetchNextPage);
   return (
     <Modal title="내 친구 목록">
@@ -76,9 +79,14 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
                   >
                     <div className="avatar">
                       <div className="w-12 rounded-full">
-                        <img src={friend.profileImageUrl} alt={friend.name} />
+                        {friend.imageUrl ? (
+                          <img src={friend.imageUrl} alt={friend.name} />
+                        ) : (
+                          <Avatar h="h-12" iconWidth="text-4xl" />
+                        )}
                       </div>
                     </div>
+
                     <div className="ml-2">
                       <p className="label-text text-inherit text-body2">
                         {friend.name}
@@ -108,7 +116,10 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
         {!view && (
           <button
             type="submit"
-            className="fixed bottom-0 right-0 h-14 bg-primary w-full text-white text-body1"
+            className={`fixed bottom-0 right-0 h-14 ${
+              friendCheckedList.length ? 'bg-primary' : 'bg-gray3'
+            } w-full text-white text-body1`}
+            disabled={!friendCheckedList.length}
             onClick={closeModal}
           >
             {`${friendCheckedList.length}명 선택하기`}

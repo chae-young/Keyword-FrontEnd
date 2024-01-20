@@ -5,6 +5,7 @@ import {
   modalMySelectedFriendsAtom
 } from '@/recoil/atoms/modal/atom';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
+import { UserInfo } from '@/types/auth/authDataType';
 
 /*
  * modalAtom: 기본 모달 state
@@ -40,7 +41,7 @@ const useModalState = () => {
   };
 
   // 모달(내 친구 목록 불러오기) : 선택된 친구들 저장
-  const saveMySelectedFriends = (friends: FriendsDataType[]) => {
+  const saveMySelectedFriends = (friends: (UserInfo | FriendsDataType)[]) => {
     setMySelectedFriends(friends);
   };
 

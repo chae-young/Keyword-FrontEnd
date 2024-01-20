@@ -41,8 +41,8 @@ const ScheduleAddr = ({
 
           setScheduleAddress(prevState => ({
             ...prevState,
-            latitude: lat,
-            longitude: long
+            latitude: Number(lat),
+            longitude: Number(long)
           }));
         }
       }
