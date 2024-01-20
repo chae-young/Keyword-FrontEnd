@@ -76,7 +76,7 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
                   >
                     <div className="avatar">
                       <div className="w-12 rounded-full">
-                        <img src={friend.profileImageUrl} alt={friend.name} />
+                        <img src={friend.imageUrl} alt={friend.name} />
                       </div>
                     </div>
                     <div className="ml-2">
