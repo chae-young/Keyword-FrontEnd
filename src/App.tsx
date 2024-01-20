@@ -20,17 +20,14 @@ import PasswordEditPage from './pages/mypage/PasswordEditPage';
 import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
 import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
 import NotLoginPage from './pages/auth/NotLoginPage';
-import AuthLayout from './components/AuthLayout';
 import ChatPage from './pages/ChatPage';
-
-// interface AppProps {
-//   children?: React.ReactNode;
-// }
+import GuardedRoute from './GuardedRoute';
 
 const App = () => (
   <>
     <Routes>
       <Route>
+        {/* 미로그인 접근 페이지 */}
         <Route path="/auth" element={<NotLoginPage />} />
         <Route element={<InnerCon />}>
           <Route path="/auth" element={<Outlet />}>
@@ -38,21 +35,23 @@ const App = () => (
             <Route path="join" element={<JoinPage />} />
           </Route>
         </Route>
-        <Route element={<AuthLayout />}>
-          <Route element={<InnerCon />}>
+        {/* 로그인 접근 페이지 */}
+        <Route element={<InnerCon />}>
+          <Route element={<GuardedRoute />}>
             {/* 홈 */}
-            <Route element={<LayoutWithHeader />}>
-              <Route path="/" element={<HomePage />} />
-            </Route>
-
+            <Route
+              path="/"
+              element={
+                <LayoutWithHeader>
+                  <HomePage />
+                </LayoutWithHeader>
+              }
+            />
             {/* 1.네비로 라우팅 하는 페이지들 */}
             <Route element={<MainLayout />}>
-              {/* 검색 */}
               <Route path="/search" element={<SearchPage />} />
               <Route path="/search/result" element={<SearchResultPage />} />
-              {/* 채팅 */}
               <Route path="/chat" element={<ChatPage />} />
-              {/* 마이페이지 */}
               <Route path="/mypage" element={<MyPage />} />
             </Route>
 
@@ -73,6 +72,8 @@ const App = () => (
               <Route path="requested" element={<RequestedFriendsPage />} />
             </Route>
           </Route>
+        </Route>
+        <Route element={<GuardedRoute />}>
           {/* 5.채팅 */}
           <Route path="chat" element={<Outlet />}>
             <Route path=":roomId" element={<ChatDetail />} />
@@ -97,5 +98,4 @@ const App = () => (
     />
   </>
 );
-
 export default App;

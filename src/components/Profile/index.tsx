@@ -10,7 +10,11 @@ const Profile = () => {
   const { saveUserInfo } = useUserState();
 
   useEffect(() => {
-    if (user) saveUserInfo(user);
+    if (user)
+      saveUserInfo({
+        ...user,
+        isLogin: true
+      });
   }, [user]);
 
   return (
