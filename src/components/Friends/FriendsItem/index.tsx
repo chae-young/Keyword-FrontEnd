@@ -1,9 +1,16 @@
 import { FriendsDataType } from '@/types/friend/friendsDataType';
-import { IS_FRIEND } from '@/constants/friends';
+import {
+  FRIEND,
+  FRIEND_REQUEST,
+  FRIEND_REQUESTED,
+  ME,
+  NOT_FRIEND
+} from '@/constants/friends';
 import usePostFriendAddQuery from '@/hooks/query/friends/usePostFriendAddQuery';
 import useDeleteMyFriendQuery from '@/hooks/query/friends/useDeleteMyFriendQuery';
 import RightButton from '@/components/common/Button/RightButton';
 import useModalState from '@/hooks/recoil/useModalState';
+import Avatar from '@/components/common/Avatar';
 
 interface FriendsItemProps extends FriendsDataType {
   // buttonName: string[];
@@ -15,12 +22,13 @@ const FriendsItem = ({
   memberId,
   name,
   email,
-  profileImageUrl,
+  imageUrl,
   status,
   del,
   reqCheck
 }: FriendsItemProps) => {
-  const friendStatus = status === IS_FRIEND;
+  const friendStatus = status !== NOT_FRIEND;
+
   const { IsFriendAdd, friendAddIsMutate } = usePostFriendAddQuery(memberId);
   const { friendDeleteIsMutate } = useDeleteMyFriendQuery();
   const { changeFriendName, openModal } = useModalState();
@@ -41,29 +49,39 @@ const FriendsItem = ({
     openModal();
   };
 
+  console.log(memberId);
+
   return (
     <li className="flex items-start mb-4">
       <div className="avatar mr-2">
         <div className="w-12 rounded-full">
-          <img src={profileImageUrl} alt={name} />
+          {imageUrl ? (
+            <img src={imageUrl} alt={name} />
+          ) : (
+            <Avatar h="h-12" iconWidth="text-3xl" />
+          )}
         </div>
       </div>
       <div className="flex-grow">
         <b className="text-body1 font-bold">{name}</b>
         <p className="text-body2 text-gray4">{email}</p>
       </div>
-      {status && (
+
+      {status && status !== ME && (
         <button
           type="button"
-          disabled={friendStatus || IsFriendAdd?.isFriendRequest}
+          disabled={friendStatus || IsFriendAdd}
           onClick={handleFriendAdd}
           className={`${
-            friendStatus || IsFriendAdd?.isFriendRequest
+            friendStatus || IsFriendAdd
               ? 'bg-gray3 text-gray1'
               : 'bg-primary text-white'
           }  rounded-xl  pt-2 py-1 px-3`}
         >
-          친구추가
+          {status === NOT_FRIEND && '친구추가'}
+          {status === FRIEND && '우린친구😆'}
+          {status === FRIEND_REQUEST && '요청중'}
+          {status === FRIEND_REQUESTED && '요청됨'}
         </button>
       )}
       {del && (

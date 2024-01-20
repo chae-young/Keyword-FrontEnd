@@ -4,6 +4,8 @@ import useGetMyFriendsQuery from '@/hooks/query/friends/useGetMyFriendsQuery';
 import useInfinite from '@/hooks/useInfinite';
 import useModalState from '@/hooks/recoil/useModalState';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
+import { ACCEPT } from '@/constants/friends';
+import NoResultText from '@/components/common/NoDataText';
 
 interface ModalInSelectedFriendsProps {
   view?: boolean;
@@ -11,8 +13,8 @@ interface ModalInSelectedFriendsProps {
 
 const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
   const { closeModal, saveMySelectedFriends } = useModalState();
-  const { friendsList, friendsListFetchNextPage } =
-    useGetMyFriendsQuery('accept');
+  const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
+    useGetMyFriendsQuery(ACCEPT);
   const [friendCheckedList, setFriendCheckedList] = useState<FriendsDataType[]>(
     []
   );
@@ -62,38 +64,46 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
       <form onSubmit={handleSubmit}>
         <ul className="pb-16 max-h-56 overflow-y-auto -mx-6">
           {friendsList?.pages.map(page =>
-            page.map(friend => (
-              <li key={friend.memberId} className="">
-                <label
-                  htmlFor={`friend${friend.memberId}`}
-                  className={`cursor-pointer flex items-center text-bk ${
-                    friendCheckedList.includes(friend) &&
-                    ' bg-primary text-white'
-                  } px-6 py-2`}
-                >
-                  <div className="avatar">
-                    <div className="w-12 rounded-full">
-                      <img src={friend.profileImageUrl} alt={friend.name} />
+            friendsList.pages[0].length ? (
+              page.map(friend => (
+                <li key={friend.memberId} className="">
+                  <label
+                    htmlFor={`friend${friend.memberId}`}
+                    className={`cursor-pointer flex items-center text-bk ${
+                      friendCheckedList.includes(friend) &&
+                      ' bg-primary text-white'
+                    } px-6 py-2`}
+                  >
+                    <div className="avatar">
+                      <div className="w-12 rounded-full">
+                        <img src={friend.profileImageUrl} alt={friend.name} />
+                      </div>
                     </div>
-                  </div>
-                  <div className="ml-2">
-                    <p className="label-text text-inherit text-body2">
-                      {friend.name}
-                    </p>
-                    <p className="text-inherit text-body3">{friend.email}</p>
-                  </div>
-                  <input
-                    id={`friend${friend.memberId}`}
-                    type="checkbox"
-                    checked={friendCheckedList.includes(friend)}
-                    className="hidden"
-                    onChange={e => handelChecked(e, friend)}
-                  />
-                </label>
-              </li>
-            ))
+                    <div className="ml-2">
+                      <p className="label-text text-inherit text-body2">
+                        {friend.name}
+                      </p>
+                      <p className="text-inherit text-body3">{friend.email}</p>
+                    </div>
+                    <input
+                      id={`friend${friend.memberId}`}
+                      type="checkbox"
+                      checked={friendCheckedList.includes(friend)}
+                      className="hidden"
+                      onChange={e => handelChecked(e, friend)}
+                    />
+                  </label>
+                </li>
+              ))
+            ) : (
+              <NoResultText text="친구가 없습니다." key="noText" />
+            )
           )}
-          {lastElement()}
+          {friendsList &&
+          friendsList.pages[0].length >= 10 &&
+          friendsListHasNextPage
+            ? lastElement()
+            : ''}
         </ul>
         {!view && (
           <button

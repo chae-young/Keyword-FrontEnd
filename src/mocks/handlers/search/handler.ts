@@ -8,8 +8,8 @@ export const getFriendsSearchList = rest.get('/friends', (req, res, ctx) => {
   const page = Number(req.url.searchParams.get('page')) || 1;
 
   const startIndex = (page - 1) * size;
-
   const newFriendsList = searchFriendsList.slice(startIndex, startIndex + size);
+  // console.log(searchFriendsList, startIndex, startIndex + size);
   const result = newFriendsList.filter(friend => friend.name === keyword);
 
   return res(ctx.status(200), ctx.json(result));

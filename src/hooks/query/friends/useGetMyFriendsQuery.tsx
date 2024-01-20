@@ -8,7 +8,7 @@ const fetchAPI = async (
 ): Promise<FriendsDataType[]> => {
   try {
     const list = await axiosAuth.get(
-      `/friends/state?friend-state=${state}&size=10&page=${page}`
+      `/friends?friend-state=${state}&size=10&page=${page}`
     );
     return list.data;
   } catch (error) {
@@ -24,9 +24,9 @@ const useGetMyFriendsQuery = (state: string) => {
     fetchNextPage: friendsListFetchNextPage,
     hasNextPage: friendsListHasNextPage
   } = useInfiniteQuery({
-    queryKey: ['myFriends'],
-    initialPageParam: 1,
-    queryFn: ({ pageParam = 1 }) => fetchAPI(pageParam, state),
+    queryKey: ['myFriends', state],
+    initialPageParam: 0,
+    queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam, state),
     getNextPageParam: (lastPage, allPage) => {
       const nextPage = allPage.length + 1;
       return lastPage.length === 0 ? null : nextPage;

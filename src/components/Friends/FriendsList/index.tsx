@@ -9,16 +9,17 @@ interface FriendsListProps {
   FetchNextPage: any;
   del?: boolean;
   reqCheck?: boolean;
+  hasNextPage: boolean;
 }
 
 const FriendsList = ({
   lists,
   FetchNextPage,
   del,
-  reqCheck
+  reqCheck,
+  hasNextPage
 }: FriendsListProps) => {
   const { lastElement } = useInfinite(FetchNextPage);
-
   return (
     <ul className="pt-5">
       {lists.pages.map(page =>
@@ -30,17 +31,17 @@ const FriendsList = ({
               name={list.name}
               email={list.email}
               status={list.status}
-              profileImageUrl={list.profileImageUrl}
+              imageUrl={list.imageUrl}
               del={del}
               reqCheck={reqCheck}
             />
           ))
         ) : (
-          <NoResultText text="검색결과가 없습니다." key="noText" />
+          <NoResultText text="친구가 없습니다." key="noText" />
         )
       )}
 
-      {lastElement()}
+      {lists?.pages[0].length >= 10 && hasNextPage ? lastElement() : ''}
     </ul>
   );
 };

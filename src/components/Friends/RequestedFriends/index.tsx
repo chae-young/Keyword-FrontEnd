@@ -3,10 +3,11 @@ import useGetMyFriendsQuery from '@/hooks/query/friends/useGetMyFriendsQuery';
 import Modal from '@/components/common/Modal';
 import useModalState from '@/hooks/recoil/useModalState';
 import ModalInReqOkOrNo from './ModalInReqOkOrNo';
+import { REQUESTED } from '@/constants/friends';
 
 const RequestedFriends = () => {
-  const { friendsList, friendsListFetchNextPage } =
-    useGetMyFriendsQuery('requested');
+  const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
+    useGetMyFriendsQuery(REQUESTED);
   const { reqModalState } = useModalState();
 
   return (
@@ -15,6 +16,7 @@ const RequestedFriends = () => {
         <FriendsList
           lists={friendsList}
           FetchNextPage={friendsListFetchNextPage}
+          hasNextPage={friendsListHasNextPage}
           reqCheck
         />
       )}

@@ -5,5 +5,5 @@ export interface ModalAcceptOrRejectType {
 }
 
 export interface ResToMyFriendType extends ModalAcceptOrRejectType {
-  friendState: string;
+  friendStatus: string;
 }

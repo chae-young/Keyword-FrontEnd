@@ -1,10 +1,22 @@
 import { IoIosArrowForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import useGetProfileQuery from '@/hooks/query/user/useGetProfileQuery';
 import Avatar from '../common/Avatar';
+import useUserState from '@/hooks/recoil/useUserState';
 
 const Profile = () => {
   const { user } = useGetProfileQuery();
+  const { saveUserInfo } = useUserState();
+
+  useEffect(() => {
+    if (user)
+      saveUserInfo({
+        ...user,
+        isLogin: true
+      });
+  }, [user]);
+
   return (
     <div className="flex justify-between">
       <div className="avatar items-center">
@@ -14,7 +26,7 @@ const Profile = () => {
           </div>
         ) : (
           <div className="w-20 rounded-full bg-gray3 mr-4">
-            <Avatar />
+            <Avatar h="h-20" />
           </div>
         )}
 

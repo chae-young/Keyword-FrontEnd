@@ -1,7 +1,7 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import { FriendDeleteType } from '@/types/friend/friendsDataType';
-import useToast from '@/hooks/useToast';
+import { ACCEPT } from '@/constants/friends';
 
 const fetchAPI = async (memberReqId: number): Promise<FriendDeleteType> => {
   const res = await axiosAuth.delete(`/friends/${memberReqId}`);
@@ -9,7 +9,7 @@ const fetchAPI = async (memberReqId: number): Promise<FriendDeleteType> => {
 };
 
 const useDeleteMyFriendQuery = () => {
-  const { toastSuccess } = useToast();
+  const queryClient = useQueryClient();
   const {
     data: IsFriendDelete,
     mutate: friendDeleteIsMutate,
@@ -22,7 +22,7 @@ const useDeleteMyFriendQuery = () => {
       throw err;
     },
     onSuccess: () => {
-      toastSuccess('친구 삭제가 완료되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['myFriends', ACCEPT] });
     }
   });
 

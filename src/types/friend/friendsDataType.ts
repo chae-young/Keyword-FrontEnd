@@ -1,15 +1,23 @@
 export type IsFriendType = 'FRIEND';
 export type IsFriendRequestType = 'REQUEST';
+
+export type NotFriendType = 'NOT_FRIEND';
+export type FriendType = 'FRIEND';
+export type FriendRequestType = 'FRIEND_REQUEST';
+export type FriendRequestedType = 'FRIEND_REQUESTED';
+export type MeType = 'ME';
+
 export interface FriendsDataType {
   memberId: number;
   name: string;
   email: string;
-  profileImageUrl: string;
-  status?: IsFriendType | IsFriendRequestType;
-}
-
-export interface FriendAddType {
-  isFriendRequest: boolean;
+  imageUrl: string;
+  status?:
+    | NotFriendType
+    | FriendType
+    | FriendRequestType
+    | FriendRequestedType
+    | MeType;
 }
 
 export interface FriendDeleteType {
@@ -17,5 +25,5 @@ export interface FriendDeleteType {
 }
 
 export interface FriendReqType {
-  friendState: string;
+  friendStatus: string;
 }
