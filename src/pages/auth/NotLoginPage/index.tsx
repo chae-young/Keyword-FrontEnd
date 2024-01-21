@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Naver from '@/components/common/Naver';
 
 const NotLoginPage = () => (
   <section className="max-w-default m-auto h-screen px-5 pt-10">
@@ -10,6 +11,9 @@ const NotLoginPage = () => (
       간편하게 로그인 하고 <br />
       다양한 서비스를 이용하세요.
     </p>
+    <div className="max-w-default relative left-0 right-0 m-auto px-5">
+      <Naver />
+    </div>
     <div className="max-w-default absolute left-0 right-0 bottom-36 m-auto px-5">
       <Link
         to="/auth/login"
