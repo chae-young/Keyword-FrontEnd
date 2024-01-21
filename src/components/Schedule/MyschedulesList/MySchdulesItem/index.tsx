@@ -22,8 +22,8 @@ const MySchedulesItem = ({
     <li className="border-b py-4">
       <Link to={`/schedule/${scheduleId}`}>
         <div className="flex">
-          <b>{title}</b>
-          <div className="basis-24  text-right">
+          <b className="grow text-overflow">{title}</b>
+          <div className="basis-24 text-right shrink-0">
             {status === ONGOING ? (
               <span className="px-2 bg-primary2 text-body3 font-bold rounded-xl py-1">
                 진행중

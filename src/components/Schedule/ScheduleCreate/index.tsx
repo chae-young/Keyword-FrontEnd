@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
+import 'moment/locale/ko';
 import { Address } from 'react-daum-postcode';
 import WideButton from '@/components/common/Button/WideButton';
 import ScheduleFriends from './ScheduleFriends';
@@ -20,6 +21,7 @@ import { formatTime } from '@/util/\bdate';
 import useModalState from '@/hooks/recoil/useModalState';
 import usePatchScheduleQuery from '@/hooks/query/schedules/usePatchScheduleQuery';
 import ScheduleAddr from './ScheduleAddr';
+import useUserState from '@/hooks/recoil/useUserState';
 
 interface ScheduleCreateProps {
   scheduleToEdit?: ScheduleDetailType;
@@ -28,7 +30,7 @@ interface ScheduleCreateProps {
 const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   const navigate = useNavigate();
   const parms = useParams();
-
+  const { userState } = useUserState();
   const { scheduleIsMutate } = usePostSchedulesQuery();
   const { patchedScheduleIsMutate } = usePatchScheduleQuery();
   const { saveMySelectedFriends } = useModalState();
@@ -101,16 +103,25 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   // 전송
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const scheduleData = {
+    // 일정 날짜 localdatetime으로 변환
+    const dateAndTime = `${scheduleDateAndTime.date} ${scheduleDateAndTime.time}`;
+    const momentObject = moment(dateAndTime, 'YYYY-MM-DD HH:mm');
+    const localDatetimeString = momentObject
+      .local()
+      .format('YYYY-MM-DDTHH:mm:ss');
+
+    const scheduleData: ScheduleDetailType = {
+      organizerId: userState.memberId,
       title: scheduleTitle,
       contents,
-      scheduleDateTime: '',
+      scheduleAt: localDatetimeString,
       locationExplanation: scheduleAddress.address,
       latitude: scheduleAddress.latitude,
       longitude: scheduleAddress.longitude,
-      remindDateTime: scheduleSelectedRemind,
-      friendList: mySelectdFriends // TODO: 주최자 추가해야함(나자신)
+      remindAt: Number(scheduleSelectedRemind),
+      scheduleFriendList: mySelectdFriends // TODO: 주최자 추가해야함(나자신)
     };
+
     if (scheduleToEdit) {
       patchedScheduleIsMutate(Number(parms.id));
     } else {
@@ -123,7 +134,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   // 일정 수정시 defaultValue setting
   useEffect(() => {
     if (scheduleToEdit) {
-      const [date, time] = scheduleToEdit.scheduleDateTime.split('T');
+      const [date, time] = scheduleToEdit.scheduleAt.split('T');
       setScheduleTitle(scheduleToEdit.title);
       setContents(scheduleToEdit.contents);
       setScheduleDate(new Date(date));
@@ -132,7 +143,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         ...prevState,
         address: scheduleToEdit.locationExplanation
       }));
-      saveMySelectedFriends(scheduleToEdit.friendList);
+      saveMySelectedFriends(scheduleToEdit.scheduleFriendList);
     }
   }, [scheduleToEdit]);
   // 날짜
@@ -180,8 +191,9 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         element={
           <Input
             type="text"
-            placeholder="일정 제목을 입력해주세요."
+            placeholder="일정 제목을 입력해주세요. (30자 이하)"
             value={scheduleTitle}
+            maxLength={30}
             handleChangeInput={handleChangeScheduleTitle}
           />
         }
@@ -191,8 +203,9 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         element={
           <textarea
             className="bg-gray2 rounded-lg text-body2 placeholder-text-gray4 p-3 w-full resize-none h-20"
-            placeholder="내용을 입력해주세요."
+            placeholder="내용을 입력해주세요. (15자 이상)"
             value={contents}
+            minLength={15}
             onChange={handleChangeContents}
           />
         }
@@ -234,11 +247,10 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         }
       />
       <ScheduleFriends />
-      {scheduleToEdit ? (
-        <WideButton text="수정하기" status={allInputValid} />
-      ) : (
-        <WideButton text="등록하기" status={allInputValid} />
-      )}
+      <WideButton
+        text={scheduleToEdit ? '수정하기' : '등록하기'}
+        status={allInputValid}
+      />
     </form>
   );
 };

@@ -13,10 +13,10 @@ import useModalState from '@/hooks/recoil/useModalState';
 
 const ScheduleDetailPage = () => {
   const { scheduleDetail } = useGetScheduleDetailQuery({
-    scheduleId: '1',
-    noticeId: '1'
+    scheduleId: '4',
+    noticeId: '4'
   });
-  const [date, time] = (scheduleDetail?.scheduleDateTime ?? '').split('T');
+  const [date, time] = (scheduleDetail?.scheduleAt ?? '').split('T');
   // const { scheduleDeleteIsMutate } = useDeleteScheduleQuery();
   const { openModal } = useModalState();
 
@@ -60,7 +60,7 @@ const ScheduleDetailPage = () => {
                 />
                 <ScheduleTextBox
                   icon={<BiBell />}
-                  element={<p>{scheduleDetail.remindDateTime}</p>}
+                  element={<p>{scheduleDetail.remindAt}</p>}
                 />
                 <ScheduleTextBox
                   icon={<LuText />}
