@@ -51,7 +51,7 @@ axiosAuth.interceptors.response.use(
     if (errorStatus === 401) {
       try {
         const res = await axiosDefault.post('/members/reissue', {
-          refreshToken: `Bearer ${refreshToken}`
+          refreshToken
         });
         const newAccessToken = res.data.accessToken;
         const newRefreshToken = res.data.refreshToken;
