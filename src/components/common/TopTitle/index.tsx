@@ -7,7 +7,7 @@ interface TopTitleProps {
   title: string;
   back?: boolean;
   alarm?: boolean;
-  edit?: number;
+  edit?: boolean;
 }
 
 const TopTitle = ({ title, back, alarm, edit }: TopTitleProps) => {
@@ -16,7 +16,7 @@ const TopTitle = ({ title, back, alarm, edit }: TopTitleProps) => {
     navigate(-1);
   };
   return (
-    <div className="max-w-default h-[60px] flex justify-center items-center fixed left-0 top-0 right-0 m-auto w-full bg-white shadow-bottom">
+    <div className="max-w-default h-[60px] flex justify-center z-50 items-center fixed left-0 top-0 right-0 m-auto w-full bg-white shadow-bottom">
       {back && (
         <button
           type="button"
