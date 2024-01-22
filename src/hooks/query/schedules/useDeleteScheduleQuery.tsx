@@ -9,7 +9,7 @@ const fetchAPI = async (scheduleId: number): Promise<ScheduleDeleteType> => {
 };
 
 const useDeleteScheduleQuery = () => {
-  const { toastSuccess } = useToast();
+  const { toastSuccess, toastError } = useToast();
   const {
     data: IsScheduleDelete,
     mutate: scheduleDeleteIsMutate,
@@ -19,7 +19,8 @@ const useDeleteScheduleQuery = () => {
     mutationKey: ['scheduleDelete'],
     mutationFn: (scheduleId: number) => fetchAPI(scheduleId),
     onError: err => {
-      throw err;
+      console.log(err);
+      toastError('에러가 발생했습니다. 잠시후 다시 시도해주세요');
     },
     onSuccess: () => {
       toastSuccess('일정 삭제가 완료되었습니다.');
