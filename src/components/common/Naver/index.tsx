@@ -4,7 +4,7 @@ const Naver = () => {
   const { VITE_SERVER } = import.meta.env;
 
   const NaverLogin = () => {
-    window.location.href = `${VITE_SERVER}oauth2/authorization/naver`;
+    window.location.href = `${VITE_SERVER}/oauth2/authorization/naver`;
   };
   return (
     <button
