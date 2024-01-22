@@ -11,8 +11,9 @@ import ScheduleTextBox from '@/components/Schedule/ScheduleDetail/ScheduleTextBo
 import WideButton from '@/components/common/Button/WideButton';
 import useModalState from '@/hooks/recoil/useModalState';
 import useUserState from '@/hooks/recoil/useUserState';
-import ModalAttendingFriends from '@/components/Schedule/ModalAttendingFriends';
 import useDeleteScheduleQuery from '@/hooks/query/schedules/useDeleteScheduleQuery';
+import { SCHEDULE_ONGOING } from '@/constants/schedule';
+import ModalAttendingFriends from '@/components/Schedule/ModalAttendingFriends';
 
 const ScheduleDetailPage = () => {
   const { id } = useParams();
@@ -42,7 +43,6 @@ const ScheduleDetailPage = () => {
   const handleFriendView = () => {
     openModal();
   };
-
   return (
     <>
       <div className="-mx-default text-body2">
@@ -51,7 +51,10 @@ const ScheduleDetailPage = () => {
             <TopTitle
               title=""
               back
-              edit={scheduleDetail.organizerId === userState.memberId}
+              edit={
+                scheduleDetail.organizerId === userState.memberId &&
+                !(scheduleDetail.status !== SCHEDULE_ONGOING)
+              }
             />
 
             <ul>
@@ -121,7 +124,7 @@ const ScheduleDetailPage = () => {
         {scheduleDetail?.organizerId === userState.memberId && (
           <WideButton
             type="button"
-            status
+            status={!(scheduleDetail.status !== SCHEDULE_ONGOING)}
             text="취소하기"
             onClick={handleScheduleDel}
           />
