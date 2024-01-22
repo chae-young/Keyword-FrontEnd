@@ -1,24 +1,35 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import useToast from '@/hooks/useToast';
-import { ScheduleDetailType } from '@/types/schedule/scheduleDataType';
+import {
+  ScheduleDataIdType,
+  ScheduleDetailType
+} from '@/types/schedule/scheduleDataType';
+import usePostChatRoomQuery from '../chat/usePostChatRoomQuery';
 
-const fetchAPI = async (data: ScheduleDetailType) => {
+const fetchAPI = async (
+  data: ScheduleDetailType
+): Promise<ScheduleDataIdType> => {
   const res = await axiosAuth.post('/schedules', data);
   return res.data;
 };
 
 const usePostSchedulesQuery = () => {
   const { toastSuccess } = useToast();
+  const queryClient = useQueryClient();
+  const { chatRoomCreateIsMutate } = usePostChatRoomQuery();
   const {
+    data: scheduleId,
     mutate: scheduleIsMutate,
     isError: scheduleIsError,
     isSuccess: scheduleIsSuccess
   } = useMutation({
     mutationKey: ['schedule'],
     mutationFn: (data: ScheduleDetailType) => fetchAPI(data),
-    onSuccess: () => {
+    onSuccess: data => {
+      queryClient.invalidateQueries({ queryKey: ['schedulesList'] });
       toastSuccess('일정이 등록되었습니다.');
+      chatRoomCreateIsMutate(data.scheduleId);
     },
     onError: err => {
       console.log(err);
@@ -26,6 +37,7 @@ const usePostSchedulesQuery = () => {
   });
 
   return {
+    scheduleId,
     scheduleIsMutate,
     scheduleIsError,
     scheduleIsSuccess

@@ -11,6 +11,7 @@ const { persistAtom } = recoilPersist({
 export const userAtom = atom<UserInfo>({
   key: 'userAtom',
   default: {
+    memberId: 0,
     name: '',
     email: '',
     phone: '',

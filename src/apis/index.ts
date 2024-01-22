@@ -51,10 +51,11 @@ axiosAuth.interceptors.response.use(
     if (errorStatus === 401) {
       try {
         const res = await axiosDefault.post('/members/reissue', {
-          refreshToken: `Bearer ${refreshToken}`
+          refreshToken
         });
-        const newAccessToken = res.data.accessToken;
-        const newRefreshToken = res.data.refreshToken;
+
+        const newAccessToken = res.data.tokenResponse.accessToken;
+        const newRefreshToken = res.data.tokenResponse.refreshToken;
         localStorage.setItem(ACCESS_TOKEN, newAccessToken);
         setCookie(REFRESH_TOKEN, newRefreshToken, {
           path: '/'
@@ -63,7 +64,7 @@ axiosAuth.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         return await axios(originalRequest);
       } catch (err) {
-        alert('토큰 재발급이 되지 않았습니다. 다시 로그인 해주세요');
+        alert('토큰 재발급에 실패했습니다. 다시 로그인 해주세요');
         window.location.replace('/auth');
       }
     }

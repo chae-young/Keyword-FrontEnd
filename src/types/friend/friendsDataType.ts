@@ -1,11 +1,20 @@
-export type IsFriendType = 'FRIEND';
-export type IsFriendRequestType = 'REQUEST';
+import {
+  FRIEND,
+  FRIEND_REQUEST,
+  FRIEND_REQUESTED,
+  ME,
+  NOT_FRIEND,
+  REQUEST
+} from '../../constants/friends/index';
 
-export type NotFriendType = 'NOT_FRIEND';
-export type FriendType = 'FRIEND';
-export type FriendRequestType = 'FRIEND_REQUEST';
-export type FriendRequestedType = 'FRIEND_REQUESTED';
-export type MeType = 'ME';
+export type IsFriendType = typeof FRIEND;
+export type IsFriendRequestType = typeof REQUEST;
+
+export type NotFriendType = typeof NOT_FRIEND;
+export type FriendType = typeof FRIEND;
+export type FriendRequestType = typeof FRIEND_REQUEST;
+export type FriendRequestedType = typeof FRIEND_REQUESTED;
+export type MeType = typeof ME;
 
 export interface FriendsDataType {
   memberId: number;

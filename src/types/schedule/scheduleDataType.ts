@@ -1,3 +1,8 @@
+import {
+  SCHEDULE_DELETE,
+  SCHEDULE_END,
+  SCHEDULE_ONGOING
+} from '@/constants/schedule';
 import { FriendsDataType } from '../friend/friendsDataType';
 
 export interface ScheduleDataType {
@@ -11,13 +16,16 @@ export interface ScheduleDetailType {
   organizerId?: number;
   title: string;
   contents: string;
-  scheduleDateTime: string;
+  scheduleAt: string;
   locationExplanation: string;
   latitude: number;
   longitude: number;
-  status?: string;
-  remindDateTime: string;
-  friendList: FriendsDataType[];
+  status?:
+    | typeof SCHEDULE_END
+    | typeof SCHEDULE_DELETE
+    | typeof SCHEDULE_ONGOING;
+  remindAt: number;
+  scheduleFriendList: FriendsDataType[];
 }
 
 export type ScheduleTime = {
@@ -26,10 +34,19 @@ export type ScheduleTime = {
 };
 
 export interface ScheduleDetailIdType {
-  scheduleId: string;
-  noticeId: string;
+  scheduleId: number;
+  noticeId: number;
 }
 
 export interface ScheduleDeleteType {
   isScheduleDelete: boolean;
+}
+
+export interface ScheduleDataIdType {
+  scheduleId: number;
+}
+
+export interface ScheduleEditDataType {
+  schedule: ScheduleDetailType;
+  scheduleId: number;
 }
