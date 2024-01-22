@@ -36,7 +36,7 @@ const MySchedulesItem = ({
           </div>
         </div>
         <p className="text-body2 text-gray4 mt-4">
-          {date}&nbsp;&nbsp;{time}시
+          {date}&nbsp;&nbsp;{time.slice(0, -3)}시
         </p>
       </Link>
     </li>

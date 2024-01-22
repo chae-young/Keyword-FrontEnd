@@ -27,7 +27,7 @@ const useGetScheduleDetailQuery = (data: ScheduleDetailIdType) => {
     isSuccess: scheduleDetailIsSuccess,
     isError: scheduleDetailIsError
   } = useQuery({
-    queryKey: ['scheduleDetail'],
+    queryKey: ['scheduleDetail', data.scheduleId],
     queryFn: () => fetchAPI(data),
 
     staleTime: Infinity
