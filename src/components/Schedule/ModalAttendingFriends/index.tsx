@@ -12,7 +12,7 @@ const ModalAttendingFriends = ({
   friendsList,
   organizerId
 }: ModalAttendingFriendsProps) => {
-  const sortedFriendsList = friendsList?.sort((a, b) => {
+  const sortedFriendsList = friendsList?.slice().sort((a, b) => {
     if (a.memberId === organizerId) {
       return -1;
     }
@@ -21,6 +21,7 @@ const ModalAttendingFriends = ({
     }
     return 0;
   });
+
   return (
     <Modal title="참석자">
       <ul className="pb-16 max-h-56 overflow-y-auto">

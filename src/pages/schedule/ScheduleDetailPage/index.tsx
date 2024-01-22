@@ -79,7 +79,7 @@ const ScheduleDetailPage = () => {
                 />
                 <ScheduleTextBox
                   icon={<BiBell />}
-                  element={<p>{scheduleDetail.remindAt}</p>}
+                  element={<p>{scheduleDetail.remindAt}시간전</p>}
                 />
                 <ScheduleTextBox
                   icon={<LuText />}

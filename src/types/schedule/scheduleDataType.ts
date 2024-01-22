@@ -1,7 +1,7 @@
 import {
   SCHEDULE_DELETE,
-  SCHEDULE_ONGOING,
-  SCHEDULE_END
+  SCHEDULE_END,
+  SCHEDULE_ONGOING
 } from '@/constants/schedule';
 import { FriendsDataType } from '../friend/friendsDataType';
 
@@ -21,9 +21,9 @@ export interface ScheduleDetailType {
   latitude: number;
   longitude: number;
   status?:
-    | typeof SCHEDULE_ONGOING
+    | typeof SCHEDULE_END
     | typeof SCHEDULE_DELETE
-    | typeof SCHEDULE_END;
+    | typeof SCHEDULE_ONGOING;
   remindAt: number;
   scheduleFriendList: FriendsDataType[];
 }
@@ -43,5 +43,10 @@ export interface ScheduleDeleteType {
 }
 
 export interface ScheduleDataIdType {
+  scheduleId: number;
+}
+
+export interface ScheduleEditDataType {
+  schedule: ScheduleDetailType;
   scheduleId: number;
 }
