@@ -23,6 +23,7 @@ export type UserToken = {
 };
 
 export type UserInfo = {
+  memberId: number;
   name: string;
   email: string;
   phone: string;

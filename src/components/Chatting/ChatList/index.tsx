@@ -7,7 +7,7 @@ const ChatList = () => {
   const { chatList, chatListFetchNextPage, chatListhasNextPage } =
     useGetChatListQuery();
   const { lastElement } = useInfinite(chatListFetchNextPage);
-
+  console.log(chatList);
   return (
     <ul className="[&>*:last-child]:border-0">
       {chatList?.pages.map(page =>

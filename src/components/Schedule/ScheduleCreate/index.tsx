@@ -1,9 +1,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
+import 'moment/locale/ko';
 import { Address } from 'react-daum-postcode';
+import { IoPersonAddSharp } from 'react-icons/io5';
 import WideButton from '@/components/common/Button/WideButton';
-import ScheduleFriends from './ScheduleFriends';
 import usePostSchedulesQuery from '@/hooks/query/schedules/usePostSchedulesQuery';
 import useInput from '@/hooks/useInput';
 import ScheduleInputBox from './ScheduleInputBox';
@@ -11,6 +12,7 @@ import Input from '@/components/common/Input';
 import SelectDate from '@/components/common/DateTimePicker/Date';
 import {
   ScheduleDetailType,
+  ScheduleEditDataType,
   ScheduleTime
 } from '@/types/schedule/scheduleDataType';
 import TimePicker from '@/components/common/DateTimePicker/Time';
@@ -20,6 +22,7 @@ import { formatTime } from '@/util/\bdate';
 import useModalState from '@/hooks/recoil/useModalState';
 import usePatchScheduleQuery from '@/hooks/query/schedules/usePatchScheduleQuery';
 import ScheduleAddr from './ScheduleAddr';
+import useUserState from '@/hooks/recoil/useUserState';
 
 interface ScheduleCreateProps {
   scheduleToEdit?: ScheduleDetailType;
@@ -28,11 +31,11 @@ interface ScheduleCreateProps {
 const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   const navigate = useNavigate();
   const parms = useParams();
-
+  const { userState } = useUserState();
   const { scheduleIsMutate } = usePostSchedulesQuery();
   const { patchedScheduleIsMutate } = usePatchScheduleQuery();
   const { saveMySelectedFriends } = useModalState();
-  const { mySelectdFriends } = useModalState();
+  const { mySelectdFriends, openModal } = useModalState();
   const [allInputValid, setAllInputValid] = useState(false);
   const [isOpenAddrPopup, setIsOpenAddrPopup] = useState(false);
 
@@ -86,7 +89,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
     scheduleAddress.longitude,
     mySelectdFriends
   ]);
-
+  console.log(mySelectdFriends);
   // useEffect(() => {
   //   const allInputChecked = Object.values(scheduleCreateState).every(value =>
   //     Array.isArray(value) ? value.length > 0 : value !== ''
@@ -101,18 +104,32 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   // 전송
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const scheduleData = {
+    // 일정 날짜 localdatetime으로 변환
+    const dateAndTime = `${scheduleDateAndTime.date} ${scheduleDateAndTime.time}`;
+    const momentObject = moment(dateAndTime, 'YYYY-MM-DD HH:mm');
+    const localDatetimeString = momentObject
+      .local()
+      .format('YYYY-MM-DDTHH:mm:ss');
+
+    const scheduleData: ScheduleDetailType = {
+      organizerId: userState.memberId,
       title: scheduleTitle,
       contents,
-      scheduleDateTime: '',
+      scheduleAt: localDatetimeString,
       locationExplanation: scheduleAddress.address,
       latitude: scheduleAddress.latitude,
       longitude: scheduleAddress.longitude,
-      remindDateTime: scheduleSelectedRemind,
-      friendList: mySelectdFriends // TODO: 주최자 추가해야함(나자신)
+      remindAt: Number(scheduleSelectedRemind),
+      scheduleFriendList: mySelectdFriends
     };
+
     if (scheduleToEdit) {
-      patchedScheduleIsMutate(Number(parms.id));
+      const editData: ScheduleEditDataType = {
+        schedule: { ...scheduleData },
+        scheduleId: Number(parms.id)
+      };
+      console.log(editData.schedule);
+      patchedScheduleIsMutate(editData);
     } else {
       scheduleIsMutate(scheduleData);
     }
@@ -123,16 +140,18 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   // 일정 수정시 defaultValue setting
   useEffect(() => {
     if (scheduleToEdit) {
-      const [date, time] = scheduleToEdit.scheduleDateTime.split('T');
+      const [date, time] = scheduleToEdit.scheduleAt.split('T');
       setScheduleTitle(scheduleToEdit.title);
       setContents(scheduleToEdit.contents);
       setScheduleDate(new Date(date));
+      setScheduleDateAndTime({ date, time });
+      setScheduleSelectedRemind(`${scheduleToEdit.remindAt}`);
       setScheduleSelectedTime(new Date(`${date} ${time}`));
       setScheduleAddress(prevState => ({
         ...prevState,
         address: scheduleToEdit.locationExplanation
       }));
-      saveMySelectedFriends(scheduleToEdit.friendList);
+      saveMySelectedFriends(scheduleToEdit.scheduleFriendList);
     }
   }, [scheduleToEdit]);
   // 날짜
@@ -172,6 +191,10 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
       address: data.address
     }));
   };
+  // 친구 선택
+  const handleFriendSelect = () => {
+    openModal();
+  };
 
   return (
     <form className="pt-0" onSubmit={handleSubmit}>
@@ -180,8 +203,9 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         element={
           <Input
             type="text"
-            placeholder="일정 제목을 입력해주세요."
+            placeholder="일정 제목을 입력해주세요. (30자 이하)"
             value={scheduleTitle}
+            maxLength={30}
             handleChangeInput={handleChangeScheduleTitle}
           />
         }
@@ -191,8 +215,9 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         element={
           <textarea
             className="bg-gray2 rounded-lg text-body2 placeholder-text-gray4 p-3 w-full resize-none h-20"
-            placeholder="내용을 입력해주세요."
+            placeholder="내용을 입력해주세요. (15자 이상)"
             value={contents}
+            minLength={15}
             onChange={handleChangeContents}
           />
         }
@@ -233,12 +258,35 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
           />
         }
       />
-      <ScheduleFriends />
-      {scheduleToEdit ? (
-        <WideButton text="수정하기" status={allInputValid} />
-      ) : (
-        <WideButton text="등록하기" status={allInputValid} />
-      )}
+      <ScheduleInputBox
+        title="친구"
+        element={
+          <div className="">
+            {mySelectdFriends.length > 0 ? (
+              <button
+                className="w-full text-body2 h-10 text-white bg-primary rounded-xl"
+                type="button"
+                onClick={handleFriendSelect}
+              >
+                {`${mySelectdFriends.length}명의 친구가 선택되었어요`}
+              </button>
+            ) : (
+              <button
+                className="w-full rounded-xl h-10 text-body2 bottom-0 text-gray4 bg-white border border-dashed border-gray3 flex justify-center items-center "
+                type="button"
+                onClick={handleFriendSelect}
+              >
+                <IoPersonAddSharp className="mr-1" />
+                친구 선택하기
+              </button>
+            )}
+          </div>
+        }
+      />
+      <WideButton
+        text={scheduleToEdit ? '수정하기' : '등록하기'}
+        status={allInputValid}
+      />
     </form>
   );
 };

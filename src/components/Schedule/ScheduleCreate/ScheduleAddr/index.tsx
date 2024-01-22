@@ -41,8 +41,8 @@ const ScheduleAddr = ({
 
           setScheduleAddress(prevState => ({
             ...prevState,
-            latitude: lat,
-            longitude: long
+            latitude: Number(lat),
+            longitude: Number(long)
           }));
         }
       }
@@ -66,8 +66,8 @@ const ScheduleAddr = ({
         검색
       </button>
       {isOpenAddrPopup && (
-        <div className="before:content-[''] before:fixed before:top-0 before:left-0 before:w-full before:h-full before:bg-black before:opacity-45 before:z-10">
-          <div className="fixed top-1/2 left-0 right-0 m-auto -translate-y-1/2 z-20">
+        <div className="before:content-[''] before:fixed before:top-0 before:left-0 before:w-full before:h-full before:bg-black before:opacity-45 before:z-[99]">
+          <div className="fixed top-1/2 left-0 right-0 m-auto -translate-y-1/2 z-[100] max-w-default">
             <DaumPostcode onComplete={handleAddrComplete} />
           </div>
         </div>

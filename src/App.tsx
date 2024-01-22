@@ -22,6 +22,7 @@ import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
 import NotLoginPage from './pages/auth/NotLoginPage';
 import ChatPage from './pages/ChatPage';
 import GuardedRoute from './GuardedRoute';
+import NaverLoginPage from './pages/auth/NaverLoginPage';
 
 const App = () => (
   <>
@@ -29,6 +30,7 @@ const App = () => (
       <Route>
         {/* 미로그인 접근 페이지 */}
         <Route path="/auth" element={<NotLoginPage />} />
+        <Route path="/auth/redirect" element={<NaverLoginPage />} />
         <Route element={<InnerCon />}>
           <Route path="/auth" element={<Outlet />}>
             <Route path="login" element={<LoginPage />} />
