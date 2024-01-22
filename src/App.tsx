@@ -22,6 +22,7 @@ import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
 import NotLoginPage from './pages/auth/NotLoginPage';
 import ChatPage from './pages/ChatPage';
 import GuardedRoute from './GuardedRoute';
+import NaverAccess from './components/common/NaverAccess';
 
 const App = () => (
   <>
@@ -30,6 +31,8 @@ const App = () => (
         {/* 미로그인 접근 페이지 */}
         <Route path="/auth" element={<NotLoginPage />} />
         <Route element={<InnerCon />}>
+          <Route path="/login/oauth2/code/naver" element={<NaverAccess />} />
+
           <Route path="/auth" element={<Outlet />}>
             <Route path="login" element={<LoginPage />} />
             <Route path="join" element={<JoinPage />} />
