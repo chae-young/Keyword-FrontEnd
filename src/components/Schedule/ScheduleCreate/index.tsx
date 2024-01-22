@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { Address } from 'react-daum-postcode';
+import { IoPersonAddSharp } from 'react-icons/io5';
 import WideButton from '@/components/common/Button/WideButton';
-import ScheduleFriends from './ScheduleFriends';
 import usePostSchedulesQuery from '@/hooks/query/schedules/usePostSchedulesQuery';
 import useInput from '@/hooks/useInput';
 import ScheduleInputBox from './ScheduleInputBox';
@@ -34,7 +34,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   const { scheduleIsMutate } = usePostSchedulesQuery();
   const { patchedScheduleIsMutate } = usePatchScheduleQuery();
   const { saveMySelectedFriends } = useModalState();
-  const { mySelectdFriends } = useModalState();
+  const { mySelectdFriends, openModal } = useModalState();
   const [allInputValid, setAllInputValid] = useState(false);
   const [isOpenAddrPopup, setIsOpenAddrPopup] = useState(false);
 
@@ -183,6 +183,10 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
       address: data.address
     }));
   };
+  // 친구 선택
+  const handleFriendSelect = () => {
+    openModal();
+  };
 
   return (
     <form className="pt-0" onSubmit={handleSubmit}>
@@ -246,7 +250,31 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
           />
         }
       />
-      <ScheduleFriends />
+      <ScheduleInputBox
+        title="친구"
+        element={
+          <div className="">
+            {mySelectdFriends.length > 0 ? (
+              <button
+                className="w-full text-body2 h-10 text-white bg-primary rounded-xl"
+                type="button"
+                onClick={handleFriendSelect}
+              >
+                {`${mySelectdFriends.length}명의 친구가 선택되었어요`}
+              </button>
+            ) : (
+              <button
+                className="w-full rounded-xl h-10 text-body2 bottom-0 text-gray4 bg-white border border-dashed border-gray3 flex justify-center items-center "
+                type="button"
+                onClick={handleFriendSelect}
+              >
+                <IoPersonAddSharp className="mr-1" />
+                친구 선택하기
+              </button>
+            )}
+          </div>
+        }
+      />
       <WideButton
         text={scheduleToEdit ? '수정하기' : '등록하기'}
         status={allInputValid}

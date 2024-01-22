@@ -26,8 +26,8 @@ export type ScheduleTime = {
 };
 
 export interface ScheduleDetailIdType {
-  scheduleId: string;
-  noticeId: string;
+  scheduleId: number;
+  noticeId: number;
 }
 
 export interface ScheduleDeleteType {

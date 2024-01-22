@@ -7,7 +7,6 @@ import { FriendsDataType } from '@/types/friend/friendsDataType';
 import { ACCEPT } from '@/constants/friends';
 import NoResultText from '@/components/common/NoDataText';
 import Avatar from '@/components/common/Avatar';
-import { UserInfo } from '@/types/auth/authDataType';
 
 interface ModalInSelectedFriendsProps {
   view?: boolean;
@@ -17,9 +16,9 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
   const { closeModal, saveMySelectedFriends } = useModalState();
   const { friendsList, friendsListFetchNextPage, friendsListHasNextPage } =
     useGetMyFriendsQuery(ACCEPT);
-  const [friendCheckedList, setFriendCheckedList] = useState<
-    (UserInfo | FriendsDataType)[]
-  >([]);
+  const [friendCheckedList, setFriendCheckedList] = useState<FriendsDataType[]>(
+    []
+  );
   const [isChecked, setIsChecked] = useState(false);
 
   // 체크리스트에 포함되어 있으면 제거 없으면 추가
