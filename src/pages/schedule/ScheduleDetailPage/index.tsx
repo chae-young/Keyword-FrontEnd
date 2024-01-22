@@ -9,17 +9,19 @@ import KakaoMap from '@/components/KakaoMap';
 import TopTitle from '@/components/common/TopTitle';
 import ScheduleTextBox from '@/components/Schedule/ScheduleDetail/ScheduleTextBox';
 import WideButton from '@/components/common/Button/WideButton';
-import ModalInSelectedFriends from '@/components/Schedule/ModalInSelectedFriedns';
 import useModalState from '@/hooks/recoil/useModalState';
 import useUserState from '@/hooks/recoil/useUserState';
 import ModalAttendingFriends from '@/components/Schedule/ModalAttendingFriends';
+import useDeleteScheduleQuery from '@/hooks/query/schedules/useDeleteScheduleQuery';
 
 const ScheduleDetailPage = () => {
   const { id } = useParams();
+  const scheduleId = Number(id);
   const { scheduleDetail } = useGetScheduleDetailQuery({
-    scheduleId: Number(id),
+    scheduleId,
     noticeId: Number(id)
   });
+  const { scheduleDeleteIsMutate } = useDeleteScheduleQuery();
   const { userState } = useUserState();
   const [date, time] = (scheduleDetail?.scheduleAt ?? '').split('T');
   const { openModal } = useModalState();
@@ -28,16 +30,16 @@ const ScheduleDetailPage = () => {
     lat: scheduleDetail?.latitude,
     long: scheduleDetail?.longitude
   };
-  // 취소하기
-  // const handleScheduleDel = (scheduleId: number) => {
-  //   const scheduleConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
-  //   if (scheduleConfirmed) {
-  //     scheduleDeleteIsMutate(scheduleId);
-  //   }
-  // };
+
+  // 삭제하기
+  const handleScheduleDel = () => {
+    const scheduleConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
+    if (scheduleConfirmed) {
+      scheduleDeleteIsMutate(scheduleId);
+    }
+  };
 
   const handleFriendView = () => {
-    console.log('친구보기');
     openModal();
   };
 
@@ -117,7 +119,12 @@ const ScheduleDetailPage = () => {
           </>
         )}
         {scheduleDetail?.organizerId === userState.memberId && (
-          <WideButton type="button" status text="취소하기" />
+          <WideButton
+            type="button"
+            status
+            text="취소하기"
+            onClick={handleScheduleDel}
+          />
         )}
       </div>
       <ModalAttendingFriends

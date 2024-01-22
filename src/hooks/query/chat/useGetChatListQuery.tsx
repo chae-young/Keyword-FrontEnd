@@ -5,7 +5,7 @@ import { ChatListDataType } from '@/types/chatting/chatDataType';
 const fetchAPI = async (page: number): Promise<ChatListDataType[]> => {
   try {
     const list = await axiosAuth.get(`/chats/room?size=10&page=${page}`);
-    return list.data;
+    return list.data.content;
   } catch (error) {
     console.log(error);
     throw error;

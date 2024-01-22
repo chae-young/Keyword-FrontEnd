@@ -1,6 +1,5 @@
 import { IoPersonAddSharp } from 'react-icons/io5';
 import ScheduleInputBox from '../ScheduleInputBox';
-import useModalState from '@/hooks/recoil/useModalState';
 
 const ScheduleFriends = () => (
   <ScheduleInputBox
