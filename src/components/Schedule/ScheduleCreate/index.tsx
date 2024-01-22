@@ -12,6 +12,7 @@ import Input from '@/components/common/Input';
 import SelectDate from '@/components/common/DateTimePicker/Date';
 import {
   ScheduleDetailType,
+  ScheduleEditDataType,
   ScheduleTime
 } from '@/types/schedule/scheduleDataType';
 import TimePicker from '@/components/common/DateTimePicker/Time';
@@ -88,7 +89,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
     scheduleAddress.longitude,
     mySelectdFriends
   ]);
-
+  console.log(mySelectdFriends);
   // useEffect(() => {
   //   const allInputChecked = Object.values(scheduleCreateState).every(value =>
   //     Array.isArray(value) ? value.length > 0 : value !== ''
@@ -119,11 +120,16 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
       latitude: scheduleAddress.latitude,
       longitude: scheduleAddress.longitude,
       remindAt: Number(scheduleSelectedRemind),
-      scheduleFriendList: mySelectdFriends // TODO: 주최자 추가해야함(나자신)
+      scheduleFriendList: mySelectdFriends
     };
 
     if (scheduleToEdit) {
-      patchedScheduleIsMutate(Number(parms.id));
+      const editData: ScheduleEditDataType = {
+        schedule: { ...scheduleData },
+        scheduleId: Number(parms.id)
+      };
+      console.log(editData.schedule);
+      patchedScheduleIsMutate(editData);
     } else {
       scheduleIsMutate(scheduleData);
     }
@@ -138,6 +144,8 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
       setScheduleTitle(scheduleToEdit.title);
       setContents(scheduleToEdit.contents);
       setScheduleDate(new Date(date));
+      setScheduleDateAndTime({ date, time });
+      setScheduleSelectedRemind(`${scheduleToEdit.remindAt}`);
       setScheduleSelectedTime(new Date(`${date} ${time}`));
       setScheduleAddress(prevState => ({
         ...prevState,
