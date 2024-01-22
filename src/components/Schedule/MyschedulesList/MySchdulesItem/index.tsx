@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ONGOING } from '@/constants/schedule';
+import { SCHEDULE_ONGOING } from '@/constants/schedule';
 
 interface MySchedulesItemProps {
   scheduleId: number;
@@ -24,7 +24,7 @@ const MySchedulesItem = ({
         <div className="flex">
           <b className="grow text-overflow">{title}</b>
           <div className="basis-24 text-right shrink-0">
-            {status === ONGOING ? (
+            {status === SCHEDULE_ONGOING ? (
               <span className="px-2 bg-primary2 text-body3 font-bold rounded-xl py-1">
                 진행중
               </span>
