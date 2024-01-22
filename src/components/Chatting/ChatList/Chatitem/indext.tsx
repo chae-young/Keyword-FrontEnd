@@ -10,13 +10,21 @@ const ChatItem = ({
   chatRoomId,
   scheduleTitle,
   friendsName
-}: ChatItemProps) => (
-  <li className="border-b py-4">
-    <Link to={`/chat/${chatRoomId}`}>
-      <b>{scheduleTitle}</b>
-      <p className="text-body2 text-gray4 mt-4">{friendsName}</p>
-    </Link>
-  </li>
-);
+}: ChatItemProps) => {
+  console.log(friendsName);
+
+  return (
+    <li className="border-b py-4">
+      <Link to={`/chat/${chatRoomId}`}>
+        <b>{scheduleTitle}</b>
+        <div className="mt-4">
+          {friendsName.map(name => (
+            <span className="text-body2 text-gray4">{name}</span>
+          ))}
+        </div>
+      </Link>
+    </li>
+  );
+};
 
 export default ChatItem;
