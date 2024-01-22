@@ -1,13 +1,10 @@
 import React from 'react';
 
 const Naver = () => {
-  const { VITE_NAVER_CLIENT_ID } = import.meta.env;
-  const REDIRECT_URI = 'http://localhost:5173/login/oauth2/code/naver';
-  const STATE = 'false';
-  const NAVER_AUTH_URI = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${VITE_NAVER_CLIENT_ID}&state=${STATE}_STRING&redirect_uri=${REDIRECT_URI}`;
+  const { VITE_SERVER } = import.meta.env;
 
   const NaverLogin = () => {
-    window.location.href = NAVER_AUTH_URI;
+    window.location.href = `${VITE_SERVER}oauth2/authorization/naver`;
   };
   return (
     <button
