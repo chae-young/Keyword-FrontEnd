@@ -46,6 +46,7 @@ const SearchBar = ({ keyword }: SearchBarProps) => {
           value={searchKeyword}
           focus
           addStyle="pr-5"
+          placeholder="이메일 또는 닉네임을 입력해주세요"
           handleChangeInput={handleChangeSearchKeyword}
         />
       </button>
