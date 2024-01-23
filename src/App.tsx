@@ -2,7 +2,6 @@ import { Suspense, lazy } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LoadingPopup from './components/common/Loading/LoadingPopup';
 
 const AlarmPage = lazy(async () => import('./pages/AlarmPage'));
 const HomePage = lazy(async () => import('./pages/HomePage'));
