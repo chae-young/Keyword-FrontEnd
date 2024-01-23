@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { Address } from 'react-daum-postcode';
-import { IoPersonAddSharp } from 'react-icons/io5';
+import { IoPersonAddSharp } from '@react-icons/all-files/io5/IoPersonAddSharp';
 import WideButton from '@/components/common/Button/WideButton';
 import usePostSchedulesQuery from '@/hooks/query/schedules/usePostSchedulesQuery';
 import useInput from '@/hooks/useInput';
@@ -89,7 +89,6 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
     scheduleAddress.longitude,
     mySelectdFriends
   ]);
-  console.log(mySelectdFriends);
   // useEffect(() => {
   //   const allInputChecked = Object.values(scheduleCreateState).every(value =>
   //     Array.isArray(value) ? value.length > 0 : value !== ''
@@ -110,7 +109,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
     const localDatetimeString = momentObject
       .local()
       .format('YYYY-MM-DDTHH:mm:ss');
-
+    console.log(dateAndTime);
     const scheduleData: ScheduleDetailType = {
       organizerId: userState.memberId,
       title: scheduleTitle,
@@ -128,10 +127,11 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         schedule: { ...scheduleData },
         scheduleId: Number(parms.id)
       };
-      console.log(editData.schedule);
       patchedScheduleIsMutate(editData);
+      navigate(-1);
     } else {
       scheduleIsMutate(scheduleData);
+      navigate('/', { replace: true });
     }
 
     navigate('/', { replace: true });

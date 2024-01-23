@@ -1,4 +1,4 @@
-import { IoPersonAddSharp } from 'react-icons/io5';
+import { IoPersonAddSharp } from '@react-icons/all-files/io5/IoPersonAddSharp';
 import ScheduleInputBox from '../ScheduleInputBox';
 import useModalState from '@/hooks/recoil/useModalState';
 

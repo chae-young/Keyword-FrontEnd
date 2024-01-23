@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { AiFillHome } from 'react-icons/ai';
-import { RiSearchLine } from 'react-icons/ri';
-import { IoChatboxEllipses } from 'react-icons/io5';
-import { FaUserAlt } from 'react-icons/fa';
+import { AiFillHome } from '@react-icons/all-files/ai/AiFillHome';
+import { RiSearchLine } from '@react-icons/all-files/ri/RiSearchLine';
+import { IoChatboxEllipses } from '@react-icons/all-files/io5/IoChatboxEllipses';
+import { FaUserAlt } from '@react-icons/all-files/fa/FaUserAlt';
 
 const navList = [
   {

@@ -1,5 +1,5 @@
 import DatePicker from 'react-datepicker';
-import { FaRegCalendarAlt } from 'react-icons/fa';
+import { FaRegCalendarAlt } from '@react-icons/all-files/fa/FaRegCalendarAlt';
 
 import 'react-datepicker/dist/react-datepicker.css';
 

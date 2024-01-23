@@ -1,4 +1,4 @@
-import { FaRegBell } from 'react-icons/fa6';
+import { FaRegBell } from '@react-icons/all-files/fa/FaRegBell';
 import { Link } from 'react-router-dom';
 
 const Alarm = () => (

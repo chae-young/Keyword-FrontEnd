@@ -6,6 +6,7 @@ import usePostLoginQuery from '@/hooks/query/auth/usePostLoginQuery';
 import WideButton from '@/components/common/Button/WideButton';
 import Logo from '@/components/common/Logo';
 import LoadingPopup from '@/components/common/Loading/LoadingPopup';
+import SEO from '@/components/SEO';
 
 const LoginPage = () => {
   const [email, , handleChangeEmail] = useInput('');
@@ -29,6 +30,7 @@ const LoginPage = () => {
 
   return (
     <>
+      <SEO title="로그인" description="로그인으로 다양한 서비스를 누려보세요" />
       <div className="mt-4">
         <TopTitle title="로그인" back />
         <form onSubmit={handleSubmit}>

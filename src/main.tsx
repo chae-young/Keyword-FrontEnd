@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
+import { HelmetProvider } from 'react-helmet-async';
 
 import App from './App';
 import './index.css';
@@ -18,13 +19,15 @@ if (process.env.NODE_ENV === 'development') {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen />
-        <RecoilRoot>
-          <App />
-        </RecoilRoot>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen />
+          <RecoilRoot>
+            <App />
+          </RecoilRoot>
+        </QueryClientProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>
 );

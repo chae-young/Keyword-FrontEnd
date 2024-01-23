@@ -9,31 +9,32 @@ const MySchedulesList = () => {
     schedulesListFetchNextPage,
     schedulesListhasNextPage
   } = useGetSchedulesQuery();
-  const { lastElement } = useInfinite(schedulesListFetchNextPage);
+  const { lastElement } = useInfinite(
+    schedulesListFetchNextPage,
+    schedulesListhasNextPage
+  );
+
   return (
-    <ul className="[&>*:last-child]:border-0">
-      {schedulesList?.pages.map(page =>
-        page.length ? (
+    <>
+      {schedulesList?.pages[0].length === 0 && (
+        <NoDataText text="등록된 일정이 없습니다." />
+      )}
+      <ul className="[&>*:last-child]:border-0">
+        {schedulesList?.pages.map(page =>
           page.map(list => (
             <MySchedulesItem
               key={list.scheduleId}
               scheduleId={list.scheduleId}
               title={list.title}
               scheduleDateTime={list.scheduleDateTime}
-              // locationExplanation={list.locationExplanation}
+              locationExplanation={list.locationExplanation}
               status={list.status}
             />
           ))
-        ) : (
-          <NoDataText text="등록한 일정이 없습니다" key={0} />
-        )
-      )}
-      {schedulesList &&
-      schedulesList?.pages[0].length >= 10 &&
-      schedulesListhasNextPage
-        ? lastElement()
-        : ''}
-    </ul>
+        )}
+        {lastElement()}
+      </ul>
+    </>
   );
 };
 

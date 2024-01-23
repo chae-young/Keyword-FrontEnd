@@ -1,5 +1,5 @@
 // import React from 'react';
-// import { IoMdArrowRoundUp } from 'react-icons/io';
+// import { IoMdArrowRoundUp } from '@react-icons/all-files/io';
 
 // interface ChatFooterProps {}
 
