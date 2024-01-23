@@ -49,8 +49,6 @@ const FriendsItem = ({
     openModal();
   };
 
-  console.log(memberId);
-
   return (
     <li className="flex items-start mb-4">
       <div className="avatar mr-2">

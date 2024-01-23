@@ -6,12 +6,18 @@ import useInfinite from '@/hooks/useInfinite';
 const ChatList = () => {
   const { chatList, chatListFetchNextPage, chatListhasNextPage } =
     useGetChatListQuery();
-  const { lastElement } = useInfinite(chatListFetchNextPage);
-  console.log(chatList);
+  const { lastElement } = useInfinite(
+    chatListFetchNextPage,
+    chatListhasNextPage
+  );
+
   return (
-    <ul className="[&>*:last-child]:border-0">
-      {chatList?.pages.map(page =>
-        page.length ? (
+    <>
+      {chatList?.pages[0].length === 0 && (
+        <NoDataText text="모임 채팅이 없습니다." />
+      )}
+      <ul className="[&>*:last-child]:border-0">
+        {chatList?.pages.map(page =>
           page.map(list => (
             <ChatItem
               key={list.chatRoomId}
@@ -20,14 +26,10 @@ const ChatList = () => {
               scheduleTitle={list.scheduleTitle}
             />
           ))
-        ) : (
-          <NoDataText text="모임 채팅이 없습니다" key={0} />
-        )
-      )}
-      {chatList && chatList?.pages[0].length >= 10 && chatListhasNextPage
-        ? lastElement()
-        : ''}
-    </ul>
+        )}
+        {lastElement()}
+      </ul>
+    </>
   );
 };
 

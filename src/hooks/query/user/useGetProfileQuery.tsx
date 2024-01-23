@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import { UserDataType } from '@/types/user/userDataType';
+import useUserState from '@/hooks/recoil/useUserState';
 // import useUserState from '@/hooks/recoil/useUserState';
 
 const fetchAPI = async (): Promise<UserDataType> => {
@@ -14,14 +15,14 @@ const fetchAPI = async (): Promise<UserDataType> => {
 };
 
 const useGetProfileQuery = () => {
-  // const { userState } = useUserState();
+  const { userState } = useUserState();
   const {
     data: user,
     isLoading: userIsLoading,
     isSuccess: userIsSuceess,
     isError: userIsError
   } = useQuery({
-    queryKey: ['myProfile'],
+    queryKey: ['myProfile', userState.email],
     queryFn: () => fetchAPI(),
     staleTime: Infinity
   });

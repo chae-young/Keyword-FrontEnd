@@ -28,7 +28,7 @@ const useGetMyFriendsQuery = (state: string) => {
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam, state),
     getNextPageParam: (lastPage, allPage) => {
-      const nextPage = allPage.length + 1;
+      const nextPage = allPage.length;
       return lastPage.length === 0 ? null : nextPage;
     },
     staleTime: 20000

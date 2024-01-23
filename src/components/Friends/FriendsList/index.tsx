@@ -19,7 +19,7 @@ const FriendsList = ({
   reqCheck,
   hasNextPage
 }: FriendsListProps) => {
-  const { lastElement } = useInfinite(FetchNextPage);
+  const { lastElement } = useInfinite(FetchNextPage, hasNextPage);
   return (
     <ul className="pt-5">
       {lists.pages.map(page =>
@@ -41,7 +41,7 @@ const FriendsList = ({
         )
       )}
 
-      {lists?.pages[0].length >= 10 && hasNextPage ? lastElement() : ''}
+      {lastElement()}
     </ul>
   );
 };
