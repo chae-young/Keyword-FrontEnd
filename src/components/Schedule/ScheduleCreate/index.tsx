@@ -89,7 +89,6 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
     scheduleAddress.longitude,
     mySelectdFriends
   ]);
-  console.log(mySelectdFriends);
   // useEffect(() => {
   //   const allInputChecked = Object.values(scheduleCreateState).every(value =>
   //     Array.isArray(value) ? value.length > 0 : value !== ''
@@ -128,10 +127,11 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         schedule: { ...scheduleData },
         scheduleId: Number(parms.id)
       };
-      console.log(editData.schedule);
       patchedScheduleIsMutate(editData);
+      navigate(-1);
     } else {
       scheduleIsMutate(scheduleData);
+      navigate('/', { replace: true });
     }
 
     navigate('/', { replace: true });

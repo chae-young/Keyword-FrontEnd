@@ -3,6 +3,7 @@ import { axiosAuth } from '@/apis';
 import { ScheduleDataType } from '@/types/schedule/scheduleDataType';
 
 const fetchAPI = async (page: number): Promise<ScheduleDataType[]> => {
+  console.log(page);
   try {
     const list = await axiosAuth.get(`/schedules?size=10&page=${page}`);
     return list.data.content;
@@ -23,10 +24,10 @@ const useGetSchedulesQuery = () => {
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam),
     getNextPageParam: (lastPage, allPage) => {
-      const nextpage = allPage.length + 1;
+      const nextpage = allPage.length;
       return lastPage.length === 0 ? null : nextpage;
-    },
-    staleTime: 20000
+    }
+    // staleTime: Infinity
   });
 
   return {

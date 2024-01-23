@@ -23,7 +23,7 @@ const useGetChatListQuery = () => {
     initialPageParam: 0,
     queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam),
     getNextPageParam: (lastPage, allPage) => {
-      const nextpage = allPage.length + 1;
+      const nextpage = allPage.length;
       return lastPage.length === 0 ? null : nextpage;
     },
     staleTime: 20000

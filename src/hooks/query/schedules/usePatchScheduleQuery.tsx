@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosAuth } from '@/apis';
 import {
   ScheduleDetailType,
@@ -19,7 +19,7 @@ const fetchAPI = async (
 
 const usePatchScheduleQuery = () => {
   const { toastSuccess, toastError } = useToast();
-
+  const queryClient = useQueryClient();
   const {
     data: scheduleId,
     mutate: patchedScheduleIsMutate,
@@ -29,6 +29,7 @@ const usePatchScheduleQuery = () => {
     mutationKey: ['patchSchedule'],
     mutationFn: (editData: ScheduleEditDataType) => fetchAPI(editData),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['scheduleDetail'] });
       toastSuccess('일정 수정이 완료되었습니다');
     },
     onError: () => {
