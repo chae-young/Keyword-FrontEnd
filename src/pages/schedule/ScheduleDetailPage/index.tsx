@@ -14,6 +14,7 @@ import useUserState from '@/hooks/recoil/useUserState';
 import useDeleteScheduleQuery from '@/hooks/query/schedules/useDeleteScheduleQuery';
 import { SCHEDULE_ONGOING } from '@/constants/schedule';
 import ModalAttendingFriends from '@/components/Schedule/ModalAttendingFriends';
+import SEO from '@/components/SEO/indext';
 
 const ScheduleDetailPage = () => {
   const { id } = useParams();
@@ -45,6 +46,12 @@ const ScheduleDetailPage = () => {
   };
   return (
     <>
+      {scheduleDetail && (
+        <SEO
+          title={scheduleDetail.title}
+          description={scheduleDetail?.contents}
+        />
+      )}
       <div className="-mx-default text-body2">
         {scheduleDetail && (
           <>

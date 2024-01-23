@@ -1,9 +1,11 @@
 import { LuPlus } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import MySchedulesList from '@/components/Schedule/MyschedulesList';
+import SEO from '@/components/SEO/indext';
 
 const HomePage = () => (
   <>
+    <SEO title="" />
     <MySchedulesList />
     <div className="fixed max-w-default bottom-16 left-0 right-0 m-auto">
       <Link
