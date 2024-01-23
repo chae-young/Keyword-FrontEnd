@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingPopup from './components/common/Loading/LoadingPopup';
 
 const AlarmPage = lazy(async () => import('./pages/AlarmPage'));
 const HomePage = lazy(async () => import('./pages/HomePage'));
@@ -43,7 +44,7 @@ const GuardedRoute = lazy(async () => import('./GuardedRoute'));
 const NaverLoginPage = lazy(async () => import('./pages/auth/NaverLoginPage'));
 
 const App = () => (
-  <Suspense fallback="">
+  <Suspense fallback={<LoadingPopup />}>
     <Routes>
       <Route>
         {/* 미로그인 접근 페이지 */}
