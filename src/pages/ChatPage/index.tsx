@@ -1,5 +1,5 @@
 import ChatList from '@/components/Chatting/ChatList';
-import SEO from '@/components/SEO/indext';
+import SEO from '@/components/SEO';
 import TopTitle from '@/components/common/TopTitle';
 
 const ChatPage = () => (

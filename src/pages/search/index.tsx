@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import SearchBar from '@/components/Search/SearchBar';
-import SEO from '@/components/SEO/indext';
+import SEO from '@/components/SEO';
 
 const SearchPage = () => (
   <>

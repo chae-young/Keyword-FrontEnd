@@ -1,7 +1,7 @@
 import { LuPlus } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import MySchedulesList from '@/components/Schedule/MyschedulesList';
-import SEO from '@/components/SEO/indext';
+import SEO from '@/components/SEO';
 
 const HomePage = () => (
   <>
