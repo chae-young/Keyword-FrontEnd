@@ -1,7 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
+import { Suspense } from 'react';
 import SearchBar from '@/components/Search/SearchBar';
 import SearchResultList from '@/components/Search/SearchResultList';
 import NoResultText from '@/components/common/NoDataText';
+import UserItem from '@/components/common/Skeleton/UserItem';
 
 const SearchResultPage = () => {
   const [query] = useSearchParams();
