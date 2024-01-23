@@ -1,32 +1,48 @@
+import { Suspense, lazy } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Helmet } from 'react-helmet-async';
-import MyPage from './pages/mypage';
-import InnerCon from './components/common/InnerCon';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/auth/LoginPage';
-import JoinPage from './pages/auth/JoinPage';
-import SearchPage from './pages/search';
-import SearchResultPage from './pages/search/SearchResultPage';
-import MainLayout from './components/common/MainLayout';
-import LayoutWithHeader from './components/common/LayoutWithHeader';
-import ProfileEditPage from './pages/mypage/ProfileEditPage';
-import MyFriendsPage from './pages/mypage/MyFriendsPage';
-import RequestedFriendsPage from './pages/mypage/RequestdFriendsPage';
-import ChatDetail from './pages/ChatPage/ChatDetail';
-import ScheduleCreatePage from './pages/schedule/ScheduleCreatePage';
-import PasswordEditPage from './pages/mypage/PasswordEditPage';
-import ScheduleDetailPage from './pages/schedule/ScheduleDetailPage';
-import ScheduleEditPage from './pages/schedule/ScheduleEditPage';
-import NotLoginPage from './pages/auth/NotLoginPage';
-import ChatPage from './pages/ChatPage';
-import GuardedRoute from './GuardedRoute';
-import NaverLoginPage from './pages/auth/NaverLoginPage';
+const HomePage = lazy(async () => import('./pages/HomePage'));
+const MyPage = lazy(async () => import('./pages/mypage'));
+const InnerCon = lazy(async () => import('./components/common/InnerCon'));
+const LoginPage = lazy(async () => import('./pages/auth/LoginPage'));
+const JoinPage = lazy(async () => import('./pages/auth/JoinPage'));
+const SearchPage = lazy(async () => import('./pages/search'));
+const SearchResultPage = lazy(
+  async () => import('./pages/search/SearchResultPage')
+);
+const MainLayout = lazy(async () => import('./components/common/MainLayout'));
+const LayoutWithHeader = lazy(
+  async () => import('./components/common/LayoutWithHeader')
+);
+const ProfileEditPage = lazy(
+  async () => import('./pages/mypage/ProfileEditPage')
+);
+const MyFriendsPage = lazy(async () => import('./pages/mypage/MyFriendsPage'));
+const RequestedFriendsPage = lazy(
+  async () => import('./pages/mypage/RequestdFriendsPage')
+);
+const ChatDetail = lazy(async () => import('./pages/ChatPage/ChatDetail'));
+const ScheduleCreatePage = lazy(
+  async () => import('./pages/schedule/ScheduleCreatePage')
+);
+const PasswordEditPage = lazy(
+  async () => import('./pages/mypage/PasswordEditPage')
+);
+const ScheduleDetailPage = lazy(
+  async () => import('./pages/schedule/ScheduleDetailPage')
+);
+const ScheduleEditPage = lazy(
+  async () => import('./pages/schedule/ScheduleEditPage')
+);
+const NotLoginPage = lazy(async () => import('./pages/auth/NotLoginPage'));
+const ChatPage = lazy(async () => import('./pages/ChatPage'));
+const GuardedRoute = lazy(async () => import('./GuardedRoute'));
+const NaverLoginPage = lazy(async () => import('./pages/auth/NaverLoginPage'));
 
 const App = () => (
-  <>
+  <Suspense fallback="로딩..">
     <Routes>
       <Route>
         {/* 미로그인 접근 페이지 */}
@@ -99,6 +115,6 @@ const App = () => (
       pauseOnHover
       theme="colored"
     />
-  </>
+  </Suspense>
 );
 export default App;
