@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingPopup from './components/common/Loading/LoadingPopup';
 
+const AlarmPage = lazy(async () => import('./pages/AlarmPage'));
 const HomePage = lazy(async () => import('./pages/HomePage'));
 const MyPage = lazy(async () => import('./pages/mypage'));
 const InnerCon = lazy(async () => import('./components/common/InnerCon'));
@@ -48,9 +49,9 @@ const App = () => (
       <Route>
         {/* 미로그인 접근 페이지 */}
         <Route path="/auth" element={<NotLoginPage />} />
-        <Route path="/auth/redirect" element={<NaverLoginPage />} />
         <Route element={<InnerCon />}>
           <Route path="/auth" element={<Outlet />}>
+            <Route path="redirect/:id" element={<NaverLoginPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="join" element={<JoinPage />} />
           </Route>
@@ -91,6 +92,8 @@ const App = () => (
               <Route path="myFriends" element={<MyFriendsPage />} />
               <Route path="requested" element={<RequestedFriendsPage />} />
             </Route>
+
+            <Route path="/alarm" element={<AlarmPage />} />
           </Route>
         </Route>
         <Route element={<GuardedRoute />}>
