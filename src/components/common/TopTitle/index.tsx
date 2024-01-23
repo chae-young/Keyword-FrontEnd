@@ -1,6 +1,6 @@
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
 import { Link, useNavigate } from 'react-router-dom';
-import { MdOutlineMode } from 'react-icons/md';
+import { GrEdit } from '@react-icons/all-files/gr/GrEdit';
 import Alarm from '../Alarm';
 
 interface TopTitleProps {
@@ -35,7 +35,7 @@ const TopTitle = ({ title, back, alarm, edit }: TopTitleProps) => {
           to="edit"
           className="w-14 h-full flex justify-center items-center absolute right-0 top-0"
         >
-          <MdOutlineMode className="text-xl" />
+          <GrEdit className="text-xl" />
         </Link>
       )}
     </div>

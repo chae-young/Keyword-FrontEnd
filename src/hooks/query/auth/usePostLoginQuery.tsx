@@ -14,6 +14,7 @@ const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
 };
 
 const usePostLoginQuery = () => {
+  // const { toastError } = useToast();
   const navigate = useNavigate();
   const { saveUserInfo } = useUserState();
   const {
@@ -36,6 +37,9 @@ const usePostLoginQuery = () => {
         isLogin: true
       });
       navigate('/', { replace: true });
+    },
+    onError: () => {
+      // toastError('');
     }
   });
 

@@ -4,7 +4,10 @@ type UseInfiniteHook = {
   lastElement: () => JSX.Element;
 };
 
-const useInfinite = (callback: () => void): UseInfiniteHook => {
+const useInfinite = (
+  callback: () => void,
+  hasNextPage: boolean
+): UseInfiniteHook => {
   const observer = useRef<IntersectionObserver | null>(null);
   const lastElementRef = useRef<HTMLDivElement>(null);
 
@@ -19,7 +22,6 @@ const useInfinite = (callback: () => void): UseInfiniteHook => {
     observer.current = new IntersectionObserver(handleFetchData, {
       threshold: 1.0
     });
-
     if (lastElementRef.current) {
       observer.current.observe(lastElementRef.current);
     }
@@ -29,14 +31,15 @@ const useInfinite = (callback: () => void): UseInfiniteHook => {
         observer.current?.disconnect();
       }
     };
-  }, [lastElementRef.current]);
+  }, [lastElementRef.current, hasNextPage]);
 
   const lastElement = () => (
-    <div className="text-center">
-      <span
-        ref={lastElementRef}
-        className="loading loading-spinner loading-md"
-      />
+    <div>
+      {hasNextPage && (
+        <div className="text-center" ref={lastElementRef}>
+          <span className="loading loading-spinner loading-md" />
+        </div>
+      )}
     </div>
   );
 

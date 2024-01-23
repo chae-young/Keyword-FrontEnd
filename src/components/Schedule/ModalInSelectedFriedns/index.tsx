@@ -54,7 +54,10 @@ const ModalInSelectedFriends = ({ view }: ModalInSelectedFriendsProps) => {
     setIsChecked(!isChecked);
     handelCheckedItem(e.target.checked, friend);
   };
-  const { lastElement } = useInfinite(friendsListFetchNextPage);
+  const { lastElement } = useInfinite(
+    friendsListFetchNextPage,
+    friendsListHasNextPage
+  );
   return (
     <Modal title="내 친구 목록">
       {!view && (

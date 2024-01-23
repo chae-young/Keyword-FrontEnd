@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiCamera } from 'react-icons/fi';
+import { FiCamera } from '@react-icons/all-files/fi/FiCamera';
 import usePatchProfileImageQuery from '@/hooks/query/user/usePatchProfileImageQeury';
 import Avatar from '@/components/common/Avatar';
 import useUserState from '@/hooks/recoil/useUserState';
