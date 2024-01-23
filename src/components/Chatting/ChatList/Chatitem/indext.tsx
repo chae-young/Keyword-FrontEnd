@@ -11,10 +11,7 @@ const ChatItem = ({
   scheduleTitle,
   friendsName
 }: ChatItemProps) => {
-  console.log(friendsName);
   const MAX_FRIENDS_TO_DISPLAY = 4;
-
-  console.log(friendsName);
 
   const displayedFriends = friendsName.slice(0, MAX_FRIENDS_TO_DISPLAY);
   const additionalFriendsCount = friendsName.length - MAX_FRIENDS_TO_DISPLAY;
