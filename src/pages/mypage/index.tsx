@@ -3,9 +3,11 @@ import { IoIosArrowForward } from 'react-icons/io';
 import TopTitle from '@/components/common/TopTitle';
 import Profile from '@/components/Profile';
 import AccountClose from '@/components/Mypage/AccountClose';
+import SEO from '@/components/SEO/indext';
 
 const MyPage = () => (
   <>
+    <SEO title="마이페이지" />
     <TopTitle title="마이페이지" alarm />
     <Profile />
     <ul className="mt-8 -mx-5">
