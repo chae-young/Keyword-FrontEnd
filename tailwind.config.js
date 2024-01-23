@@ -3,6 +3,9 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        'ico-naver': "url('/images/ico-naver.svg')"
+      },
       padding: {
         default: '1.25rem'
       },

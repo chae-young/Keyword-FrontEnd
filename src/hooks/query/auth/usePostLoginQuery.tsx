@@ -5,6 +5,7 @@ import { LoginDataType, UserIsLoginDataType } from '@/types/auth/authDataType';
 import { setCookie } from '@/util/cookie';
 import useUserState from '@/hooks/recoil/useUserState';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants/auth';
+import useToast from '@/hooks/useToast';
 
 const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
   const { email, password } = data;
@@ -14,6 +15,7 @@ const fetchAPI = async (data: LoginDataType): Promise<UserIsLoginDataType> => {
 };
 
 const usePostLoginQuery = () => {
+  const { toastError } = useToast();
   const navigate = useNavigate();
   const { saveUserInfo } = useUserState();
   const {
@@ -36,6 +38,9 @@ const usePostLoginQuery = () => {
         isLogin: true
       });
       navigate('/', { replace: true });
+    },
+    onError: () => {
+      // toastError('');
     }
   });
 
