@@ -1,4 +1,4 @@
-import { FaUserAlt } from 'react-icons/fa';
+import { FaUserAlt } from '@react-icons/all-files/fa/FaUserAlt';
 // 프로필 사진 x
 interface AvatarProps {
   h: string;

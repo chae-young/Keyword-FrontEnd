@@ -1,6 +1,6 @@
 import React from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
-import { IoSearchOutline } from 'react-icons/io5';
+import { IoIosArrowBack } from '@react-icons/all-files/io/IoIosArrowBack';
+import { IoSearchOutline } from '@react-icons/all-files/io5/IoSearchOutline';
 import { useNavigate } from 'react-router-dom';
 import Input from '@/components/common/Input';
 import useInput from '@/hooks/useInput';

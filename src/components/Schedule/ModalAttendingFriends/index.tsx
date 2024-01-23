@@ -1,4 +1,4 @@
-import { RiVipCrown2Fill } from 'react-icons/ri';
+import { FaCrown } from '@react-icons/all-files/fa/FaCrown';
 import Avatar from '@/components/common/Avatar';
 import Modal from '@/components/common/Modal';
 import { FriendsDataType } from '@/types/friend/friendsDataType';
@@ -42,7 +42,7 @@ const ModalAttendingFriends = ({
                   )}
                 </div>
                 <i className="absolute right-0 bottom-0 w-5 h-5 border border-white rounded-full bg-primary flex justify-center items-center">
-                  <RiVipCrown2Fill className="text-white text-xs font-bold" />
+                  <FaCrown className="text-white text-xs font-bold" />
                 </i>
               </div>
               <div className="ml-2 grow">

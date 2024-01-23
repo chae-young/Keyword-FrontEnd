@@ -6,7 +6,7 @@ import usePostLoginQuery from '@/hooks/query/auth/usePostLoginQuery';
 import WideButton from '@/components/common/Button/WideButton';
 import Logo from '@/components/common/Logo';
 import LoadingPopup from '@/components/common/Loading/LoadingPopup';
-import SEO from '@/components/SEO/indext';
+import SEO from '@/components/SEO';
 
 const LoginPage = () => {
   const [email, , handleChangeEmail] = useInput('');

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { Address } from 'react-daum-postcode';
-import { IoPersonAddSharp } from 'react-icons/io5';
+import { IoPersonAddSharp } from '@react-icons/all-files/io5/IoPersonAddSharp';
 import WideButton from '@/components/common/Button/WideButton';
 import usePostSchedulesQuery from '@/hooks/query/schedules/usePostSchedulesQuery';
 import useInput from '@/hooks/useInput';

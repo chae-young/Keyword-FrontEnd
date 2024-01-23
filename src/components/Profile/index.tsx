@@ -1,4 +1,4 @@
-import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import useGetProfileQuery from '@/hooks/query/user/useGetProfileQuery';

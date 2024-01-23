@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MdLocationOn } from 'react-icons/md';
+import { MdLocationOn } from '@react-icons/all-files/md/MdLocationOn';
 import { SCHEDULE_ONGOING } from '@/constants/schedule';
 
 interface MySchedulesItemProps {
@@ -23,7 +23,7 @@ const MySchedulesItem = ({
     <li className="border-b py-4">
       <Link to={`/schedule/${scheduleId}`}>
         <div className="flex">
-          <b className="grow text-overflow">{title}</b>
+          <p className="grow text-overflow font-bold">{title}</p>
           <div className="basis-24 text-right shrink-0">
             {status === SCHEDULE_ONGOING ? (
               <span className="px-2 bg-primary2 text-body3 font-bold rounded-xl py-1">
