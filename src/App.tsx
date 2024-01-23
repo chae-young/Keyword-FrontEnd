@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingPopup from './components/common/Loading/LoadingPopup';
+import NotLoginPage from './pages/auth/NotLoginPage';
 
 const AlarmPage = lazy(async () => import('./pages/AlarmPage'));
 const HomePage = lazy(async () => import('./pages/HomePage'));
@@ -38,7 +39,6 @@ const ScheduleDetailPage = lazy(
 const ScheduleEditPage = lazy(
   async () => import('./pages/schedule/ScheduleEditPage')
 );
-const NotLoginPage = lazy(async () => import('./pages/auth/NotLoginPage'));
 const ChatPage = lazy(async () => import('./pages/ChatPage'));
 const GuardedRoute = lazy(async () => import('./GuardedRoute'));
 const NaverLoginPage = lazy(async () => import('./pages/auth/NaverLoginPage'));
