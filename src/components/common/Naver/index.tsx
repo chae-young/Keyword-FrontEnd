@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Naver = () => {
   const { VITE_SERVER } = import.meta.env;
 

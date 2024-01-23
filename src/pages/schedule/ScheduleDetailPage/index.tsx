@@ -1,8 +1,8 @@
-import { MdAccessTime } from 'react-icons/md';
-import { BiBell } from 'react-icons/bi';
-import { LuText } from 'react-icons/lu';
-import { FaLocationDot } from 'react-icons/fa6';
-import { LiaUserFriendsSolid } from 'react-icons/lia';
+import { MdAccessTime } from '@react-icons/all-files/md/MdAccessTime';
+import { BiBell } from '@react-icons/all-files/bi/BiBell';
+import { FaAlignLeft } from '@react-icons/all-files/fa/FaAlignLeft';
+import { FaMapMarkerAlt } from '@react-icons/all-files/fa/FaMapMarkerAlt';
+import { FaUserFriends } from '@react-icons/all-files/fa/FaUserFriends';
 import { useParams } from 'react-router-dom';
 import useGetScheduleDetailQuery from '@/hooks/query/schedules/useGetScheduleDetailQuery';
 import KakaoMap from '@/components/KakaoMap';
@@ -89,13 +89,13 @@ const ScheduleDetailPage = () => {
                   element={<p>{scheduleDetail.remindAt}시간전</p>}
                 />
                 <ScheduleTextBox
-                  icon={<LuText />}
+                  icon={<FaAlignLeft />}
                   element={<p>{scheduleDetail.contents}</p>}
                 />
               </li>
               <li className="px-5 py-6 border-b-4 border-gray1">
                 <ScheduleTextBox
-                  icon={<FaLocationDot />}
+                  icon={<FaMapMarkerAlt />}
                   element={
                     <address className="not-italic">
                       {scheduleDetail?.locationExplanation}
@@ -107,7 +107,7 @@ const ScheduleDetailPage = () => {
               </li>
               <li className="px-5 py-6">
                 <ScheduleTextBox
-                  icon={<LiaUserFriendsSolid />}
+                  icon={<FaUserFriends />}
                   element={
                     <div className="flex justify-between">
                       <p>

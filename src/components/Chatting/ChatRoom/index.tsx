@@ -3,7 +3,7 @@ import * as StompJs from '@stomp/stompjs';
 // import SockJS from 'sockjs-client/dist/sockjs';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import { IoMdArrowRoundUp } from 'react-icons/io';
+import { IoMdArrowRoundUp } from '@react-icons/all-files/io/IoMdArrowRoundUp';
 import { ChatDataType } from '@/types/chatting/chatDataType';
 import TopTitle from '@/components/common/TopTitle';
 

@@ -8,7 +8,7 @@ import { VaildType } from '@/types/auth/authDataType';
 import { isValidEmail, isValidPassword } from '@/util/valid';
 import usePostJoinQuery from '@/hooks/query/auth/usePostJoinQuery';
 import useRedirectAfterToast from '@/hooks/useRedirectAfterToast';
-import SEO from '@/components/SEO/indext';
+import SEO from '@/components/SEO';
 
 const JoinPage = () => {
   const [email, , handleChangeEmail] = useInput('');

@@ -1,4 +1,4 @@
-import { IoClose } from 'react-icons/io5';
+import { MdClose } from '@react-icons/all-files/md/MdClose';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ const Modal = ({ children, title }: ModalProps) => (
         <form method="dialog">
           <button type="submit">
             {' '}
-            <IoClose className="text-3xl" />
+            <MdClose className="text-3xl" />
           </button>
         </form>
       </header>

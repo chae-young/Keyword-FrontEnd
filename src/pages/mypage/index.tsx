@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { IoIosArrowForward } from 'react-icons/io';
+import { IoIosArrowForward } from '@react-icons/all-files/io/IoIosArrowForward';
 import TopTitle from '@/components/common/TopTitle';
 import Profile from '@/components/Profile';
 import AccountClose from '@/components/Mypage/AccountClose';
