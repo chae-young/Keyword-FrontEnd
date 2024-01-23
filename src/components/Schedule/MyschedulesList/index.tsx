@@ -20,7 +20,7 @@ const MySchedulesList = () => {
               scheduleId={list.scheduleId}
               title={list.title}
               scheduleDateTime={list.scheduleDateTime}
-              // locationExplanation={list.locationExplanation}
+              locationExplanation={list.locationExplanation}
               status={list.status}
             />
           ))

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import { MdLocationOn } from 'react-icons/md';
 import { SCHEDULE_ONGOING } from '@/constants/schedule';
 
 interface MySchedulesItemProps {
   scheduleId: number;
   title: string;
   scheduleDateTime: string;
-  // locationExplanation?: string;
+  locationExplanation?: string;
   status: string;
 }
 
@@ -13,7 +14,7 @@ const MySchedulesItem = ({
   scheduleId,
   title,
   scheduleDateTime,
-  // locationExplanation,
+  locationExplanation,
   status
 }: MySchedulesItemProps) => {
   const [date, time] = scheduleDateTime.split('T');
@@ -35,7 +36,11 @@ const MySchedulesItem = ({
             )}
           </div>
         </div>
-        <p className="text-body2 text-gray4 mt-4">
+        <p className="text-body3 text-gray4 flex mt-2">
+          <MdLocationOn className="text-sm" />
+          {locationExplanation}
+        </p>
+        <p className="text-body3 text-gray4">
           {date}&nbsp;&nbsp;{time.slice(0, -3)}시
         </p>
       </Link>
