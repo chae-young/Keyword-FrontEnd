@@ -2,10 +2,12 @@ import useInfinite from '@/hooks/useInfinite';
 import MySchedulesItem from './MySchdulesItem';
 import useGetSchedulesQuery from '@/hooks/query/schedules/useGetSchedulesQuery';
 import NoDataText from '@/components/common/NoDataText';
+import ItemList from '@/components/common/Skeleton/ItemList';
 
 const MySchedulesList = () => {
   const {
     schedulesList,
+    schedulesListIsLoading,
     schedulesListFetchNextPage,
     schedulesListhasNextPage
   } = useGetSchedulesQuery();
@@ -13,6 +15,8 @@ const MySchedulesList = () => {
     schedulesListFetchNextPage,
     schedulesListhasNextPage
   );
+
+  if (schedulesListIsLoading) return <ItemList />;
 
   return (
     <>
