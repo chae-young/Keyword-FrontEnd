@@ -5,7 +5,7 @@ import SEO from '@/components/SEO';
 
 const HomePage = () => (
   <>
-    <SEO title="" />
+    <SEO title="메인" />
     <MySchedulesList />
     <div className="fixed max-w-default bottom-16 left-0 right-0 m-auto">
       <Link
