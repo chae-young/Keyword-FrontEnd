@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Naver from '@/components/common/Naver';
 
 const NotLoginPage = () => (
-  <section className="max-w-default m-auto h-screen px-5 pt-10">
+  <section className="max-w-default m-auto h-screen px-5 pt-10 bg-white">
     <h1>
       <img src="/images/logo.svg" alt="keyword" className="w-80 m-auto" />
     </h1>
