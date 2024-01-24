@@ -73,7 +73,7 @@ const FriendsItem = ({
           className={`${
             friendStatus || IsFriendAdd
               ? 'bg-gray3 text-gray1'
-              : 'bg-primary text-white'
+              : 'bg-primary text-white flex-shrink-0'
           }  rounded-xl  pt-2 py-1 px-3`}
         >
           {status === NOT_FRIEND && '친구추가'}
