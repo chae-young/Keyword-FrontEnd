@@ -27,6 +27,8 @@ module.exports = {
   },
 
   rules: {
+    // index key
+    'react/no-array-index-key': 'off',
     // 'react' 제거
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
