@@ -99,7 +99,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   //     setAllInputValid(false);
   //   }
   // }, [scheduleCreateState]);
-
+  console.log(scheduleDateAndTime.date, scheduleDateAndTime.time);
   // 전송
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -109,7 +109,7 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
     const localDatetimeString = momentObject
       .local()
       .format('YYYY-MM-DDTHH:mm:ss');
-    console.log(dateAndTime);
+
     const scheduleData: ScheduleDetailType = {
       organizerId: userState.memberId,
       title: scheduleTitle,

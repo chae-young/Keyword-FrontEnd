@@ -19,7 +19,7 @@ const ChatItem = ({
   const formattedFriendsList = displayedFriends.join(',');
   return (
     <li className="border-b py-4">
-      <Link to={`/chat/${chatRoomId}`}>
+      <Link to={`/chat/${chatRoomId}`} className="block">
         <b>{scheduleTitle}</b>
         <div className="mt-4">
           <span className="text-body2 text-gray4">{formattedFriendsList}</span>
