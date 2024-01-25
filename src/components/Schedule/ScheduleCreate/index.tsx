@@ -99,7 +99,6 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
   //     setAllInputValid(false);
   //   }
   // }, [scheduleCreateState]);
-  console.log(scheduleDateAndTime.date, scheduleDateAndTime.time);
   // 전송
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
