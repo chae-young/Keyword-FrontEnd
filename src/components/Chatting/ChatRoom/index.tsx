@@ -94,6 +94,8 @@ const ChatRoom = () => {
   };
 
   useEffect(() => {
+    if (!chatMessages.length && scrollRef.current)
+      scrollRef.current.scrollIntoView({ block: 'end' });
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
@@ -122,7 +124,7 @@ const ChatRoom = () => {
                         <div className="w-10 rounded-full bg-stone-500">
                           {prevMsg.imageUrl ? (
                             <img
-                              alt={prevMsg.imageUrl}
+                              alt={prevMsg.sender}
                               src={`${import.meta.env.VITE_IMAGE_SERVER}${
                                 prevMsg.imageUrl
                               }`}
@@ -154,10 +156,10 @@ const ChatRoom = () => {
                     <div className="w-10 rounded-full bg-stone-500">
                       {newMsg.imageUrl ? (
                         <img
-                          alt={`${import.meta.env.VITE_IMAGE_SERVER}${
+                          alt={newMsg.sender}
+                          src={`${import.meta.env.VITE_IMAGE_SERVER}${
                             newMsg.imageUrl
                           }`}
-                          src={newMsg.imageUrl}
                         />
                       ) : (
                         <Avatar h="h-10" />
