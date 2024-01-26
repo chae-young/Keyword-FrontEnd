@@ -127,9 +127,11 @@ const ScheduleCreate = ({ scheduleToEdit }: ScheduleCreateProps) => {
         scheduleId: Number(parms.id)
       };
       patchedScheduleIsMutate(editData);
+      saveMySelectedFriends([]);
       navigate(-1);
     } else {
       scheduleIsMutate(scheduleData);
+      saveMySelectedFriends([]);
       navigate('/', { replace: true });
     }
 
