@@ -34,18 +34,18 @@ const ChatRoom = () => {
         Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`
       },
       debug(str) {
-        console.log(str);
+        // console.log(str);
       },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
       // 연결시 구독 시작
       onConnect: () => {
-        console.log('연결');
+        // console.log('연결');
         subscribe();
       },
       onStompError: frame => {
-        console.error(frame);
+        // console.error(frame);
       }
     });
 
