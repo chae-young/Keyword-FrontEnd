@@ -34,7 +34,7 @@ const ChatRoom = () => {
         Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`
       },
       debug(str) {
-        // console.log(str);
+        console.log(str);
       },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
@@ -45,7 +45,7 @@ const ChatRoom = () => {
         subscribe();
       },
       onStompError: frame => {
-        // console.error(frame);
+        console.error(frame);
       }
     });
 
