@@ -26,7 +26,7 @@ const useGetChatListQuery = () => {
       const nextpage = allPage.length;
       return lastPage.length === 0 ? null : nextpage;
     },
-    staleTime: 20000
+    staleTime: Infinity
   });
 
   return {

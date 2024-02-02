@@ -31,7 +31,7 @@ const useGetMyFriendsQuery = (state: string) => {
       const nextPage = allPage.length;
       return lastPage.length === 0 ? null : nextPage;
     },
-    staleTime: 20000
+    staleTime: Infinity
   });
 
   return {
