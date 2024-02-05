@@ -75,7 +75,7 @@
 - [pakage.json 종속성 오류!!](https://proud-thief-ae8.notion.site/pakage-json-81b2896cc9464e778a4828a991986766?pvs=4)
 - [github에 올라간 폴더와 로컬 폴더가 일치하지 않아 Build Error](https://proud-thief-ae8.notion.site/github-Build-Error-e34108825f4a42ac8ab7f70a60c48517?pvs=4)
 - [Mixed-content(HTTP/HTTPS 호환)](https://proud-thief-ae8.notion.site/Mixed-content-HTTP-HTTPS-d56c3cba83374440a4bc5c68e74c61a4?pvs=4)
-- [Code-splitting으로 JS 번들 축소하기]()
+- [Code-splitting으로 JS 번들 축소하기](https://proud-thief-ae8.notion.site/Code-splitting-JS-fd27bc4c36d7407199fe545dcf536719?pvs=4)
 
 </br>
 </br>
