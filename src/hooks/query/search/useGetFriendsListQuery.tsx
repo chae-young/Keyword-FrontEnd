@@ -31,7 +31,7 @@ const useGetFriendsListQuery = (keyword: string) => {
       const nextPage = allPage.length;
       return lastPage.length === 0 ? null : nextPage;
     },
-    staleTime: 10000
+    staleTime: Infinity
   });
 
   return {
