@@ -16,9 +16,24 @@
 
 </br>
 
+## 목차
+
+## [1.프로젝트 기간](#프로젝트-기간)
+
+## [2.주요 기능](#주요-기능)
+
+## [3.FE 구현 과정](#fe-구현-과정)
+
+## [4.트러블 슈팅](#트러블-슈팅)
+
+## [5.아키텍처](#아키텍처)
+
+</br>
+</br>
+
 ## 프로젝트 기간
 
-2023.12.15 ~ 2024.01.25
+🚩2023.12.15 ~ 2024.01.25
 </br>
 </br>
 
@@ -32,7 +47,7 @@
 </br>
 </br>
 
-## 주요기능
+## 주요 기능
 
 |                                                  이메일 로그인                                                  |                                               소셜 로그인(네이버)                                               |                                                일정등록/일정조회                                                |
 | :-------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
@@ -57,11 +72,191 @@
 </br>
 </br>
 
-## FE 주요 기술
+## FE 구현 과정
 
-<!-- - React-query의 useInfinite를 사용한 infinite scroll
-- 라이브러리 없이 유효성 검사 도전
-- 낙관적 업데이트 -->
+### 1. axios interceptors를 활용한 JWT 로그인 유지 구현
+
+1. 로그인 구현
+   - jwt 토큰기반으로 로그인 구현
+   - 로그인시 access token은 localStorage에 refresh token은 cookie에 저장
+   - localStorage는 XSS 공격에 취약. cookie는 CSRF 공격에 취약하지만 httponly와 secure 옵션으로 보안 강화 가능
+   - 이러한 점을 이용해 토큰 저장 분리
+2. axios interceptors를 활용해 로그인 유지  
+   인터셉터는 "then" 또는 "catch"로 처리되기 전에 요청이나 응답을 가로챌 수 있다.  
+   서버에 요청시 HTTP Authorization 요청 헤더에 토큰을 넣어줘야함. 토큰 만료시 다시 재발급을 해야한다. 이러한 로직을 전역적으로 사용하기위해 인터셉터 사용.  
+   [자세한 설명은 블로그에..☺️ ](https://chaeyoung2.tistory.com/134)
+
+### 2. UX향상을 위해 낙관적 업데이트 적용
+
+<img src="https://github.com/chae-young/weather_zip/assets/28029685/ba3ae8f4-6676-4885-9651-08e110d5c2db" width="200">
+
+우리 프로젝트에 낙관적 업데이트를 적용할 만한 곳이 있을까? 생각했다. 대표적인 예로 좋아요 처럼 유저들이 액션을 취하면 바로 반응을 해줘야 할만한 UI가 딱 하나 있었다.  
+_친구요청_ 이다.  
+친구요청 버튼을 클릭하면 버튼이 disabled 처리 되면서 요청됨으로 바뀌어야 한다.  
+이때 react-query에서 제공하는 **Optimistic Updates**를 사용했다.
+
+```js
+const {
+  data: IsFriendAdd,
+  mutate: friendAddIsMutate,
+  isError: friendAddIsError,
+  isSuccess: friendAddIsSuccess
+} = useMutation({
+  mutationKey: ['friendAdd', memberId],
+  mutationFn: () => responsAPI(memberId),
+  onMutate: async reqMemberId => {
+    // 발신 취소
+    await queryClient.cancelQueries({ queryKey: ['friendAdd', reqMemberId] });
+    // 현재 정보 저장
+    const prevMemberId = queryClient.getQueriesData({
+      queryKey: ['friendAdd', reqMemberId]
+    });
+    // 비동기전 예상 결과를 클라이언트에 반영
+    queryClient.setQueryData(['friendAdd', reqMemberId], true);
+    // 롤백
+    return { prevMemberId };
+  },
+  onError: (_, reqMemberId, context) => {
+    toastError('에러가 발생했습니다. 잠시후에 다시 시도해주세요');
+    queryClient.setQueryData(['friendAdd', reqMemberId], context?.prevMemberId);
+  },
+  onSettled: () => {
+    queryClient.invalidateQueries({ queryKey: ['friendList'] });
+  }
+});
+```
+
+- onMutate는 mutate함수 시작되기 직전 실행된다.
+- mutate 발신을 취소하고 롤백은 대비해 현재 쿼리 정보를 저장한다.
+- 비동기가 실행되기전에 예상 결과를 클라이언트에 반영 한다.
+- 에러가 발생하면 저장해놨던 정보로 다시 롤백해준다.
+
+### 3. 캐싱 전략
+
+Tanstack-query에서는 query key를 기반으로 쿼리 캐싱을 관리.
+
+```js
+useQuery({
+  queryKey: ['myProfile', userState.email],
+  queryFn: () => fetchAPI(),
+  staleTime: Infinity
+});
+```
+
+- 쿼리키는 쿼리함수의 의존성 역할. 의존성이 변경되면 쿼리가 재실행된다.
+- 쿼리키는 배열 형태로 표현된다.
+- 쿼리키에 해당하는 쿼리들이 독립적으로 데이터를 캐시한다.
+
+> 현재 프로젝트에서 유저의 액션이 있을경우 data가 변경되는 경우가 대부분이다. 그렇다면 어떻게 효율적으로 data를 관리할수 있을까?
+
+- staletime을 infinity로 설정.
+- 유저의 어떠한 액션이 있을 경우 해당 data의 쿼리키를 무효화(invalidQueries) 한다.
+- data가 stale한 상태로 변경
+- 서버에서 data를 다시 받아온다.
+
+**---> 불필요한 API 호출을 최소화!!**
+
+### 4. 중복 컴포넌트는 재사용 하자
+
+친구 목록이 들어가는 페이지가 여럿 페이지 되는데 친구 목록 UI가 버튼 컬러, 텍스트만 다를뿐 똑같다. 같은 컴포넌트내 로직을 짜서 중복 컴포넌트를 최소화 시키려고 했다.  
+FriendsItem 에는 버튼 액션에 대한 props를 받아 조건문에 따라 버튼을 다르게 보여주고자 했다.
+
+```js
+const FriendsList = ({
+  lists,
+  FetchNextPage,
+  del,
+  reqCheck,
+  hasNextPage
+}: FriendsListProps) => {
+  const { lastElement } = useInfinite(FetchNextPage, hasNextPage);
+  return (
+    <ul className="pt-5">
+      {lists.pages.map(page =>
+        lists.pages[0].length ? (
+          page.map(list => (
+            <FiendsItem
+              key={list.memberId}
+              memberId={list.memberId}
+              name={list.name}
+              email={list.email}
+              status={list.status}
+              imageUrl={list.imageUrl}
+              del={del}
+              reqCheck={reqCheck}
+            />
+          ))
+        ) : (
+          <NoResultText text="친구가 없습니다." key="noText" />
+        )
+      )}
+
+      {lastElement()}
+    </ul>
+  );
+};
+
+```
+
+```js
+const FriendsItem = ({
+  memberId,
+  name,
+  email,
+  imageUrl,
+  status,
+  del,
+  reqCheck
+}: FriendsItemProps) => {
+  const friendStatus = status !== NOT_FRIEND;
+
+... 로직 생략
+
+  return (
+    <li className="flex items-start mb-4">
+     ... 로직 생략
+
+      {status && status !== ME && (
+        <button
+          type="button"
+          disabled={friendStatus || IsFriendAdd}
+          onClick={handleFriendAdd}
+          className={`${
+            friendStatus || IsFriendAdd
+              ? 'bg-gray3 text-gray1'
+              : 'bg-primary text-white flex-shrink-0'
+          }  rounded-xl  pt-2 py-1 px-3`}
+        >
+          {status === NOT_FRIEND && '친구추가'}
+          {status === FRIEND && '우린친구😆'}
+          {status === FRIEND_REQUEST && '요청중'}
+          {status === FRIEND_REQUESTED && '요청됨'}
+        </button>
+      )}
+      {del && (
+        <RightButton
+          handleClick={() => handleFriendDel(memberId)}
+          text="삭제"
+        />
+      )}
+      {reqCheck && (
+        <RightButton
+          handleClick={() => handleRequestCheck(name)}
+          text="확인하기"
+        />
+      )}
+    </li>
+  );
+};
+```
+
+**아쉬운점**  
+친구 목록이 팝업창에도 들어가는 경우가 있어서 UI만 따로 공통 컴포넌트로 빼고 이벤트 처리는 따로 컴포넌트를 만들었으면 좋지 않았을까 라는 생각이 들었다.  
+이러한 점은 생각을 못해서 팝업창에 들어가는 친구목록은 따로 구현을 했다.  
+친구 목록에 체크박스 까지 들어가다 보니 코드가 방대해지는 걸 경험한뒤 애초에 컴포넌트 설계를 잘 했더라면 쉽게 로직을 구현하지 않았을까 라는 아쉬운점이 남았다.
+
+<img src="https://github.com/chae-young/weather_zip/assets/28029685/1755bca1-4a65-4f98-a0c1-bfe9f5c6bf32" width="200">  
+<img src="https://github.com/chae-young/weather_zip/assets/28029685/9935b51d-5f52-41b1-9e06-1185ab97b5df" width="200">
 
 </br>
 </br>
