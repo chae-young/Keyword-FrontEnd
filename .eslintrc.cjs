@@ -27,6 +27,7 @@ module.exports = {
   },
 
   rules: {
+    camelcase: 'off',
     // index key
     'react/no-array-index-key': 'off',
     // 'react' 제거

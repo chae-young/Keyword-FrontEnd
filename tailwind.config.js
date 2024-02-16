@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'ico-naver': "url('/images/ico-naver.svg')"
+        'ico-naver': "url('/images/ico-naver.svg')",
+        'ico-logo': "url('/images/logo.svg')"
       },
       padding: {
         default: '1.25rem'
