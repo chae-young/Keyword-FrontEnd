@@ -4,11 +4,14 @@ import { FriendsDataType } from '@/types/friend/friendsDataType';
 
 const fetchAPI = async (
   page: number,
-  state: string
+  state: string,
+  noticeId?: number
 ): Promise<FriendsDataType[]> => {
   try {
     const list = await axiosAuth.get(
-      `/friends?friend-state=${state}&size=10&page=${page}`
+      `/friends?friend-state=${state}${
+        noticeId ? `&noticeId=${noticeId}` : ''
+      }&size=10&page=${page}`
     );
     return list.data;
   } catch (error) {
@@ -17,7 +20,7 @@ const fetchAPI = async (
   }
 };
 
-const useGetMyFriendsQuery = (state: string) => {
+const useGetMyFriendsQuery = (state: string, noticeId?: number) => {
   const {
     data: friendsList,
     isLoading: friendsListIsLoading,
@@ -26,7 +29,7 @@ const useGetMyFriendsQuery = (state: string) => {
   } = useInfiniteQuery({
     queryKey: ['myFriends', state],
     initialPageParam: 0,
-    queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam, state),
+    queryFn: ({ pageParam = 0 }) => fetchAPI(pageParam, state, noticeId),
     getNextPageParam: (lastPage, allPage) => {
       const nextPage = allPage.length;
       return lastPage.length === 0 ? null : nextPage;
