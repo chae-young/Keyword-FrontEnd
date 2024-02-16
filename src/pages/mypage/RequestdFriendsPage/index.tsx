@@ -1,10 +1,14 @@
 import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import TopTitle from '@/components/common/TopTitle';
 import RequestedFriends from '@/components/Friends/RequestedFriends';
 import RequestFriends from '@/components/Friends/RequestFriends';
 
 const RequestedFriendsPage = () => {
-  const [currentTab, clickTab] = useState(0);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('tab');
+  const [_, clickTab] = useState(0);
 
   const category = [
     { id: 1, name: '내가 요청 한 친구' },
@@ -13,6 +17,7 @@ const RequestedFriendsPage = () => {
 
   const handleTab = (idx: number) => {
     clickTab(idx);
+    navigate(`?tab=${idx}`);
   };
   return (
     <>
@@ -20,7 +25,7 @@ const RequestedFriendsPage = () => {
       <ul
         className={`flex -my-5 -mx-5 relative
       before:content-[''] before:absolute before:w-1/2 before:bg-black before:h-[2px] before:bottom-0 before:transition-transform 
-      ${currentTab ? 'before:translate-x-full' : 'before:translate-x-0'}
+      ${Number(query) ? 'before:translate-x-full' : 'before:translate-x-0'}
 `}
       >
         {category.map((el, idx) => (
@@ -32,7 +37,7 @@ const RequestedFriendsPage = () => {
               onClick={() => handleTab(idx)}
               type="button"
               className={`text-body2  py-5 ${
-                idx === currentTab ? 'text-bk font-bold' : 'text-gray4'
+                idx === Number(query) ? 'text-bk font-bold' : 'text-gray4'
               }`}
             >
               {el.name}
@@ -40,7 +45,7 @@ const RequestedFriendsPage = () => {
           </li>
         ))}
       </ul>
-      {currentTab ? <RequestedFriends /> : <RequestFriends />}
+      {query === '1' ? <RequestedFriends /> : <RequestFriends />}
     </>
   );
 };
