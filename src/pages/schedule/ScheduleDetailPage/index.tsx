@@ -17,11 +17,11 @@ import ModalAttendingFriends from '@/components/Schedule/ModalAttendingFriends';
 import SEO from '@/components/SEO';
 
 const ScheduleDetailPage = () => {
-  const { id } = useParams();
+  const { id, noticeId } = useParams();
   const scheduleId = Number(id);
   const { scheduleDetail } = useGetScheduleDetailQuery({
     scheduleId,
-    noticeId: Number(id)
+    noticeId: Number(noticeId)
   });
   const { scheduleDeleteIsMutate } = useDeleteScheduleQuery();
   const { userState } = useUserState();
