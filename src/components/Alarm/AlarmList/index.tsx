@@ -18,6 +18,7 @@ const AlarmList = () => {
             <AlarmItem
               type={list.type}
               noticeId={list.noticeId}
+              scheduleId={list.scheduleId}
               key={list.infoId}
             />
           ))

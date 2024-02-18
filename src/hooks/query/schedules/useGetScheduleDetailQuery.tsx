@@ -11,7 +11,9 @@ const fetchAPI = async (
   const { scheduleId, noticeId } = data;
   try {
     const res = await axiosAuth.get(
-      `/schedules/${scheduleId}?noticeId=${noticeId}`
+      `/schedules/${scheduleId}?${
+        noticeId ? `noticeId=${noticeId}` : `noticeId=${scheduleId}`
+      }`
     );
     return res.data;
   } catch (error) {
