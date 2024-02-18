@@ -6,25 +6,26 @@ import {
   SCHEDULE_CALCEL,
   SCHEDULE_REMIND
 } from '@/constants/alarm';
-import useAlarmState from '@/hooks/recoil/useAlarmState';
 import useDeleteAlarmQuery from '@/hooks/query/alarm/useDeleteAlarmQuery';
 
 interface AlramItemProps {
   noticeId: number;
   type: string;
+  scheduleId?: number;
 }
 
-const AlarmItem = ({ type, noticeId }: AlramItemProps) => {
+const AlarmItem = ({ type, noticeId, scheduleId }: AlramItemProps) => {
   const navigate = useNavigate();
-  const { alarmNoticeIdChange } = useAlarmState();
   const { alarmDeleteIsMutate } = useDeleteAlarmQuery();
   const queryClient = useQueryClient();
 
   const handleIsReadAlarm = () => {
     queryClient.invalidateQueries({ queryKey: ['alarmList'] });
-    alarmNoticeIdChange(noticeId);
-    if (type === FRIEND_REQUEST) navigate('/mypage/requested?tab=1');
-    // if(type === SCHEDULE_CALCEL) navigate('/mypage/requested?tab=1');
+    // alarmNoticeIdChange(noticeId);
+    if (type === FRIEND_REQUEST)
+      navigate(`/mypage/requested?tab=1&noticeId=${noticeId}`);
+    if (type === SCHEDULE_CALCEL)
+      navigate(`/schedule/${scheduleId}?noticeId=${noticeId}`);
     // if(type === SCHEDULE_REMIND) navigate('/mypage/requested?tab=1');
   };
 
@@ -34,7 +35,7 @@ const AlarmItem = ({ type, noticeId }: AlramItemProps) => {
   };
 
   return (
-    <li className="flex">
+    <li className="flex mb-3">
       <button
         type="button"
         onClick={handleIsReadAlarm}

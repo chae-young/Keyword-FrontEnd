@@ -7,7 +7,8 @@ import RequestFriends from '@/components/Friends/RequestFriends';
 const RequestedFriendsPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('tab');
+  const queryIsTab = Number(searchParams.get('tab'));
+  const queryIsNoticeId = Number(searchParams.get('noticeId'));
   const [_, clickTab] = useState(0);
 
   const category = [
@@ -25,7 +26,7 @@ const RequestedFriendsPage = () => {
       <ul
         className={`flex -my-5 -mx-5 relative
       before:content-[''] before:absolute before:w-1/2 before:bg-black before:h-[2px] before:bottom-0 before:transition-transform 
-      ${Number(query) ? 'before:translate-x-full' : 'before:translate-x-0'}
+      ${queryIsTab ? 'before:translate-x-full' : 'before:translate-x-0'}
 `}
       >
         {category.map((el, idx) => (
@@ -37,7 +38,7 @@ const RequestedFriendsPage = () => {
               onClick={() => handleTab(idx)}
               type="button"
               className={`text-body2  py-5 ${
-                idx === Number(query) ? 'text-bk font-bold' : 'text-gray4'
+                idx === queryIsTab ? 'text-bk font-bold' : 'text-gray4'
               }`}
             >
               {el.name}
@@ -45,7 +46,11 @@ const RequestedFriendsPage = () => {
           </li>
         ))}
       </ul>
-      {query === '1' ? <RequestedFriends /> : <RequestFriends />}
+      {String(queryIsTab) === '1' ? (
+        <RequestedFriends noticeId={queryIsNoticeId} />
+      ) : (
+        <RequestFriends />
+      )}
     </>
   );
 };
